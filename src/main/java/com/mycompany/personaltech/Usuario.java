@@ -43,7 +43,7 @@ public class Usuario implements Serializable {
     @Column(name = "DT_NASCIMENTO", nullable = true)
     private Date dataNascimento;
     @Enumerated(EnumType.STRING)
-    @Column(name = "TXT_TIPO_USUARIO")
+    @Column(name = "TXT_TIPO_USUARIO", length = 20, nullable = false)
     private TipoUsuario tipo;
 
     @ElementCollection
