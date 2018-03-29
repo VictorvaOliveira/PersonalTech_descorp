@@ -1,6 +1,6 @@
 package com.mycompany.personaltech;
 
-import static com.mycompany.personaltech.Exercicio_.exercicio;
+//import static com.mycompany.personaltech.Exercicio_.exercicio;
 import java.util.Calendar;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
