@@ -5,11 +5,16 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "TB_EXERCICIO")
 public class Exercicio implements Serializable {
     
     @Id
@@ -17,10 +22,10 @@ public class Exercicio implements Serializable {
     private Long id;
     
     @Enumerated(EnumType.STRING)
-    @Column(name = "TXT_TIPO_EXERCICIO", length = 20, nullable = false)
+    @Column(name = "TXT_TIPO_EXERCICIO", length = 20, nullable = true)
     private TipoExercicio tipo;
     @Enumerated(EnumType.STRING)
-    @Column(name = "TXT_NOME_EXERCICIO")
+    @Column(name = "TXT_NOME_EXERCICIO", length = 50, nullable = true)
     private NomeExercicio exercicio;
 
     public Long getId() {
@@ -29,6 +34,22 @@ public class Exercicio implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public TipoExercicio getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(TipoExercicio tipo) {
+        this.tipo = tipo;
+    }
+
+    public NomeExercicio getExercicio() {
+        return exercicio;
+    }
+
+    public void setExercicio(NomeExercicio exercicio) {
+        this.exercicio = exercicio;
     }
 
     @Override
@@ -54,6 +75,5 @@ public class Exercicio implements Serializable {
     @Override
     public String toString() {
         return "com.mycompany.personaltech.Exercicio[ id=" + id + " ]";
-    }
-    
+    }    
 }

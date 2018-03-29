@@ -1,9 +1,12 @@
 package com.mycompany.personaltech;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -11,10 +14,12 @@ import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -55,6 +60,11 @@ public class Usuario implements Serializable {
     @Embedded // Mapeada na Classe Endereco
     private Endereco endereco;
 
+    @OneToMany(fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "ID_USUARIO", referencedColumnName = "ID")
+    private List<Exercicio> exercicios;
+
     public Long getId() {
         return id;
     }
@@ -62,9 +72,8 @@ public class Usuario implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-    
-    //=============================
 
+    //=============================
     public String getCpf() {
         return cpf;
     }
@@ -116,7 +125,7 @@ public class Usuario implements Serializable {
     public Collection<String> getTelefones() {
         return telefones;
     }
-    
+
     public void addTelefone(String telefone) {
         if (this.telefones == null) {
             this.telefones = new HashSet<>();
@@ -146,10 +155,20 @@ public class Usuario implements Serializable {
 
     public void setTipo(TipoUsuario tipo) {
         this.tipo = tipo;
-    }    
-    
+    }
+
+    public List<Exercicio> getExercicios() {
+        return exercicios;
+    }
+
+    public void addExercicio(Exercicio exercicio) {
+        if (this.exercicios == null) {
+            this.exercicios = new ArrayList<>();
+        }
+        this.exercicios.add(exercicio);
+    }
+
     //=============================
-    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -173,6 +192,10 @@ public class Usuario implements Serializable {
     @Override
     public String toString() {
         return "sistema.PersonalTrainer[ id=" + id + " ]";
+    }
+
+    void addExercicio(TipoExercicio tipoExercicio, NomeExercicio nomeExercicio) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

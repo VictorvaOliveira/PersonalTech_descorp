@@ -1,5 +1,6 @@
 package com.mycompany.personaltech;
 
+import static com.mycompany.personaltech.Exercicio_.exercicio;
 import java.util.Calendar;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -11,6 +12,7 @@ public class Teste {
     public static void main(String[] args) {
         Usuario user = new Usuario();
         preencherUsuario(user);
+        preencherExercicio(user);
 
         EntityManagerFactory emf = null;
         EntityManager em = null;
@@ -43,7 +45,7 @@ public class Teste {
         user.addTelefone("(81) 3456-2525");
         user.addTelefone("(81) 9122-4528");
         user.setTipo(TipoUsuario.ALUNO);
-        
+
         Calendar c = Calendar.getInstance();
         c.set(Calendar.YEAR, 1993);
         c.set(Calendar.MONTH, Calendar.FEBRUARY);
@@ -63,5 +65,17 @@ public class Teste {
         endereco.setNumero(550);
         endereco.setComplemento("Perto do Satanás");
         user.setEndereco(endereco);
+    }
+
+    private static void preencherExercicio(Usuario user) {
+        Exercicio exercicio1 = new Exercicio();
+        exercicio1.setTipo(TipoExercicio.ABDOMINAIS);
+        exercicio1.setExercicio(NomeExercicio.ABD_BOSU);
+        user.addExercicio(exercicio1);
+        
+        Exercicio exercicio2 = new Exercicio();
+        exercicio2.setTipo(TipoExercicio.BICEPS);
+        exercicio2.setExercicio(NomeExercicio.BICEPS_90_ROSCA_SIMULTANEA);
+        user.addExercicio(exercicio2);
     }
 }
