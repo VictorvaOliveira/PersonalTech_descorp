@@ -7,7 +7,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
 public class Teste {
-
+    // esetes teste passaram
     public static void main(String[] args) {
         Usuario user = new Usuario();
         preencherUsuario(user);
