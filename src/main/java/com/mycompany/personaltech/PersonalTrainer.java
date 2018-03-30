@@ -63,7 +63,6 @@ public class PersonalTrainer implements Serializable {
     private Endereco endereco;
 
     
-
     public Long getId() {
         return id;
     }
@@ -153,6 +152,10 @@ public class PersonalTrainer implements Serializable {
 
     public void setTipo(TipoUsuario tipo) {
         this.tipo = tipo;
+    }
+
+    public void setTelefones(Collection<String> telefones) {
+        this.telefones = telefones;
     }
 
     @Override

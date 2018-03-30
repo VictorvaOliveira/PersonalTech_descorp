@@ -51,7 +51,7 @@ public class Aluno implements Serializable {
     private Date dataNascimento;
     
     @Enumerated(EnumType.STRING)
-    @Column(name = "TXT_TIPO_USUARIO", length = 20, nullable = false)
+    @Column(name = "TXT_TIPO_USUARIO", length = 20, nullable = true)
     private TipoUsuario tipo;
 
     @ElementCollection
@@ -169,7 +169,16 @@ public class Aluno implements Serializable {
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
     }
+
+    public void setTelefones(Collection<String> telefones) {
+        this.telefones = telefones;
+    }
+
+    public void setExercicios(List<Exercicio> exercicios) {
+        this.exercicios = exercicios;
+    }
     
+        
     
 
     @Override
