@@ -25,9 +25,10 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "TB_USUARIO")
-public class Usuario implements Serializable {
+@Table(name = "TB_ALUNO")
+public class Aluno implements Serializable {
 
+//    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -44,16 +45,18 @@ public class Usuario implements Serializable {
     private String senha;
     @Column(name = "TXT_EMAIL", length = 50, nullable = false)
     private String email;
+    
     @Temporal(TemporalType.DATE)
     @Column(name = "DT_NASCIMENTO", nullable = true)
     private Date dataNascimento;
+    
     @Enumerated(EnumType.STRING)
     @Column(name = "TXT_TIPO_USUARIO", length = 20, nullable = false)
     private TipoUsuario tipo;
 
     @ElementCollection
-    @CollectionTable(name = "TB_TELEFONE",
-            joinColumns = @JoinColumn(name = "ID_USUARIO", nullable = false))
+    @CollectionTable(name = "TB_TELEFONE_ALUNO",
+            joinColumns = @JoinColumn(name = "ID_ALUNO", nullable = false))
     @Column(name = "TXT_NUM_TELEFONE", nullable = false, length = 20)
     private Collection<String> telefones;
 
@@ -62,7 +65,7 @@ public class Usuario implements Serializable {
 
     @OneToMany(fetch = FetchType.LAZY,
             cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "ID_USUARIO", referencedColumnName = "ID")
+    @JoinColumn(name = "ID_ALUNO", referencedColumnName = "ID")
     private List<Exercicio> exercicios;
 
     public Long getId() {
@@ -71,23 +74,6 @@ public class Usuario implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    //=============================
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
     }
 
     public String getNome() {
@@ -106,39 +92,28 @@ public class Usuario implements Serializable {
         this.sobrenome = sobrenome;
     }
 
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
     public String getSenha() {
         return senha;
     }
 
     public void setSenha(String senha) {
         this.senha = senha;
-    }
-
-    public Date getDataNascimento() {
-        return dataNascimento;
-    }
-
-    public void setDataNascimento(Date dataNascimento) {
-        this.dataNascimento = dataNascimento;
-    }
-
-    public Collection<String> getTelefones() {
-        return telefones;
-    }
-
-    public void addTelefone(String telefone) {
-        if (this.telefones == null) {
-            this.telefones = new HashSet<>();
-        }
-        telefones.add(telefone);
-    }
-
-    public Endereco getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
     }
 
     public String getEmail() {
@@ -168,7 +143,35 @@ public class Usuario implements Serializable {
         this.exercicios.add(exercicio);
     }
 
-    //=============================
+    public Collection<String> getTelefones() {
+        return telefones;
+    }
+
+    public void addTelefone(String telefone) {
+        if (this.telefones == null) {
+            this.telefones = new HashSet<>();
+        }
+        telefones.add(telefone);
+    }
+
+    public Date getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(Date dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+    
+    
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -179,10 +182,10 @@ public class Usuario implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Usuario)) {
+        if (!(object instanceof Aluno)) {
             return false;
         }
-        Usuario other = (Usuario) object;
+        Aluno other = (Aluno) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -191,11 +194,7 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "sistema.PersonalTrainer[ id=" + id + " ]";
-    }
-
-    void addExercicio(TipoExercicio tipoExercicio, NomeExercicio nomeExercicio) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "com.mycompany.personaltech.Aluno[ id=" + id + " ]";
     }
 
 }

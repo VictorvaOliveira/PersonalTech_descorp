@@ -12,16 +12,16 @@ import javax.persistence.metamodel.StaticMetamodel;
 @StaticMetamodel(Usuario.class)
 public class Usuario_ { 
 
-    public static volatile SingularAttribute<Usuario, String> senha;
-    public static volatile SingularAttribute<Usuario, TipoUsuario> tipo;
-    public static volatile SingularAttribute<Usuario, Endereco> endereco;
-    public static volatile SingularAttribute<Usuario, String> cpf;
-    public static volatile SingularAttribute<Usuario, String> nome;
-    public static volatile SingularAttribute<Usuario, Long> id;
-    public static volatile SingularAttribute<Usuario, String> sobrenome;
-    public static volatile SingularAttribute<Usuario, String> login;
-    public static volatile SingularAttribute<Usuario, Date> dataNascimento;
-    public static volatile CollectionAttribute<Usuario, String> telefones;
-    public static volatile SingularAttribute<Usuario, String> email;
+    public static volatile SingularAttribute<PersonalTrainer, String> senha;
+    public static volatile SingularAttribute<PersonalTrainer, TipoUsuario> tipo;
+    public static volatile SingularAttribute<PersonalTrainer, Endereco> endereco;
+    public static volatile SingularAttribute<PersonalTrainer, String> cpf;
+    public static volatile SingularAttribute<PersonalTrainer, String> nome;
+    public static volatile SingularAttribute<PersonalTrainer, Long> id;
+    public static volatile SingularAttribute<PersonalTrainer, String> sobrenome;
+    public static volatile SingularAttribute<PersonalTrainer, String> login;
+    public static volatile SingularAttribute<PersonalTrainer, Date> dataNascimento;
+    public static volatile CollectionAttribute<PersonalTrainer, String> telefones;
+    public static volatile SingularAttribute<PersonalTrainer, String> email;
 
 }
