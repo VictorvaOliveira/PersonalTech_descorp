@@ -8,9 +8,9 @@ import javax.persistence.metamodel.CollectionAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2018-03-27T19:12:28")
-@StaticMetamodel(Usuario.class)
-public class Usuario_ { 
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2018-03-31T08:27:01")
+@StaticMetamodel(PersonalTrainer.class)
+public class PersonalTrainer_ { 
 
     public static volatile SingularAttribute<PersonalTrainer, String> senha;
     public static volatile SingularAttribute<PersonalTrainer, TipoUsuario> tipo;

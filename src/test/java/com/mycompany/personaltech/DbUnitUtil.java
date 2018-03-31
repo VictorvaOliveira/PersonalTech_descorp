@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.personaltech.test;
+package com.mycompany.personaltech;
 
 import java.io.InputStream;
 import java.sql.Connection;
@@ -32,8 +32,8 @@ public class DbUnitUtil {
         IDatabaseConnection db_conn = null;
         try {
             conn = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/jdbc:mysql://localhost:3306/PERSONALTECH", "root", "root");
-            db_conn = new DatabaseConnection(conn, "PERSONALTECH");
+                    "jdbc:mysql://localhost:3306/PERSONALTECH", "root", "root");
+            db_conn = new DatabaseConnection(conn, "PERSONALTECH"); // não e nome do PU é o nome do DATABASE
             DatabaseConfig dbConfig = db_conn.getConfig();
             dbConfig.setProperty(DatabaseConfig.PROPERTY_DATATYPE_FACTORY, new MySqlDataTypeFactory());
             dbConfig.setProperty(DatabaseConfig.PROPERTY_METADATA_HANDLER, new MySqlMetadataHandler());
