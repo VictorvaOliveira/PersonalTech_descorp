@@ -41,6 +41,7 @@ public class AlunoTest {
         //logger.setLevel(Level.INFO);
         logger.setLevel(Level.SEVERE);
         emf = Persistence.createEntityManagerFactory("PersonalTech_PU");
+//        emf.createEntityManager();
         DbUnitUtil.inserirDados();
     }
 
