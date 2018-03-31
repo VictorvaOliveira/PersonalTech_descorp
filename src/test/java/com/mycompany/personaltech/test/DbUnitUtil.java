@@ -32,7 +32,7 @@ public class DbUnitUtil {
         IDatabaseConnection db_conn = null;
         try {
             conn = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/jdbc:mysql://localhost:3306/PERSONALTECH", "root", "root");
+                    "jdbc:mysql://localhost:3306/PERSONALTECH", "root", "root");
             db_conn = new DatabaseConnection(conn, "PERSONALTECH");
             DatabaseConfig dbConfig = db_conn.getConfig();
             dbConfig.setProperty(DatabaseConfig.PROPERTY_DATATYPE_FACTORY, new MySqlDataTypeFactory());
