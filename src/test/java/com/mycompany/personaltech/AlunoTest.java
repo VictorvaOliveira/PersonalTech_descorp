@@ -138,6 +138,7 @@ public class AlunoTest {
         aluno.setLogin("juba");
         aluno.setSenha("123");
         aluno.setEmail("juba@gmail");
+        aluno.setSexo("M");
 
         Endereco end = new Endereco();
         end.setLogradouro("Rua do Cordeiro");
