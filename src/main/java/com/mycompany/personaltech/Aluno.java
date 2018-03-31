@@ -33,9 +33,9 @@ public class Aluno implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "TXT_NOME", length = 255, nullable = false)
+    @Column(name = "TXT_NOME", length = 100, nullable = false)
     private String nome;
-    @Column(name = "TXT_SOBRENOME", length = 255, nullable = false)
+    @Column(name = "TXT_SOBRENOME", length = 100, nullable = false)
     private String sobrenome;
     @Column(name = "TXT_CPF", length = 14, unique = true, nullable = false)
     private String cpf;
@@ -45,6 +45,8 @@ public class Aluno implements Serializable {
     private String senha;
     @Column(name = "TXT_EMAIL", length = 50, nullable = false)
     private String email;
+    @Column(name = "TXT_SEXO", length = 1, nullable = false)
+    private String sexo;
     
     @Temporal(TemporalType.DATE)
     @Column(name = "DT_NASCIMENTO", nullable = true)
@@ -66,7 +68,7 @@ public class Aluno implements Serializable {
     @OneToMany(fetch = FetchType.LAZY,
             cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "ID_ALUNO", referencedColumnName = "ID")
-    private List<Exercicio> exercicios;
+    private List<Exercicio> exercicios;    
 
     public Long getId() {
         return id;
@@ -177,6 +179,16 @@ public class Aluno implements Serializable {
     public void setExercicios(List<Exercicio> exercicios) {
         this.exercicios = exercicios;
     }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+    
+    
     
         
     
