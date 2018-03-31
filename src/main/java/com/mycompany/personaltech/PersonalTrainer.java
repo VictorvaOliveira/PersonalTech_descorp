@@ -44,6 +44,8 @@ public class PersonalTrainer implements Serializable {
     private String senha;
     @Column(name = "TXT_EMAIL", length = 50, nullable = false)
     private String email;
+    @Column(name = "TXT_SEXO", length = 1, nullable = false)   
+    private String sexo;
     
     @Temporal(TemporalType.DATE)
     @Column(name = "DT_NASCIMENTO", nullable = true)
@@ -61,6 +63,11 @@ public class PersonalTrainer implements Serializable {
 
     @Embedded // Mapeada na Classe Endereco
     private Endereco endereco;
+    
+    @OneToMany(fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "ID_PT", referencedColumnName = "ID")
+    private List<Aluno> alunos;
 
     
     public Long getId() {
@@ -157,6 +164,16 @@ public class PersonalTrainer implements Serializable {
     public void setTelefones(Collection<String> telefones) {
         this.telefones = telefones;
     }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+    
+    
 
     @Override
     public int hashCode() {

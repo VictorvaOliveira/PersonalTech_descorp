@@ -86,7 +86,7 @@ public class AlunoTest {
      */
     @Test
     public void selecionarAlunoPorId() {
-        Aluno aluno = em.find(Aluno.class, (long) 1);
+        Aluno aluno = em.find(Aluno.class, (long) 2);
         assertNotNull(aluno);
         assertEquals("JOAO", aluno.getNome());
         assertEquals("111.222.333-43", aluno.getCpf());
