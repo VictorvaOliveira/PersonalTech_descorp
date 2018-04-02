@@ -211,7 +211,7 @@ public class AlunoTest {
 
     @Test
     public void deletarAluno_02() {
-        Aluno aluno = em.find(Aluno.class, (long) 6);
+        Aluno aluno = em.find(Aluno.class, (long) 2);
         assertNotNull(aluno);
         PersonalTrainer pt = new PersonalTrainer();
         pt = em.find(PersonalTrainer.class, (long) 1);

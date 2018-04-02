@@ -207,6 +207,8 @@ public class Aluno implements Serializable {
         }
         this.avaliacoes.add(avaliacao);
     }
+    
+    
 
     @Override
     public int hashCode() {

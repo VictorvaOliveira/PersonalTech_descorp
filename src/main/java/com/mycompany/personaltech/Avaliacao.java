@@ -27,7 +27,7 @@ public class Avaliacao implements Serializable {
     
     @Temporal(TemporalType.DATE)
     @Column(name = "DT_AVALIACAO", nullable = false, unique = false)
-    private Date dataNascimento;
+    private Date dataAvaliacao;
     
     public Long getId() {
         return id;
@@ -37,12 +37,12 @@ public class Avaliacao implements Serializable {
         this.id = id;
     }
 
-    public Date getDataNascimento() {
-        return dataNascimento;
+    public Date getdataAvaliacao() {
+        return dataAvaliacao;
     }
 
-    public void setDataNascimento(Date dataNascimento) {
-        this.dataNascimento = dataNascimento;
+    public void setdataAvaliacao(Date dataAvaliacao) {
+        this.dataAvaliacao = dataAvaliacao;
     }    
 
     @Override
