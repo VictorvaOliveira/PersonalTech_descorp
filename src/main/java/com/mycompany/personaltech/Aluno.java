@@ -33,9 +33,9 @@ public class Aluno implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "TXT_NOME", length = 255, nullable = false)
+    @Column(name = "TXT_NOME", length = 100, nullable = false)
     private String nome;
-    @Column(name = "TXT_SOBRENOME", length = 255, nullable = false)
+    @Column(name = "TXT_SOBRENOME", length = 100, nullable = false)
     private String sobrenome;
     @Column(name = "TXT_CPF", length = 14, unique = true, nullable = false)
     private String cpf;
@@ -45,15 +45,17 @@ public class Aluno implements Serializable {
     private String senha;
     @Column(name = "TXT_EMAIL", length = 50, nullable = false)
     private String email;
-    
+    @Column(name = "TXT_SEXO", length = 1, nullable = false)
+    private String sexo;
+
     @Temporal(TemporalType.DATE)
     @Column(name = "DT_NASCIMENTO", nullable = true)
     private Date dataNascimento;
-    
-    @Enumerated(EnumType.STRING)
-    @Column(name = "TXT_TIPO_USUARIO", length = 20, nullable = false)
-    private TipoUsuario tipo;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "TXT_TIPO_USUARIO", length = 20, nullable = true)
+    private TipoUsuario tipo;
+    
     @ElementCollection
     @CollectionTable(name = "TB_TELEFONE_ALUNO",
             joinColumns = @JoinColumn(name = "ID_ALUNO", nullable = false))
@@ -67,6 +69,11 @@ public class Aluno implements Serializable {
             cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "ID_ALUNO", referencedColumnName = "ID")
     private List<Exercicio> exercicios;
+
+    @OneToMany(fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "ID_TB_ALUNO", referencedColumnName = "ID")
+    private List<Avaliacao> avaliacoes;
 
     public Long getId() {
         return id;
@@ -168,6 +175,37 @@ public class Aluno implements Serializable {
 
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
+    }
+
+    public void setTelefones(Collection<String> telefones) {
+        this.telefones = telefones;
+    }
+
+    public void setExercicios(List<Exercicio> exercicios) {
+        this.exercicios = exercicios;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+
+    public List<Avaliacao> getAvaliacoes() {
+        return avaliacoes;
+    }
+
+    public void setAvaliacoes(List<Avaliacao> avaliacoes) {
+        this.avaliacoes = avaliacoes;
+    }
+    
+    public void addAvaliacao(Avaliacao avaliacao) {
+        if (this.avaliacoes == null) {
+            this.avaliacoes = new ArrayList<>();
+        }
+        this.avaliacoes.add(avaliacao);
     }
     
     

@@ -3,57 +3,42 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.personaltech.test;
+package com.mycompany.personaltech;
 
-////Classes que serão testadas
-//import com.mycompany.personaltech.Aluno;
-//import com.mycompany.personaltech.Endereco;
-//import com.mycompany.personaltech.Exercicio;
-//import com.mycompany.personaltech.NomeExercicio;
-//import com.mycompany.personaltech.PersonalTrainer;
-//import com.mycompany.personaltech.TipoExercicio;
-//import com.mycompany.personaltech.TipoUsuario;
-import com.mycompany.personaltech.DbUnitUtil;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.junit.FixMethodOrder;
-import org.junit.runners.MethodSorters;
 
 /**
  *
- * @author victor
+ * @author john
  */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
-@SuppressWarnings("JPQLValidation")
-public class JpqlTest {
+public class ExercicioTest {
 
     private static EntityManagerFactory emf;
     private static Logger logger;
     private EntityManager em;
     private EntityTransaction et;
 
-    public JpqlTest() {
+    public ExercicioTest() {
     }
 
     @BeforeClass
     public static void setUpClass() {
         logger = Logger.getGlobal();
-        //logger.setLevel(Level.INFO);
-        logger.setLevel(Level.SEVERE);
-        emf = Persistence.createEntityManagerFactory("PERSONALTECH");
+        logger.setLevel(Level.INFO);
+        //logger.setLevel(Level.SEVERE);
+        emf = Persistence.createEntityManagerFactory("PersonalTech_PU");
+//        emf.createEntityManager();
         DbUnitUtil.inserirDados();
     }
 
@@ -84,24 +69,34 @@ public class JpqlTest {
             et.commit();
         } catch (Exception ex) {
             logger.log(Level.SEVERE, ex.getMessage(), ex);
-            et.rollback();
+            if (et.isActive()) {
+                et.rollback();
+            }
             fail(ex.getMessage());
         }
     }
+
     /**
-     * Teste para retornar quantos tipos de exercício estão 
-     * cadastrados na TB_EXERCICIO
-     * 
-     * OBS: Pegando informação de todos os alunos 
-     * author: Victor Vinicius
+     * Test of getId method, of class Aluno.
      */
     @Test
-    public void t01_tipoExercicio(){
-        logger.info("Executando t01: SELECT DISTINCT (e.tipo) FROM Exercicio e ORDER BY e.tipo");
-        TypedQuery<String> query
-                = em.createQuery("SELECT DISTINCT (e.tipo) FROM Exercicio e ORDER BY e.tipo", String.class);
-        List<String> tipos = query.getResultList();
-        assertEquals(2, tipos.size());
-        
+    public void inserirExercicio_01() {
+        Exercicio ex = new Exercicio();
+        // TODO
+    }
+    
+    @Test
+    public void selecionarExercicio_01() {
+        // TODO
+    }
+    
+    @Test
+    public void alterarExercicio_01() {
+        // TODO
+    }
+    
+    @Test
+    public void removerExercicio_01() {
+        // TODO
     }
 }

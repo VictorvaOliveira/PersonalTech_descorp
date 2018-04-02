@@ -44,11 +44,13 @@ public class PersonalTrainer implements Serializable {
     private String senha;
     @Column(name = "TXT_EMAIL", length = 50, nullable = false)
     private String email;
-    
+    @Column(name = "TXT_SEXO", length = 1, nullable = false)
+    private String sexo;
+
     @Temporal(TemporalType.DATE)
     @Column(name = "DT_NASCIMENTO", nullable = true)
     private Date dataNascimento;
-    
+
     @Enumerated(EnumType.STRING)
     @Column(name = "TXT_TIPO_USUARIO", length = 20, nullable = false)
     private TipoUsuario tipo;
@@ -62,7 +64,15 @@ public class PersonalTrainer implements Serializable {
     @Embedded // Mapeada na Classe Endereco
     private Endereco endereco;
 
-    
+    @OneToMany(fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "ID_PT", referencedColumnName = "ID")
+    private List<Aluno> alunos;
+
+    @OneToMany(fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "ID_TB_PT", referencedColumnName = "ID")
+    private List<Avaliacao> avaliacoes;
 
     public Long getId() {
         return id;
@@ -71,7 +81,7 @@ public class PersonalTrainer implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-    
+
     public String getCpf() {
         return cpf;
     }
@@ -131,6 +141,19 @@ public class PersonalTrainer implements Serializable {
         telefones.add(telefone);
     }
 
+    public void addAluno(Aluno aluno) {
+        if (this.alunos == null) {
+            this.alunos = new ArrayList<>();
+        }
+        alunos.add(aluno);
+    }
+    public void removeAluno(Aluno aluno) {
+        if (aluno == null) {
+            return;
+        }
+        this.alunos.remove(aluno);
+    }
+
     public Endereco getEndereco() {
         return endereco;
     }
@@ -153,6 +176,41 @@ public class PersonalTrainer implements Serializable {
 
     public void setTipo(TipoUsuario tipo) {
         this.tipo = tipo;
+    }
+
+    public void setTelefones(Collection<String> telefones) {
+        this.telefones = telefones;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+
+    public List<Aluno> getAlunos() {
+        return alunos;
+    }
+
+    public void setAlunos(List<Aluno> alunos) {
+        this.alunos = alunos;
+    }
+
+    public List<Avaliacao> getAvaliacoes() {
+        return avaliacoes;
+    }
+
+    public void setAvaliacoes(List<Avaliacao> avaliacoes) {
+        this.avaliacoes = avaliacoes;
+    }
+
+    public void addAvaliacao(Avaliacao avaliacao) {
+        if (this.avaliacoes == null) {
+            this.avaliacoes = new ArrayList<>();
+        }
+        this.avaliacoes.add(avaliacao);
     }
 
     @Override
@@ -179,9 +237,4 @@ public class PersonalTrainer implements Serializable {
     public String toString() {
         return "sistema.PersonalTrainer[ id=" + id + " ]";
     }
-
-    void addExercicio(TipoExercicio tipoExercicio, NomeExercicio nomeExercicio) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 }

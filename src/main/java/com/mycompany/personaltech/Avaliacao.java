@@ -1,30 +1,34 @@
 package com.mycompany.personaltech;
 
 import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "TB_EXERCICIO")
-public class Exercicio implements Serializable {
-    
+@Table(name = "TB_AVALIACAO")
+public class Avaliacao implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Enumerated(EnumType.STRING)
-    @Column(name = "TXT_TIPO_EXERCICIO", length = 20, nullable = true)
-    private TipoExercicio tipo;
-    @Enumerated(EnumType.STRING)
-    @Column(name = "TXT_NOME_EXERCICIO", length = 50, nullable = true)
-    private NomeExercicio exercicio;
-
+    @Temporal(TemporalType.DATE)
+    @Column(name = "DT_AVALIACAO", nullable = false, unique = false)
+    private Date dataAvaliacao;
+    
     public Long getId() {
         return id;
     }
@@ -33,21 +37,13 @@ public class Exercicio implements Serializable {
         this.id = id;
     }
 
-    public TipoExercicio getTipo() {
-        return tipo;
+    public Date getdataAvaliacao() {
+        return dataAvaliacao;
     }
 
-    public void setTipo(TipoExercicio tipo) {
-        this.tipo = tipo;
-    }
-
-    public NomeExercicio getExercicio() {
-        return exercicio;
-    }
-
-    public void setExercicio(NomeExercicio exercicio) {
-        this.exercicio = exercicio;
-    }
+    public void setdataAvaliacao(Date dataAvaliacao) {
+        this.dataAvaliacao = dataAvaliacao;
+    }    
 
     @Override
     public int hashCode() {
@@ -59,10 +55,10 @@ public class Exercicio implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Exercicio)) {
+        if (!(object instanceof Avaliacao)) {
             return false;
         }
-        Exercicio other = (Exercicio) object;
+        Avaliacao other = (Avaliacao) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -71,6 +67,7 @@ public class Exercicio implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.personaltech.Exercicio[ id=" + id + " ]";
-    }    
+        return "com.mycompany.personaltech.Avaliacao[ id=" + id + " ]";
+    }
+    
 }
