@@ -62,6 +62,9 @@ public class TesteUsuarios {
         c.set(Calendar.MONTH, Calendar.AUGUST);
         c.set(Calendar.DAY_OF_MONTH, 16);
         aluno.setDataNascimento(c.getTime());
+        
+        aluno.setSexo("M");
+        
 
         preencherEndereco(aluno);
         preencherExercicio(aluno);

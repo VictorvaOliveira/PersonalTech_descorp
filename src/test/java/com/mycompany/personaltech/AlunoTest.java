@@ -5,9 +5,7 @@
  */
 package com.mycompany.personaltech;
 
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
@@ -15,7 +13,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
-import javax.persistence.TypedQuery;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -97,37 +94,27 @@ public class AlunoTest {
     public void atualizarAluno() {
         Aluno aluno = em.find(Aluno.class, (long) 1);
         assertNotNull(aluno);
-//        logger.log(Level.INFO, "selecionarAlunoPorId: Aluno {0}", aluno.toString());
-        aluno.setNome("ZEBRA");
+        aluno.setEmail("zoiao.com");
         em.flush();
         em.clear();
+        logger.log(Level.INFO, "selecionarAlunoPorId: Aluno {0}", aluno.toString());
 
         aluno = em.find(Aluno.class, (long) 1);
 //        assertNotNull(aluno);
-        assertEquals("ZEBRA", aluno.getNome());
+        assertEquals("zoiao.com", aluno.getEmail());
     }
-
     @Test
-    public void pegarAluno() {
+    public void selecionarAlunoPorCPF() {
         String jpql = "SELECT a FROM Aluno a where a.cpf = ?1";
         Query query = em.createQuery(jpql);
         query.setParameter(1, "111.222.333-42");
 
-        Aluno usuario = (Aluno) query.getSingleResult();
+        Aluno aluno = (Aluno) query.getSingleResult();
 
-        assertEquals("111.222.333-42", usuario.getCpf());
+        assertEquals("111.222.333-42", aluno.getCpf());
+        logger.log(Level.INFO, "selecionarAlunoPorId: Aluno {0}", aluno.toString());
     }
 
-    @Test
-    public void deletarAluno() {
-        Aluno aluno = em.find(Aluno.class, (long) 2);
-        assertNotNull(aluno);
-        em.remove(aluno);
-        em.flush();
-        em.clear();
-        aluno = em.find(Aluno.class, (long) 2);
-        assertNull(aluno);
-    }
 
     @Test
     public void inserirAluno() {
@@ -139,6 +126,20 @@ public class AlunoTest {
         aluno.setSenha("123");
         aluno.setEmail("juba@gmail");
         aluno.setSexo("M");
+        aluno.addTelefone("111 222 333");
+        
+        Exercicio ex = new Exercicio();
+        ex.setExercicio(NomeExercicio.COXAS_45_STIFF_BARRA);
+        ex.setTipo(TipoExercicio.COXAS);
+        aluno.addExercicio(ex);
+
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.YEAR, 2000);
+        c.set(Calendar.MONTH, Calendar.AUGUST);
+        c.set(Calendar.DAY_OF_MONTH, 27);
+        aluno.setDataNascimento(c.getTime());
+
+        aluno.setTipo(TipoUsuario.ALUNO);
 
         Endereco end = new Endereco();
         end.setLogradouro("Rua do Cordeiro");
@@ -150,8 +151,70 @@ public class AlunoTest {
 
         aluno.setEndereco(end);
 
-        em.persist(aluno);
+        PersonalTrainer pt = new PersonalTrainer();
+        pt = em.find(PersonalTrainer.class, (long) 1);
+        pt.addAluno(aluno);
         em.flush();
+        em.clear();
+
         assertNotNull(aluno.getId());
+    }
+
+    @Test
+    public void inserirAluno_02() {
+        Aluno aluno = new Aluno();
+        aluno.setNome("Jurubeba2");
+        aluno.setSobrenome("Alcoolica");
+        aluno.setCpf("123-321-416-13");
+        aluno.setLogin("juba2asd");
+        aluno.setSenha("123");
+        aluno.setEmail("juba@gmail");
+        aluno.setSexo("M");
+
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.YEAR, 2000);
+        c.set(Calendar.MONTH, Calendar.AUGUST);
+        c.set(Calendar.DAY_OF_MONTH, 27);
+        aluno.setDataNascimento(c.getTime());
+
+        aluno.setTipo(TipoUsuario.ALUNO);
+
+        Endereco end = new Endereco();
+        end.setLogradouro("Rua do Cordeiro");
+        end.setBairro("Cordeiro");
+        end.setNumero(666);
+        end.setCep("123456-88");
+        end.setCidade("Recife");
+        end.setEstado("Pernambuco");
+
+        aluno.setEndereco(end);
+
+        PersonalTrainer pt = new PersonalTrainer();
+        pt = em.find(PersonalTrainer.class, (long) 1);
+        pt.addAluno(aluno);
+        em.flush();
+        em.clear();
+
+        assertNotNull(aluno.getId());
+    }
+    
+    @Test
+    public void deletarAluno_01() {
+        Aluno aluno = em.find(Aluno.class, (long) 3);
+        assertNotNull(aluno);
+        em.remove(aluno);
+        em.flush();
+        em.clear();
+        aluno = em.find(Aluno.class, (long) 3);
+        assertNull(aluno);
+    }
+
+    @Test
+    public void deletarAluno_02() {
+        Aluno aluno = em.find(Aluno.class, (long) 2);
+        assertNotNull(aluno);
+        PersonalTrainer pt = new PersonalTrainer();
+        pt = em.find(PersonalTrainer.class, (long) 1);
+        pt.removeAluno(aluno);
     }
 }
