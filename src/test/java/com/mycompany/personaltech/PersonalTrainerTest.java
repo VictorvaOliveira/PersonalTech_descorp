@@ -160,15 +160,6 @@ public class PersonalTrainerTest {
         assertNull(pt);
     }
 
-
-    @Test
-    public void quantidadePersonalTrainer() {
-        TypedQuery<Long> query = em.createQuery("SELECT count(pt.id) FROM PersonalTrainer pt", Long.class);
-        
-        Long quantidade = query.getSingleResult();
-        assertEquals(new Long(4), quantidade);
-    }
-
 //    @Test
 //    public void quantidadeALunoPorExercicio() {
 //
