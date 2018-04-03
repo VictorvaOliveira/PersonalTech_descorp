@@ -1,6 +1,7 @@
 -------------------------------------------------------------------------------
 Test set: com.mycompany.personaltech.PersonalTrainerTest
 -------------------------------------------------------------------------------
+<<<<<<< HEAD
 Tests run: 7, Failures: 1, Errors: 1, Skipped: 0, Time elapsed: 10.846 sec <<< FAILURE!
 removerPersonalTrainerPorCPF(com.mycompany.personaltech.PersonalTrainerTest)  Time elapsed: 0.057 sec  <<< ERROR!
 java.lang.IllegalArgumentException: You have provided an instance of an incorrect PK class for this find operation.  Class expected : class java.lang.Long, Class received : class java.lang.String.
@@ -77,3 +78,6 @@ java.lang.AssertionError: Transaction rolled back because transaction was set to
 	at org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:175)
 	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
+=======
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 20.906 sec
+>>>>>>> master

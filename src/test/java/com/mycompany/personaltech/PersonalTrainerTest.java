@@ -106,18 +106,9 @@ public class PersonalTrainerTest {
         end.setLogradouro("Avenida Caxanga");
         end.setNumero(101);
         pt.setEndereco(end);
-        
+
         em.persist(pt);
 
-    }
-
-    @Test
-    public void selecionarPersonalTrainerPorId() {
-        PersonalTrainer pt = em.find(PersonalTrainer.class, (long) 4);
-        assertNotNull(pt);
-        assertEquals("VICTOR", pt.getNome());
-        assertEquals("VICTOR98", pt.getLogin());
-        logger.log(Level.INFO, "selecionarPersonalTrainerPorId: PT {0}", pt.toString());
     }
 
     @Test
@@ -135,8 +126,17 @@ public class PersonalTrainerTest {
     }
 
     @Test
+    public void selecionarPersonalTrainerPorId() {
+        PersonalTrainer pt = em.find(PersonalTrainer.class, (long) 4);
+        assertNotNull(pt);
+        assertEquals("VICTOR", pt.getNome());
+        assertEquals("VICTOR98", pt.getLogin());
+        logger.log(Level.INFO, "selecionarPersonalTrainerPorId: PT {0}", pt.toString());
+    }
+
+    @Test
     public void removerPersonalTrainerPorCPF() {
-        
+
         TypedQuery<PersonalTrainer> query = em.createNamedQuery("", PersonalTrainer.class);
         query.setParameter("cpf", "222-222-746-22");
         PersonalTrainer pt = query.getSingleResult();
@@ -144,24 +144,28 @@ public class PersonalTrainerTest {
         em.remove(pt);
         em.flush();
         assertEquals(0, query.getResultList().size());
-        
-        pt = em.find(PersonalTrainer.class, (String)"222-222-746-22");
+
+        pt = em.find(PersonalTrainer.class, (String) "222-222-746-22");
         assertNull(pt);
     }
+
     @Test
     public void removerPersonalTrainerPorId() {
-        PersonalTrainer pt = em.find(PersonalTrainer.class,(long)4);
+        PersonalTrainer pt = em.find(PersonalTrainer.class, (long) 4);
         assertNotNull(pt);
         em.remove(pt);
         em.flush();
         em.clear();
-        
+
         pt = em.find(PersonalTrainer.class, (long) 4);
         assertNull(pt);
     }
 
-//    @Test
-//    public void quantidadeALunoPorExercicio() {
-//
-//    }
+    @Test
+    public void coletarAlunos_01() {
+        PersonalTrainer pt = em.find(PersonalTrainer.class, (long) 1);
+        List<Aluno> a = pt.getAlunos();
+        assertNotNull(a);
+//        logger.log(Level.INFO, ">>>>>>>>>>>>>>>>>>>", a.toString());
+    }
 }

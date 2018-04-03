@@ -6,6 +6,8 @@
     <class>com.mycompany.personaltech.Aluno</class>
     <class>com.mycompany.personaltech.PersonalTrainer</class>
     <class>com.mycompany.personaltech.Avaliacao</class>
+    <class>com.mycompany.personaltech.RespostasAvaliacao</class>
+    <class>com.mycompany.personaltech.Pergunta</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/PERSONALTECH"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
