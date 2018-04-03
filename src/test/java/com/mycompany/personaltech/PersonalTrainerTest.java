@@ -1,11 +1,13 @@
 package com.mycompany.personaltech;
 
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -18,7 +20,7 @@ import static org.junit.Assert.*;
  * @author john
  */
 public class PersonalTrainerTest {
-    
+
     private static EntityManagerFactory emf;
     private static Logger logger;
     private EntityManager em;
@@ -76,22 +78,29 @@ public class PersonalTrainerTest {
      */
     @Test
     public void inserirPersonalTrainer_01() {
-        PersonalTrainer pt = new PersonalTrainer();
-        // TODO
+
     }
-    
+
     @Test
     public void selecionarPersonalTrainer_01() {
         // TODO
     }
-    
+
     @Test
     public void alterarPersonalTrainer_01() {
         // TODO
     }
-    
+
     @Test
     public void removerPersonalTrainer_01() {
         // TODO
+    }
+
+    @Test
+    public void coletarAlunos_01() {
+        PersonalTrainer pt = em.find(PersonalTrainer.class, (long)1);
+        List<Aluno> a = pt.getAlunos();
+        assertNotNull(a);
+//        logger.log(Level.INFO, ">>>>>>>>>>>>>>>>>>>", a.toString());
     }
 }

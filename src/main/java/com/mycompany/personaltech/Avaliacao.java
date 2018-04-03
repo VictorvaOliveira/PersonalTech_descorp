@@ -1,6 +1,7 @@
 package com.mycompany.personaltech;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -24,11 +25,16 @@ public class Avaliacao implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     @Temporal(TemporalType.DATE)
     @Column(name = "DT_AVALIACAO", nullable = false, unique = false)
     private Date dataAvaliacao;
-    
+
+    @OneToMany(fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "ID_AVALIACAO", referencedColumnName = "ID")
+    private List<RespostasAvaliacao> respostas;
+
     public Long getId() {
         return id;
     }
@@ -37,13 +43,43 @@ public class Avaliacao implements Serializable {
         this.id = id;
     }
 
+    public Date getDataAvaliacao() {
+        return dataAvaliacao;
+    }
+
+    public void setDataAvaliacao(Date dataAvaliacao) {
+        this.dataAvaliacao = dataAvaliacao;
+    }
+
+    public List<RespostasAvaliacao> getRespostas() {
+        return respostas;
+    }
+
+    public void setRespostas(List<RespostasAvaliacao> respostas) {
+        this.respostas = respostas;
+    }
+
     public Date getdataAvaliacao() {
         return dataAvaliacao;
     }
 
     public void setdataAvaliacao(Date dataAvaliacao) {
         this.dataAvaliacao = dataAvaliacao;
-    }    
+    }
+
+    public void addRespostaAvaliacao(RespostasAvaliacao resposta) {
+        if (this.respostas == null) {
+            this.respostas = new ArrayList<>();
+        }
+        this.respostas.add(resposta);
+    }
+
+    public void removeRespostaAvaliacao(RespostasAvaliacao resposta) {
+        if (this.respostas == null) {
+            return;
+        }
+        this.respostas.remove(resposta);
+    }
 
     @Override
     public int hashCode() {
@@ -69,5 +105,5 @@ public class Avaliacao implements Serializable {
     public String toString() {
         return "com.mycompany.personaltech.Avaliacao[ id=" + id + " ]";
     }
-    
+
 }
