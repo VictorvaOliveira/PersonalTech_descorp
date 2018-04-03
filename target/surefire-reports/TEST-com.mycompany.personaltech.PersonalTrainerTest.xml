@@ -1,60 +1,59 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="4" failures="0" name="com.mycompany.personaltech.PersonalTrainerTest" time="9.742" errors="0" skipped="0">
+<testsuite tests="7" failures="1" name="com.mycompany.personaltech.PersonalTrainerTest" time="10.846" errors="1" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
-    <property name="sun.boot.library.path" value="/home/john/jdk1.8.0_161/jre/lib/amd64"/>
+    <property name="sun.boot.library.path" value="/usr/lib/jvm/java-8-oracle/jre/lib/amd64"/>
     <property name="java.vm.version" value="25.161-b12"/>
-    <property name="user.country.format" value="BR"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
     <property name="java.vendor.url" value="http://java.oracle.com/"/>
     <property name="path.separator" value=":"/>
     <property name="guice.disable.misplaced.annotation.check" value="true"/>
     <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
     <property name="file.encoding.pkg" value="sun.io"/>
-    <property name="user.country" value="US"/>
+    <property name="user.country" value="BR"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.os.patch.level" value="unknown"/>
+    <property name="test" value="com.mycompany.personaltech.PersonalTrainerTest"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="/home/john/NetBeansProjects/PersonalTech"/>
+    <property name="user.dir" value="/home/victor/Documentos/PersonalTech_descorp"/>
     <property name="java.runtime.version" value="1.8.0_161-b12"/>
     <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment"/>
-    <property name="java.endorsed.dirs" value="/home/john/jdk1.8.0_161/jre/lib/endorsed"/>
+    <property name="java.endorsed.dirs" value="/usr/lib/jvm/java-8-oracle/jre/lib/endorsed"/>
     <property name="os.arch" value="amd64"/>
     <property name="java.io.tmpdir" value="/tmp"/>
     <property name="line.separator" value="
 "/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="os.name" value="Linux"/>
-    <property name="maven.ext.class.path" value="/home/john/netbeans-8.2/java/maven-nblib/netbeans-eventspy.jar"/>
-    <property name="classworlds.conf" value="/home/john/netbeans-8.2/java/maven/bin/m2.conf"/>
+    <property name="maven.ext.class.path" value="/home/victor/netbeans-8.2/java/maven-nblib/netbeans-eventspy.jar"/>
+    <property name="classworlds.conf" value="/home/victor/netbeans-8.2/java/maven/bin/m2.conf"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
-    <property name="java.library.path" value="/home/john/jdk1.8.0_161/jre/lib/amd64:/home/john/jdk1.8.0_161/jre/lib/i386::/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib"/>
+    <property name="java.library.path" value="/usr/lib/jvm/java-8-oracle/jre/lib/amd64:/usr/lib/jvm/java-8-oracle/jre/lib/i386::/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.class.version" value="52.0"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="os.version" value="4.13.0-37-generic"/>
-    <property name="user.home" value="/home/john"/>
+    <property name="user.home" value="/home/victor"/>
     <property name="user.timezone" value="America/Recife"/>
     <property name="java.awt.printerjob" value="sun.print.PSPrinterJob"/>
     <property name="java.specification.version" value="1.8"/>
     <property name="file.encoding" value="UTF-8"/>
-    <property name="user.name" value="john"/>
-    <property name="java.class.path" value="/home/john/netbeans-8.2/java/maven/boot/plexus-classworlds-2.4.jar"/>
+    <property name="user.name" value="victor"/>
+    <property name="java.class.path" value="/home/victor/netbeans-8.2/java/maven/boot/plexus-classworlds-2.4.jar"/>
     <property name="java.vm.specification.version" value="1.8"/>
     <property name="sun.arch.data.model" value="64"/>
-    <property name="java.home" value="/home/john/jdk1.8.0_161/jre"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -Dmaven.ext.class.path=/home/john/netbeans-8.2/java/maven-nblib/netbeans-eventspy.jar clean install"/>
+    <property name="java.home" value="/usr/lib/jvm/java-8-oracle/jre"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -Dtest=com.mycompany.personaltech.PersonalTrainerTest -Dmaven.ext.class.path=/home/victor/netbeans-8.2/java/maven-nblib/netbeans-eventspy.jar surefire:test"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
-    <property name="user.language" value="en"/>
-    <property name="user.language.format" value="pt"/>
+    <property name="user.language" value="pt"/>
     <property name="awt.toolkit" value="sun.awt.X11.XToolkit"/>
     <property name="java.vm.info" value="mixed mode"/>
     <property name="java.version" value="1.8.0_161"/>
-    <property name="java.ext.dirs" value="/home/john/jdk1.8.0_161/jre/lib/ext:/usr/java/packages/lib/ext"/>
+    <property name="java.ext.dirs" value="/usr/lib/jvm/java-8-oracle/jre/lib/ext:/usr/java/packages/lib/ext"/>
     <property name="securerandom.source" value="file:/dev/./urandom"/>
-    <property name="sun.boot.class.path" value="/home/john/jdk1.8.0_161/jre/lib/resources.jar:/home/john/jdk1.8.0_161/jre/lib/rt.jar:/home/john/jdk1.8.0_161/jre/lib/sunrsasign.jar:/home/john/jdk1.8.0_161/jre/lib/jsse.jar:/home/john/jdk1.8.0_161/jre/lib/jce.jar:/home/john/jdk1.8.0_161/jre/lib/charsets.jar:/home/john/jdk1.8.0_161/jre/lib/jfr.jar:/home/john/jdk1.8.0_161/jre/classes"/>
+    <property name="sun.boot.class.path" value="/usr/lib/jvm/java-8-oracle/jre/lib/resources.jar:/usr/lib/jvm/java-8-oracle/jre/lib/rt.jar:/usr/lib/jvm/java-8-oracle/jre/lib/sunrsasign.jar:/usr/lib/jvm/java-8-oracle/jre/lib/jsse.jar:/usr/lib/jvm/java-8-oracle/jre/lib/jce.jar:/usr/lib/jvm/java-8-oracle/jre/lib/charsets.jar:/usr/lib/jvm/java-8-oracle/jre/lib/jfr.jar:/usr/lib/jvm/java-8-oracle/jre/classes"/>
     <property name="java.vendor" value="Oracle Corporation"/>
-    <property name="maven.home" value="/home/john/netbeans-8.2/java/maven"/>
+    <property name="maven.home" value="/home/victor/netbeans-8.2/java/maven"/>
     <property name="file.separator" value="/"/>
     <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -62,8 +61,188 @@
     <property name="sun.desktop" value="gnome"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="com.mycompany.personaltech.PersonalTrainerTest" name="selecionarPersonalTrainer_01" time="0"/>
-  <testcase classname="com.mycompany.personaltech.PersonalTrainerTest" name="removerPersonalTrainer_01" time="0"/>
-  <testcase classname="com.mycompany.personaltech.PersonalTrainerTest" name="alterarPersonalTrainer_01" time="0.001"/>
-  <testcase classname="com.mycompany.personaltech.PersonalTrainerTest" name="inserirPersonalTrainer_01" time="0"/>
+  <testcase classname="com.mycompany.personaltech.PersonalTrainerTest" name="removerPersonalTrainerPorCPF" time="0.057">
+    <error message="You have provided an instance of an incorrect PK class for this find operation.  Class expected : class java.lang.Long, Class received : class java.lang.String." type="java.lang.IllegalArgumentException">java.lang.IllegalArgumentException: You have provided an instance of an incorrect PK class for this find operation.  Class expected : class java.lang.Long, Class received : class java.lang.String.
+	at org.eclipse.persistence.internal.jpa.EntityManagerImpl.findInternal(EntityManagerImpl.java:795)
+	at org.eclipse.persistence.internal.jpa.EntityManagerImpl.find(EntityManagerImpl.java:719)
+	at org.eclipse.persistence.internal.jpa.EntityManagerImpl.find(EntityManagerImpl.java:588)
+	at com.mycompany.personaltech.PersonalTrainerTest.removerPersonalTrainerPorCPF(PersonalTrainerTest.java:139)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:53)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:123)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:104)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:164)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:110)
+	at org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:175)
+	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
+</error>
+    <system-out>[EL Config]: metadata: 2018-04-03 19:52:16.15--ServerSession(2056418216)--Thread(Thread[main,5,main])--The access type for the persistent class [class com.mycompany.personaltech.Exercicio] is set to [FIELD].
+[EL Config]: metadata: 2018-04-03 19:52:16.166--ServerSession(2056418216)--Thread(Thread[main,5,main])--The access type for the persistent class [class com.mycompany.personaltech.Aluno] is set to [FIELD].
+[EL Config]: metadata: 2018-04-03 19:52:16.172--ServerSession(2056418216)--Thread(Thread[main,5,main])--The target entity (reference) class for the one to many mapping element [field exercicios] is being defaulted to: class com.mycompany.personaltech.Exercicio.
+[EL Config]: metadata: 2018-04-03 19:52:16.178--ServerSession(2056418216)--Thread(Thread[main,5,main])--The target class (reference) class for the element collection mapping element [field telefones] is being defaulted to: class java.lang.String.
+[EL Config]: metadata: 2018-04-03 19:52:16.179--ServerSession(2056418216)--Thread(Thread[main,5,main])--The target entity (reference) class for the one to many mapping element [field avaliacoes] is being defaulted to: class com.mycompany.personaltech.Avaliacao.
+[EL Config]: metadata: 2018-04-03 19:52:16.18--ServerSession(2056418216)--Thread(Thread[main,5,main])--The access type for the persistent class [class com.mycompany.personaltech.PersonalTrainer] is set to [FIELD].
+[EL Config]: metadata: 2018-04-03 19:52:16.18--ServerSession(2056418216)--Thread(Thread[main,5,main])--The target entity (reference) class for the one to many mapping element [field alunos] is being defaulted to: class com.mycompany.personaltech.Aluno.
+[EL Config]: metadata: 2018-04-03 19:52:16.181--ServerSession(2056418216)--Thread(Thread[main,5,main])--The target class (reference) class for the element collection mapping element [field telefones] is being defaulted to: class java.lang.String.
+[EL Config]: metadata: 2018-04-03 19:52:16.181--ServerSession(2056418216)--Thread(Thread[main,5,main])--The target entity (reference) class for the one to many mapping element [field avaliacoes] is being defaulted to: class com.mycompany.personaltech.Avaliacao.
+[EL Config]: metadata: 2018-04-03 19:52:16.182--ServerSession(2056418216)--Thread(Thread[main,5,main])--The access type for the persistent class [class com.mycompany.personaltech.Avaliacao] is set to [FIELD].
+[EL Config]: metadata: 2018-04-03 19:52:16.182--ServerSession(2056418216)--Thread(Thread[main,5,main])--The access type for the persistent class [class com.mycompany.personaltech.Endereco] is set to [FIELD].
+[EL Config]: metadata: 2018-04-03 19:52:16.183--ServerSession(2056418216)--Thread(Thread[main,5,main])--The alias name for the entity class [class com.mycompany.personaltech.Exercicio] is being defaulted to: Exercicio.
+[EL Config]: metadata: 2018-04-03 19:52:16.197--ServerSession(2056418216)--Thread(Thread[main,5,main])--The column name for element [id] is being defaulted to: ID.
+[EL Config]: metadata: 2018-04-03 19:52:16.197--ServerSession(2056418216)--Thread(Thread[main,5,main])--The alias name for the entity class [class com.mycompany.personaltech.Aluno] is being defaulted to: Aluno.
+[EL Config]: metadata: 2018-04-03 19:52:16.199--ServerSession(2056418216)--Thread(Thread[main,5,main])--The column name for element [id] is being defaulted to: ID.
+[EL Config]: metadata: 2018-04-03 19:52:16.199--ServerSession(2056418216)--Thread(Thread[main,5,main])--The alias name for the entity class [class com.mycompany.personaltech.PersonalTrainer] is being defaulted to: PersonalTrainer.
+[EL Config]: metadata: 2018-04-03 19:52:16.2--ServerSession(2056418216)--Thread(Thread[main,5,main])--The column name for element [id] is being defaulted to: ID.
+[EL Config]: metadata: 2018-04-03 19:52:16.201--ServerSession(2056418216)--Thread(Thread[main,5,main])--The alias name for the entity class [class com.mycompany.personaltech.Avaliacao] is being defaulted to: Avaliacao.
+[EL Config]: metadata: 2018-04-03 19:52:16.201--ServerSession(2056418216)--Thread(Thread[main,5,main])--The column name for element [id] is being defaulted to: ID.
+[EL Config]: metadata: 2018-04-03 19:52:16.217--ServerSession(2056418216)--Thread(Thread[main,5,main])--The primary key column name for the mapping element [field telefones] is being defaulted to: ID.
+[EL Config]: metadata: 2018-04-03 19:52:16.22--ServerSession(2056418216)--Thread(Thread[main,5,main])--The primary key column name for the mapping element [field telefones] is being defaulted to: ID.
+[EL Info]: 2018-04-03 19:52:16.502--ServerSession(2056418216)--Thread(Thread[main,5,main])--EclipseLink, version: Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd
+[EL Fine]: connection: 2018-04-03 19:52:16.729--Thread(Thread[main,5,main])--Detected database platform: org.eclipse.persistence.platform.database.MySQLPlatform
+[EL Config]: connection: 2018-04-03 19:52:16.738--ServerSession(2056418216)--Connection(2151717)--Thread(Thread[main,5,main])--connecting(DatabaseLogin(
+	platform=&gt;MySQLPlatform
+	user name=&gt; &quot;root&quot;
+	datasource URL=&gt; &quot;jdbc:mysql://localhost:3306/PERSONALTECH&quot;
+))
+[EL Config]: connection: 2018-04-03 19:52:16.744--ServerSession(2056418216)--Connection(2109798150)--Thread(Thread[main,5,main])--Connected: jdbc:mysql://localhost:3306/PERSONALTECH
+	User: root@localhost
+	Database: MySQL  Version: 5.7.21-0ubuntu0.16.04.1
+	Driver: MySQL Connector Java  Version: mysql-connector-java-5.1.34 ( Revision: jess.balint@oracle.com-20141014163213-wqbwpf1ok2kvo1om )
+[EL Info]: connection: 2018-04-03 19:52:16.79--ServerSession(2056418216)--Thread(Thread[main,5,main])--file:/home/victor/Documentos/PersonalTech_descorp/target/classes/_PersonalTech_PU login successful
+[EL Fine]: sql: 2018-04-03 19:52:16.804--ServerSession(2056418216)--Connection(2109798150)--Thread(Thread[main,5,main])--ALTER TABLE TB_EXERCICIO DROP FOREIGN KEY FK_TB_EXERCICIO_ID_ALUNO
+[EL Fine]: sql: 2018-04-03 19:52:16.904--ServerSession(2056418216)--Connection(2109798150)--Thread(Thread[main,5,main])--ALTER TABLE TB_ALUNO DROP FOREIGN KEY FK_TB_ALUNO_ID_PT
+[EL Fine]: sql: 2018-04-03 19:52:16.994--ServerSession(2056418216)--Connection(2109798150)--Thread(Thread[main,5,main])--ALTER TABLE TB_AVALIACAO DROP FOREIGN KEY FK_TB_AVALIACAO_ID_TB_PT
+[EL Fine]: sql: 2018-04-03 19:52:17.061--ServerSession(2056418216)--Connection(2109798150)--Thread(Thread[main,5,main])--ALTER TABLE TB_AVALIACAO DROP FOREIGN KEY FK_TB_AVALIACAO_ID_TB_ALUNO
+[EL Fine]: sql: 2018-04-03 19:52:17.195--ServerSession(2056418216)--Connection(2109798150)--Thread(Thread[main,5,main])--ALTER TABLE TB_TELEFONE_ALUNO DROP FOREIGN KEY FK_TB_TELEFONE_ALUNO_ID_ALUNO
+[EL Fine]: sql: 2018-04-03 19:52:17.263--ServerSession(2056418216)--Connection(2109798150)--Thread(Thread[main,5,main])--ALTER TABLE TB_TELEFONE_PT DROP FOREIGN KEY FK_TB_TELEFONE_PT_ID_PERSONALTRAINER
+[EL Fine]: sql: 2018-04-03 19:52:17.33--ServerSession(2056418216)--Connection(2109798150)--Thread(Thread[main,5,main])--DROP TABLE TB_EXERCICIO
+[EL Fine]: sql: 2018-04-03 19:52:17.454--ServerSession(2056418216)--Connection(2109798150)--Thread(Thread[main,5,main])--DROP TABLE TB_ALUNO
+[EL Fine]: sql: 2018-04-03 19:52:17.588--ServerSession(2056418216)--Connection(2109798150)--Thread(Thread[main,5,main])--DROP TABLE TB_PERSONALTRAINER
+[EL Fine]: sql: 2018-04-03 19:52:17.724--ServerSession(2056418216)--Connection(2109798150)--Thread(Thread[main,5,main])--DROP TABLE TB_AVALIACAO
+[EL Fine]: sql: 2018-04-03 19:52:17.86--ServerSession(2056418216)--Connection(2109798150)--Thread(Thread[main,5,main])--DROP TABLE TB_TELEFONE_ALUNO
+[EL Fine]: sql: 2018-04-03 19:52:17.994--ServerSession(2056418216)--Connection(2109798150)--Thread(Thread[main,5,main])--DROP TABLE TB_TELEFONE_PT
+[EL Fine]: sql: 2018-04-03 19:52:18.148--ServerSession(2056418216)--Connection(2109798150)--Thread(Thread[main,5,main])--CREATE TABLE TB_EXERCICIO (ID BIGINT AUTO_INCREMENT NOT NULL, TXT_NOME_EXERCICIO VARCHAR(50), TXT_TIPO_EXERCICIO VARCHAR(20), ID_ALUNO BIGINT, PRIMARY KEY (ID))
+[EL Fine]: sql: 2018-04-03 19:52:18.437--ServerSession(2056418216)--Connection(2109798150)--Thread(Thread[main,5,main])--CREATE TABLE TB_ALUNO (ID BIGINT AUTO_INCREMENT NOT NULL, TXT_CPF VARCHAR(14) NOT NULL UNIQUE, DT_NASCIMENTO DATE, TXT_EMAIL VARCHAR(50) NOT NULL, TXT_LOGIN VARCHAR(50) NOT NULL UNIQUE, TXT_NOME VARCHAR(100) NOT NULL, TXT_SENHA VARCHAR(20) NOT NULL, TXT_SEXO VARCHAR(1) NOT NULL, TXT_SOBRENOME VARCHAR(100) NOT NULL, TXT_TIPO_USUARIO VARCHAR(20), END_TXT_BAIRRO VARCHAR(150) NOT NULL, END_TXT_CEP VARCHAR(20) NOT NULL, END_TXT_CIDADE VARCHAR(50) NOT NULL, END_TXT_COMPLEMENTO VARCHAR(30), END_TXT_ESTADO VARCHAR(50) NOT NULL, END_TXT_LOGRADOURO VARCHAR(150) NOT NULL, END_NUMERO INTEGER NOT NULL, ID_PT BIGINT, PRIMARY KEY (ID))
+[EL Fine]: sql: 2018-04-03 19:52:18.75--ServerSession(2056418216)--Connection(2109798150)--Thread(Thread[main,5,main])--CREATE TABLE TB_PERSONALTRAINER (ID BIGINT AUTO_INCREMENT NOT NULL, TXT_CPF VARCHAR(14) NOT NULL UNIQUE, DT_NASCIMENTO DATE, TXT_EMAIL VARCHAR(50) NOT NULL, TXT_LOGIN VARCHAR(50) NOT NULL UNIQUE, TXT_NOME VARCHAR(255) NOT NULL, TXT_SENHA VARCHAR(20) NOT NULL, TXT_SEXO VARCHAR(1) NOT NULL, TXT_SOBRENOME VARCHAR(255) NOT NULL, TXT_TIPO_USUARIO VARCHAR(20) NOT NULL, END_TXT_BAIRRO VARCHAR(150) NOT NULL, END_TXT_CEP VARCHAR(20) NOT NULL, END_TXT_CIDADE VARCHAR(50) NOT NULL, END_TXT_COMPLEMENTO VARCHAR(30), END_TXT_ESTADO VARCHAR(50) NOT NULL, END_TXT_LOGRADOURO VARCHAR(150) NOT NULL, END_NUMERO INTEGER NOT NULL, PRIMARY KEY (ID))
+[EL Fine]: sql: 2018-04-03 19:52:19.186--ServerSession(2056418216)--Connection(2109798150)--Thread(Thread[main,5,main])--CREATE TABLE TB_AVALIACAO (ID BIGINT AUTO_INCREMENT NOT NULL, DT_AVALIACAO DATE NOT NULL, ID_TB_ALUNO BIGINT, ID_TB_PT BIGINT, PRIMARY KEY (ID))
+[EL Fine]: sql: 2018-04-03 19:52:19.475--ServerSession(2056418216)--Connection(2109798150)--Thread(Thread[main,5,main])--CREATE TABLE TB_TELEFONE_ALUNO (ID_ALUNO BIGINT NOT NULL, TXT_NUM_TELEFONE VARCHAR(20) NOT NULL)
+[EL Fine]: sql: 2018-04-03 19:52:19.719--ServerSession(2056418216)--Connection(2109798150)--Thread(Thread[main,5,main])--CREATE TABLE TB_TELEFONE_PT (ID_PERSONALTRAINER BIGINT NOT NULL, TXT_NUM_TELEFONE VARCHAR(20) NOT NULL)
+[EL Fine]: sql: 2018-04-03 19:52:19.953--ServerSession(2056418216)--Connection(2109798150)--Thread(Thread[main,5,main])--ALTER TABLE TB_EXERCICIO ADD CONSTRAINT FK_TB_EXERCICIO_ID_ALUNO FOREIGN KEY (ID_ALUNO) REFERENCES TB_ALUNO (ID)
+[EL Fine]: sql: 2018-04-03 19:52:20.701--ServerSession(2056418216)--Connection(2109798150)--Thread(Thread[main,5,main])--ALTER TABLE TB_ALUNO ADD CONSTRAINT FK_TB_ALUNO_ID_PT FOREIGN KEY (ID_PT) REFERENCES TB_PERSONALTRAINER (ID)
+[EL Fine]: sql: 2018-04-03 19:52:21.452--ServerSession(2056418216)--Connection(2109798150)--Thread(Thread[main,5,main])--ALTER TABLE TB_AVALIACAO ADD CONSTRAINT FK_TB_AVALIACAO_ID_TB_PT FOREIGN KEY (ID_TB_PT) REFERENCES TB_PERSONALTRAINER (ID)
+[EL Fine]: sql: 2018-04-03 19:52:22.12--ServerSession(2056418216)--Connection(2109798150)--Thread(Thread[main,5,main])--ALTER TABLE TB_AVALIACAO ADD CONSTRAINT FK_TB_AVALIACAO_ID_TB_ALUNO FOREIGN KEY (ID_TB_ALUNO) REFERENCES TB_ALUNO (ID)
+[EL Fine]: sql: 2018-04-03 19:52:22.815--ServerSession(2056418216)--Connection(2109798150)--Thread(Thread[main,5,main])--ALTER TABLE TB_TELEFONE_ALUNO ADD CONSTRAINT FK_TB_TELEFONE_ALUNO_ID_ALUNO FOREIGN KEY (ID_ALUNO) REFERENCES TB_ALUNO (ID)
+[EL Fine]: sql: 2018-04-03 19:52:23.631--ServerSession(2056418216)--Connection(2109798150)--Thread(Thread[main,5,main])--ALTER TABLE TB_TELEFONE_PT ADD CONSTRAINT FK_TB_TELEFONE_PT_ID_PERSONALTRAINER FOREIGN KEY (ID_PERSONALTRAINER) REFERENCES TB_PERSONALTRAINER (ID)
+</system-out>
+    <system-err>SLF4J: Failed to load class &quot;org.slf4j.impl.StaticLoggerBinder&quot;.
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+abr 03, 2018 7:52:26 PM com.mycompany.personaltech.PersonalTrainerTest commitTransaction
+GRAVE: Transaction rolled back because transaction was set to RollbackOnly.
+javax.persistence.RollbackException: Transaction rolled back because transaction was set to RollbackOnly.
+	at org.eclipse.persistence.internal.jpa.transaction.EntityTransactionImpl.commit(EntityTransactionImpl.java:141)
+	at com.mycompany.personaltech.PersonalTrainerTest.commitTransaction(PersonalTrainerTest.java:67)
+	at com.mycompany.personaltech.PersonalTrainerTest.tearDown(PersonalTrainerTest.java:56)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:33)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:53)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:123)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:104)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:164)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:110)
+	at org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:175)
+	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
+
+</system-err>
+  </testcase>
+  <testcase classname="com.mycompany.personaltech.PersonalTrainerTest" name="removerPersonalTrainerPorCPF" time="0.059">
+    <failure message="Transaction rolled back because transaction was set to RollbackOnly." type="java.lang.AssertionError">java.lang.AssertionError: Transaction rolled back because transaction was set to RollbackOnly.
+	at org.junit.Assert.fail(Assert.java:88)
+	at com.mycompany.personaltech.PersonalTrainerTest.commitTransaction(PersonalTrainerTest.java:73)
+	at com.mycompany.personaltech.PersonalTrainerTest.tearDown(PersonalTrainerTest.java:56)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:33)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:53)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:123)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:104)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:164)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:110)
+	at org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:175)
+	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
+</failure>
+  </testcase>
+  <testcase classname="com.mycompany.personaltech.PersonalTrainerTest" name="alterarPersonalTrainerPorId" time="0.057"/>
+  <testcase classname="com.mycompany.personaltech.PersonalTrainerTest" name="selecionarPersonalTrainerPorId" time="0.003"/>
+  <testcase classname="com.mycompany.personaltech.PersonalTrainerTest" name="quantidadePersonalTrainer" time="0.136"/>
+  <testcase classname="com.mycompany.personaltech.PersonalTrainerTest" name="removerPersonalTrainerPorId" time="0.138"/>
+  <testcase classname="com.mycompany.personaltech.PersonalTrainerTest" name="inserirPersonalTrainer_01" time="0.046"/>
 </testsuite>

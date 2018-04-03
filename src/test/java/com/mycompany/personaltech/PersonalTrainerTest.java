@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -83,7 +84,7 @@ public class PersonalTrainerTest {
         pt.setNome("Iron");
         pt.setSobrenome("Man");
         pt.setSexo("M");
-        pt.setCpf("111-111-111-11");
+        pt.setCpf("222-222-746-22");
         pt.setEmail("ironman@personaltech.com");
         pt.setLogin("iron92man");
         pt.setSenha("ironman123");
@@ -96,10 +97,6 @@ public class PersonalTrainerTest {
 
         pt.setTipo(TipoUsuario.PERSONAL_TRAINER);
 
-        List<String> telefone = null;
-        telefone.add("1234-5678");
-        pt.setTelefones(telefone);
-
         Endereco end = new Endereco();
         end.setBairro("Cordeiro");
         end.setCep("50000-000");
@@ -109,25 +106,71 @@ public class PersonalTrainerTest {
         end.setLogradouro("Avenida Caxanga");
         end.setNumero(101);
         pt.setEndereco(end);
-
-        pt.setAvaliacoes();
-
-        pt.setAlunos();
+        
+        em.persist(pt);
 
     }
 
     @Test
-    public void selecionarPersonalTrainer_01() {
-        // TODO
+    public void selecionarPersonalTrainerPorId() {
+        PersonalTrainer pt = em.find(PersonalTrainer.class, (long) 4);
+        assertNotNull(pt);
+        assertEquals("VICTOR", pt.getNome());
+        assertEquals("VICTOR98", pt.getLogin());
+        logger.log(Level.INFO, "selecionarPersonalTrainerPorId: PT {0}", pt.toString());
     }
 
     @Test
-    public void alterarPersonalTrainer_01() {
-        // TODO
+    public void alterarPersonalTrainerPorId() {
+        PersonalTrainer pt = em.find(PersonalTrainer.class, (long) 4);
+        assertNotNull(pt);
+        pt.setEmail("victor123@gmail.com");
+        em.flush();
+        em.clear();
+        logger.log(Level.INFO, "alterarPersonalPorId", pt.toString());
+
+        pt = em.find(PersonalTrainer.class, (long) 4);
+//        assertNotNull(aluno);
+        assertEquals("victor123@gmail.com", pt.getEmail());
     }
 
     @Test
-    public void removerPersonalTrainer_01() {
-        // TODO
+    public void removerPersonalTrainerPorCPF() {
+        
+        TypedQuery<PersonalTrainer> query = em.createNamedQuery("", PersonalTrainer.class);
+        query.setParameter("cpf", "222-222-746-22");
+        PersonalTrainer pt = query.getSingleResult();
+        assertNotNull(pt);
+        em.remove(pt);
+        em.flush();
+        assertEquals(0, query.getResultList().size());
+        
+        pt = em.find(PersonalTrainer.class, (String)"222-222-746-22");
+        assertNull(pt);
     }
+    @Test
+    public void removerPersonalTrainerPorId() {
+        PersonalTrainer pt = em.find(PersonalTrainer.class,(long)4);
+        assertNotNull(pt);
+        em.remove(pt);
+        em.flush();
+        em.clear();
+        
+        pt = em.find(PersonalTrainer.class, (long) 4);
+        assertNull(pt);
+    }
+
+
+    @Test
+    public void quantidadePersonalTrainer() {
+        TypedQuery<Long> query = em.createQuery("SELECT count(pt.id) FROM PersonalTrainer pt", Long.class);
+        
+        Long quantidade = query.getSingleResult();
+        assertEquals(new Long(4), quantidade);
+    }
+
+//    @Test
+//    public void quantidadeALunoPorExercicio() {
+//
+//    }
 }
