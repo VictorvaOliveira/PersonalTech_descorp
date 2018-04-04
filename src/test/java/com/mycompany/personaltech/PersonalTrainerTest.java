@@ -79,6 +79,8 @@ public class PersonalTrainerTest {
      */
     @Test
     public void inserirPersonalTrainer_01() {
+
+        logger.log(Level.INFO, "Inserção do Personal id = 6");
         PersonalTrainer pt = new PersonalTrainer();
 
         pt.setNome("Iron");
@@ -135,23 +137,10 @@ public class PersonalTrainerTest {
     }
 
     @Test
-    public void removerPersonalTrainerPorCPF() {
-
-        TypedQuery<PersonalTrainer> query = em.createNamedQuery("", PersonalTrainer.class);
-        query.setParameter("cpf", "222-222-746-22");
-        PersonalTrainer pt = query.getSingleResult();
-        assertNotNull(pt);
-        em.remove(pt);
-        em.flush();
-        assertEquals(0, query.getResultList().size());
-
-        pt = em.find(PersonalTrainer.class, (String) "222-222-746-22");
-        assertNull(pt);
-    }
-
-    @Test
     public void removerPersonalTrainerPorId() {
+        logger.log(Level.INFO, "Remoção do Personal id = 4");
         PersonalTrainer pt = em.find(PersonalTrainer.class, (long) 4);
+        //Aqui vai ter que ter algo parecido com "UPDATE TB_ALUNO SET ID_PT='X' WHERE ID_PT=X;"
         assertNotNull(pt);
         em.remove(pt);
         em.flush();
@@ -163,9 +152,16 @@ public class PersonalTrainerTest {
 
     @Test
     public void coletarAlunos_01() {
-        PersonalTrainer pt = em.find(PersonalTrainer.class, (long) 1);
+        PersonalTrainer pt = em.find(PersonalTrainer.class, (long) 3);
         List<Aluno> a = pt.getAlunos();
-        assertNotNull(a);
-//        logger.log(Level.INFO, ">>>>>>>>>>>>>>>>>>>", a.toString());
+        assertEquals(5, a.size());
+    }
+
+//    @Test
+    public void coletarAluno_02() {
+        logger.log(Level.INFO, "Contagem dos alunos vinculados ao Personal 4");
+        PersonalTrainer pt = em.find(PersonalTrainer.class, (long) 4);
+        List<Aluno> a = pt.getAlunos();
+        assertEquals(0, a.size());
     }
 }
