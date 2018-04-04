@@ -8,7 +8,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import jdk.nashorn.internal.objects.NativeArray;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -140,18 +142,19 @@ public class PersonalTrainerTest {
     public void removerPersonalTrainerPorId() {
         logger.log(Level.INFO, "Remoção do Personal id = 4");
         PersonalTrainer pt = em.find(PersonalTrainer.class, (long) 4);
-        //Aqui vai ter que ter algo parecido com "UPDATE TB_ALUNO SET ID_PT='X' WHERE ID_PT=X;"
+        
         assertNotNull(pt);
         em.remove(pt);
         em.flush();
         em.clear();
-
+        
         pt = em.find(PersonalTrainer.class, (long) 4);
         assertNull(pt);
     }
 
     @Test
     public void coletarAlunos_01() {
+        logger.log(Level.INFO, "Contagem dos alunos vinculados ao Personal 3");
         PersonalTrainer pt = em.find(PersonalTrainer.class, (long) 3);
         List<Aluno> a = pt.getAlunos();
         assertEquals(5, a.size());
