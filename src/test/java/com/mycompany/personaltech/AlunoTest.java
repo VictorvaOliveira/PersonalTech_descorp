@@ -83,10 +83,10 @@ public class AlunoTest {
      */
     @Test
     public void selecionarAlunoPorId() {
-        Aluno aluno = em.find(Aluno.class, (long) 2);
+        Aluno aluno = em.find(Aluno.class, (long) 23);
         assertNotNull(aluno);
-        assertEquals("JOAO", aluno.getNome());
-        assertEquals("111.222.333-43", aluno.getCpf());
+        assertEquals("MICHEL", aluno.getNome());
+        assertEquals("05842569855", aluno.getCpf());
         logger.log(Level.INFO, "selecionarAlunoPorId: Aluno {0}", aluno.toString());
     }
 
