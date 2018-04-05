@@ -205,21 +205,21 @@ public class AlunoTest {
     
     @Test
     public void deletarAluno_01() {
-        Aluno aluno = em.find(Aluno.class, (long) 3);
+        Aluno aluno = em.find(Aluno.class, (long) 24);
         assertNotNull(aluno);
         em.remove(aluno);
         em.flush();
         em.clear();
-        aluno = em.find(Aluno.class, (long) 3);
+        aluno = em.find(Aluno.class, (long) 24);
         assertNull(aluno);
     }
 
     @Test
     public void deletarAluno_02() {
-        Aluno aluno = em.find(Aluno.class, (long) 2);
+        Aluno aluno = em.find(Aluno.class, (long) 22);
         assertNotNull(aluno);
         PersonalTrainer pt = new PersonalTrainer();
-        pt = em.find(PersonalTrainer.class, (long) 1);
+        pt = em.find(PersonalTrainer.class, (long) 5);
         pt.removeAluno(aluno);
     }
 }
