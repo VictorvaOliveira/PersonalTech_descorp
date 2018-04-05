@@ -1,4 +1,12 @@
 -------------------------------------------------------------------------------
 Test set: com.mycompany.personaltech.AlunoTest
 -------------------------------------------------------------------------------
+<<<<<<< HEAD
 Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 21.305 sec
+=======
+<<<<<<< HEAD
+Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 10.302 sec
+=======
+Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 31.343 sec
+>>>>>>> master
+>>>>>>> dev_victor
