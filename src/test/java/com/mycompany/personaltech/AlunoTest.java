@@ -83,15 +83,17 @@ public class AlunoTest {
      */
     @Test
     public void selecionarAlunoPorId() {
-        Aluno aluno = em.find(Aluno.class, (long) 2);
+        // Coment teste branch
+        Aluno aluno = em.find(Aluno.class, (long) 23);
         assertNotNull(aluno);
-        assertEquals("JOAO", aluno.getNome());
-        assertEquals("111.222.333-43", aluno.getCpf());
+        assertEquals("MICHEL", aluno.getNome());
+        assertEquals("05842569855", aluno.getCpf());
         logger.log(Level.INFO, "selecionarAlunoPorId: Aluno {0}", aluno.toString());
     }
 
     @Test
     public void atualizarAluno() {
+        // Coment teste branch
         Aluno aluno = em.find(Aluno.class, (long) 1);
         assertNotNull(aluno);
         aluno.setEmail("zoiao.com");
@@ -105,6 +107,7 @@ public class AlunoTest {
     }
     @Test
     public void selecionarAlunoPorCPF() {
+        // Coment teste branch
         String jpql = "SELECT a FROM Aluno a where a.cpf = ?1";
         Query query = em.createQuery(jpql);
         query.setParameter(1, "111.222.333-42");
@@ -118,6 +121,7 @@ public class AlunoTest {
 
     @Test
     public void inserirAluno() {
+        // Coment teste branch
         Aluno aluno = new Aluno();
         aluno.setNome("Jurubeba");
         aluno.setSobrenome("Alcoolica");
@@ -162,6 +166,7 @@ public class AlunoTest {
 
     @Test
     public void inserirAluno_02() {
+        // Coment teste branch
         Aluno aluno = new Aluno();
         aluno.setNome("Jurubeba2");
         aluno.setSobrenome("Alcoolica");
