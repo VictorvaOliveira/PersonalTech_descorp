@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.mycompany.personaltech;
 
 import java.util.Calendar;
@@ -78,12 +74,9 @@ public class AlunoTest {
         }
     }
 
-    /**
-     * Test of getId method, of class Aluno.
-     */
     @Test
     public void selecionarAlunoPorId() {
-        // Coment teste branch
+        
         Aluno aluno = em.find(Aluno.class, (long) 23);
         assertNotNull(aluno);
         assertEquals("MICHEL", aluno.getNome());
@@ -93,28 +86,26 @@ public class AlunoTest {
 
     @Test
     public void atualizarAluno() {
-        // Coment teste branch
-        Aluno aluno = em.find(Aluno.class, (long) 1);
+       
+        Aluno aluno = em.find(Aluno.class, (long) 25);
         assertNotNull(aluno);
-        aluno.setEmail("zoiao.com");
+        aluno.setEmail("email@hotmail.com");
         em.flush();
         em.clear();
         logger.log(Level.INFO, "selecionarAlunoPorId: Aluno {0}", aluno.toString());
-
-        aluno = em.find(Aluno.class, (long) 1);
-//        assertNotNull(aluno);
-        assertEquals("zoiao.com", aluno.getEmail());
+        aluno = em.find(Aluno.class, (long) 25);
+        assertEquals("email@hotmail.com", aluno.getEmail());
     }
     @Test
     public void selecionarAlunoPorCPF() {
-        // Coment teste branch
+        
         String jpql = "SELECT a FROM Aluno a where a.cpf = ?1";
         Query query = em.createQuery(jpql);
-        query.setParameter(1, "111.222.333-42");
+        query.setParameter(1, "05842569855");
 
         Aluno aluno = (Aluno) query.getSingleResult();
 
-        assertEquals("111.222.333-42", aluno.getCpf());
+        assertEquals("05842569855", aluno.getCpf());
         logger.log(Level.INFO, "selecionarAlunoPorId: Aluno {0}", aluno.toString());
     }
 
@@ -162,11 +153,16 @@ public class AlunoTest {
         em.clear();
 
         assertNotNull(aluno.getId());
+        
+        // Teste dados do aluno inserido
+        assertEquals("Cordeiro", aluno.getEndereco().getBairro());
+        assertEquals("Recife", aluno.getEndereco().getCidade());
+        assertEquals(c.getTime(), aluno.getDataNascimento());
     }
 
     @Test
     public void inserirAluno_02() {
-        // Coment teste branch
+        
         Aluno aluno = new Aluno();
         aluno.setNome("Jurubeba2");
         aluno.setSobrenome("Alcoolica");
@@ -221,5 +217,6 @@ public class AlunoTest {
         PersonalTrainer pt = new PersonalTrainer();
         pt = em.find(PersonalTrainer.class, (long) 5);
         pt.removeAluno(aluno);
+        
     }
 }
