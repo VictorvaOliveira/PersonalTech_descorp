@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="5" failures="0" name="com.mycompany.personaltech.AvaliacaoTest" time="17.912" errors="0" skipped="0">
+<testsuite tests="11" failures="0" name="com.mycompany.personaltech.AvaliacaoTest" time="18.384" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/home/john/jdk1.8.0_161/jre/lib/amd64"/>
@@ -62,9 +62,15 @@
     <property name="sun.desktop" value="gnome"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="com.mycompany.personaltech.AvaliacaoTest" name="selecionarAvaliacao_01" time="0.001"/>
-  <testcase classname="com.mycompany.personaltech.AvaliacaoTest" name="inserirAvaliacao_01" time="0.066"/>
-  <testcase classname="com.mycompany.personaltech.AvaliacaoTest" name="inserirAvaliacao_02" time="0.067"/>
-  <testcase classname="com.mycompany.personaltech.AvaliacaoTest" name="removerAvaliacao_01" time="0"/>
-  <testcase classname="com.mycompany.personaltech.AvaliacaoTest" name="alterarAvaliacao_01" time="0"/>
+  <testcase classname="com.mycompany.personaltech.AvaliacaoTest" name="test01" time="0.055"/>
+  <testcase classname="com.mycompany.personaltech.AvaliacaoTest" name="test02" time="0.045"/>
+  <testcase classname="com.mycompany.personaltech.AvaliacaoTest" name="test03" time="0.044"/>
+  <testcase classname="com.mycompany.personaltech.AvaliacaoTest" name="test04" time="0.002"/>
+  <testcase classname="com.mycompany.personaltech.AvaliacaoTest" name="test05" time="0.041"/>
+  <testcase classname="com.mycompany.personaltech.AvaliacaoTest" name="test06" time="0.033"/>
+  <testcase classname="com.mycompany.personaltech.AvaliacaoTest" name="test07" time="0.005"/>
+  <testcase classname="com.mycompany.personaltech.AvaliacaoTest" name="test08" time="0.005"/>
+  <testcase classname="com.mycompany.personaltech.AvaliacaoTest" name="test09" time="0.003"/>
+  <testcase classname="com.mycompany.personaltech.AvaliacaoTest" name="test10" time="0.063"/>
+  <testcase classname="com.mycompany.personaltech.AvaliacaoTest" name="test11" time="0.1"/>
 </testsuite>

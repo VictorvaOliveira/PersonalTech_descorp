@@ -147,6 +147,7 @@ public class PersonalTrainer implements Serializable {
         }
         alunos.add(aluno);
     }
+
     public void removeAluno(Aluno aluno) {
         if (aluno == null) {
             return;
@@ -213,6 +214,13 @@ public class PersonalTrainer implements Serializable {
         this.avaliacoes.add(avaliacao);
     }
 
+    void removeAvaliacao(Avaliacao avaliacao) {
+        if (this.avaliacoes == null) {
+            return;
+        }
+        this.avaliacoes.remove(avaliacao);
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -237,4 +245,5 @@ public class PersonalTrainer implements Serializable {
     public String toString() {
         return "sistema.PersonalTrainer[ id=" + id + " ]";
     }
+
 }

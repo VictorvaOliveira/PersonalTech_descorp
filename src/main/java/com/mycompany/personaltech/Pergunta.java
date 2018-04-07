@@ -67,7 +67,7 @@ public class Pergunta implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.personaltech.Pergunta[ id=" + id + " ]";
+        return this.getPergunta();
     }
 
 }
