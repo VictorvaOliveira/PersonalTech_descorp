@@ -213,11 +213,12 @@ public class PersonalTrainer implements Serializable {
         avaliacao.setPersonalTrainer(this);
     }
 
-    void removeAvaliacao(Avaliacao avaliacao) {
+    public void removeAvaliacao(Avaliacao avaliacao) {
         if (this.avaliacoes == null) {
             return;
         }
         this.avaliacoes.remove(avaliacao);
+        avaliacao.setPersonalTrainer(null);
     }
 
     @Override

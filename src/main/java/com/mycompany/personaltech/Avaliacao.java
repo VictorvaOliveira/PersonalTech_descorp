@@ -36,11 +36,11 @@ public class Avaliacao implements Serializable {
     @JoinColumn(name = "ID_AVALIACAO", referencedColumnName = "ID")
     private List<RespostasAvaliacao> respostas;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.LAZY, optional = true, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "ID_ALUNO", referencedColumnName = "ID")
     private Aluno aluno;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.LAZY, optional = true, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "ID_PT", referencedColumnName = "ID")
     private PersonalTrainer personalTrainer;
 

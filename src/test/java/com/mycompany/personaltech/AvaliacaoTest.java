@@ -80,95 +80,53 @@ public class AvaliacaoTest {
     /**
      * Test of getId method, of class Aluno.
      */
-//    @Test
-//    public void inserirAvaliacao_01() {
+    @Test
+    public void inserirAvaliacao_01() {
 //    public void test01() {
-//        Aluno aluno = em.find(Aluno.class, (long) 2);
-//        em.flush();
-//        Avaliacao av = new Avaliacao();
-//        Calendar c = Calendar.getInstance();
-//        c.set(Calendar.YEAR, 2018);
-//        c.set(Calendar.MONTH, Calendar.JANUARY);
-//        c.set(Calendar.DAY_OF_MONTH, 25);
-//        av.setdataAvaliacao(c.getTime());
-//        aluno.addAvaliacao(av);
-//        PersonalTrainer p = new PersonalTrainer();
-//        p = em.find(PersonalTrainer.class, (long) 1);
-//        p.addAvaliacao(av);
-//        em.flush();
-//        em.clear();
-//        assertNotNull(aluno.getId());
-//    }
-//    @Test
-//    public void inserirAvaliacao_02() {
-//    public void test02() {
-//        Aluno aluno = em.find(Aluno.class, (long) 2);
-//        em.flush();
-//        Avaliacao av = new Avaliacao();
-//        Calendar c = Calendar.getInstance();
-//        c.set(Calendar.YEAR, 2018);
-//        c.set(Calendar.MONTH, Calendar.FEBRUARY);
-//        c.set(Calendar.DAY_OF_MONTH, 25);
-//        av.setdataAvaliacao(c.getTime());
-//        aluno.addAvaliacao(av);
-//        PersonalTrainer p = new PersonalTrainer();
-//        p = em.find(PersonalTrainer.class, (long) 1);
-//        p.addAvaliacao(av);
-//        em.flush();
-//        em.clear();
-//        assertNotNull(aluno.getId());
-//    }
-//    @Test
-//    public void inserirAvaliacao_03() {
-//    public void test03() {
-//        Aluno aluno = em.find(Aluno.class, (long) 5);
-//        em.flush();
-//        Avaliacao av = new Avaliacao();
-//        Calendar c = Calendar.getInstance();
-//        c.set(Calendar.YEAR, 2018);
-//        c.set(Calendar.MONTH, Calendar.FEBRUARY);
-//        c.set(Calendar.DAY_OF_MONTH, 25);
-//        av.setdataAvaliacao(c.getTime());
-//        aluno.addAvaliacao(av);
-//        PersonalTrainer p = new PersonalTrainer();
-//        p = em.find(PersonalTrainer.class, (long) 1);
-//        p.addAvaliacao(av);
-//        em.flush();
-//        em.clear();
-//        assertNotNull(aluno.getId());
-//}
+        Avaliacao av = new Avaliacao();
+        setAvaliacao(av);
+        
+        Aluno aluno = em.find(Aluno.class, (long) 2);
+        aluno.addAvaliacao(av);
+        em.flush();
+        
+        PersonalTrainer p = new PersonalTrainer();
+        p = em.find(PersonalTrainer.class, (long) 1);
+        p.addAvaliacao(av);
+        em.flush();
+        em.clear();
+        
+        assertNotNull(aluno.getId());
+    }
 
-//    @Test
-//    public void selecionarAvaliacao_04() {
+    @Test
+    public void selecionarAvaliacao_04() {
 //    public void test04() {
-//        Avaliacao av = em.find(Avaliacao.class, (long) 1);
-//        assertNotNull(av);
-//    }
-//    @Test
-//    public void alterarAvaliacao_05() {
+        Avaliacao av = em.find(Avaliacao.class, (long) 1);
+        assertNotNull(av);
+    }
+    
+    @Test
+    public void alterarAvaliacao_05() {
 //    public void test05() {
-//        Avaliacao av = em.find(Avaliacao.class, (long) 1);
-//        Calendar c = Calendar.getInstance();
-//        c.set(Calendar.YEAR, 2017);
-//        c.set(Calendar.MONTH, Calendar.JULY);
-//        c.set(Calendar.DAY_OF_MONTH, 9);
-//        av.setDataAvaliacao(c.getTime());
-//        assertNotNull(av);
-//        assertEquals(c.getTime(), av.getDataAvaliacao());
-//    }
-//    @Test
-//    public void alterarAvaliacao_06() {
-//    public void test06() {
-//        Avaliacao av = em.find(Avaliacao.class, (long) 2);
-//        Calendar c = Calendar.getInstance();
-//        c.set(Calendar.YEAR, 2017);
-//        c.set(Calendar.MONTH, Calendar.AUGUST);
-//        c.set(Calendar.DAY_OF_MONTH, 9);
-//        av.setDataAvaliacao(c.getTime());
-//        assertNotNull(av);
-//        assertEquals(c.getTime(), av.getDataAvaliacao());
-//    }
-//    @Test
+        Avaliacao av = em.find(Avaliacao.class, (long) 1);
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.YEAR, 2017);
+        c.set(Calendar.MONTH, Calendar.JULY);
+        c.set(Calendar.DAY_OF_MONTH, 9);
+        av.setDataAvaliacao(c.getTime());
+        assertNotNull(av);
+        assertEquals(c.getTime(), av.getDataAvaliacao());
+    }
+    
+    @Test
+    public void rem() {
+//    public void test05() {
+        PersonalTrainer pt = em.find(PersonalTrainer.class, (long) 2);
+        em.remove(pt);
+    }
+    
+
 //    public void testarPerguntasDaAvaliacao_07() {
 //    public void test07() {
 //        Pergunta p = em.find(Pergunta.class, (long) 2);
@@ -205,4 +163,11 @@ public class AvaliacaoTest {
 //        Aluno aluno = em.find(Aluno.class, (long) 1);
 //        pt.removeAluno(aluno);
 //    }
+    private void setAvaliacao(Avaliacao av) {
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.YEAR, 2018);
+        c.set(Calendar.MONTH, Calendar.JANUARY);
+        c.set(Calendar.DAY_OF_MONTH, 25);
+        av.setdataAvaliacao(c.getTime());
+    }
 }
