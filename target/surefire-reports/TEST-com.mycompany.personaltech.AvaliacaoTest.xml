@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="1" failures="1" name="com.mycompany.personaltech.AvaliacaoTest" time="35.742" errors="0" skipped="0">
+<testsuite tests="4" failures="1" name="com.mycompany.personaltech.AvaliacaoTest" time="31.851" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/home/john/jdk1.8.0_161/jre/lib/amd64"/>
@@ -14,7 +14,7 @@
     <property name="user.country" value="US"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.os.patch.level" value="unknown"/>
-    <property name="test" value="com.mycompany.personaltech.AvaliacaoTest#rem"/>
+    <property name="test" value="com.mycompany.personaltech.AvaliacaoTest"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
     <property name="user.dir" value="/home/john/NetBeansProjects/PersonalTech"/>
     <property name="java.runtime.version" value="1.8.0_161-b12"/>
@@ -44,7 +44,7 @@
     <property name="java.vm.specification.version" value="1.8"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.home" value="/home/john/jdk1.8.0_161/jre"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -Dtest=com.mycompany.personaltech.AvaliacaoTest#rem -Dmaven.ext.class.path=/home/john/netbeans-8.2/java/maven-nblib/netbeans-eventspy.jar surefire:test"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -Dtest=com.mycompany.personaltech.AvaliacaoTest -Dmaven.ext.class.path=/home/john/netbeans-8.2/java/maven-nblib/netbeans-eventspy.jar surefire:test"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="user.language" value="en"/>
     <property name="user.language.format" value="pt"/>
@@ -63,18 +63,20 @@
     <property name="sun.desktop" value="gnome"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="com.mycompany.personaltech.AvaliacaoTest" name="rem" time="0.845">
+  <testcase classname="com.mycompany.personaltech.AvaliacaoTest" name="alterarAvaliacao_05" time="0.145"/>
+  <testcase classname="com.mycompany.personaltech.AvaliacaoTest" name="inserirAvaliacao_01" time="0.088"/>
+  <testcase classname="com.mycompany.personaltech.AvaliacaoTest" name="rem" time="0.361">
     <failure message="Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd): org.eclipse.persistence.exceptions.DatabaseException
-Internal Exception: com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Cannot delete or update a parent row: a foreign key constraint fails (`PERSONALTECH`.`TB_AVALIACAO`, CONSTRAINT `FK_TB_AVALIACAO_ID_ALUNO` FOREIGN KEY (`ID_ALUNO`) REFERENCES `TB_ALUNO` (`ID`))
+Internal Exception: com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Cannot delete or update a parent row: a foreign key constraint fails (`PERSONALTECH`.`TB_AVALIACAO`, CONSTRAINT `FK_TB_AVALIACAO_ID_PT` FOREIGN KEY (`ID_PT`) REFERENCES `TB_PERSONALTRAINER` (`ID`))
 Error Code: 1451
-Call: DELETE FROM TB_ALUNO WHERE (ID = ?)
-	bind =&gt; [1]
-Query: DeleteObjectQuery(1 -&gt; CARL)" type="java.lang.AssertionError">java.lang.AssertionError: Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd): org.eclipse.persistence.exceptions.DatabaseException
-Internal Exception: com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Cannot delete or update a parent row: a foreign key constraint fails (`PERSONALTECH`.`TB_AVALIACAO`, CONSTRAINT `FK_TB_AVALIACAO_ID_ALUNO` FOREIGN KEY (`ID_ALUNO`) REFERENCES `TB_ALUNO` (`ID`))
+Call: DELETE FROM TB_PERSONALTRAINER WHERE (ID = ?)
+	bind =&gt; [2]
+Query: DeleteObjectQuery(2 -&gt; JUCA)" type="java.lang.AssertionError">java.lang.AssertionError: Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd): org.eclipse.persistence.exceptions.DatabaseException
+Internal Exception: com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Cannot delete or update a parent row: a foreign key constraint fails (`PERSONALTECH`.`TB_AVALIACAO`, CONSTRAINT `FK_TB_AVALIACAO_ID_PT` FOREIGN KEY (`ID_PT`) REFERENCES `TB_PERSONALTRAINER` (`ID`))
 Error Code: 1451
-Call: DELETE FROM TB_ALUNO WHERE (ID = ?)
-	bind =&gt; [1]
-Query: DeleteObjectQuery(1 -&gt; CARL)
+Call: DELETE FROM TB_PERSONALTRAINER WHERE (ID = ?)
+	bind =&gt; [2]
+Query: DeleteObjectQuery(2 -&gt; JUCA)
 	at org.junit.Assert.fail(Assert.java:88)
 	at com.mycompany.personaltech.AvaliacaoTest.commitTransaction(AvaliacaoTest.java:76)
 	at com.mycompany.personaltech.AvaliacaoTest.tearDown(AvaliacaoTest.java:59)
@@ -97,7 +99,7 @@ Query: DeleteObjectQuery(1 -&gt; CARL)
 	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
 	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
 	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
-	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:45)
+	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:53)
 	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:123)
 	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:104)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -110,115 +112,35 @@ Query: DeleteObjectQuery(1 -&gt; CARL)
 	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
 </failure>
-    <system-out>[EL Config]: metadata: 2018-04-08 00:20:46.982--ServerSession(1597655940)--Thread(Thread[main,5,main])--The access type for the persistent class [class com.mycompany.personaltech.Exercicio] is set to [FIELD].
-[EL Config]: metadata: 2018-04-08 00:20:47.038--ServerSession(1597655940)--Thread(Thread[main,5,main])--The access type for the persistent class [class com.mycompany.personaltech.RespostasAvaliacao] is set to [FIELD].
-[EL Config]: metadata: 2018-04-08 00:20:47.048--ServerSession(1597655940)--Thread(Thread[main,5,main])--The target entity (reference) class for the one to one mapping element [field pergunta] is being defaulted to: class com.mycompany.personaltech.Pergunta.
-[EL Config]: metadata: 2018-04-08 00:20:47.05--ServerSession(1597655940)--Thread(Thread[main,5,main])--The access type for the persistent class [class com.mycompany.personaltech.Aluno] is set to [FIELD].
-[EL Config]: metadata: 2018-04-08 00:20:47.058--ServerSession(1597655940)--Thread(Thread[main,5,main])--The target entity (reference) class for the one to many mapping element [field exercicios] is being defaulted to: class com.mycompany.personaltech.Exercicio.
-[EL Config]: metadata: 2018-04-08 00:20:47.069--ServerSession(1597655940)--Thread(Thread[main,5,main])--The target class (reference) class for the element collection mapping element [field telefones] is being defaulted to: class java.lang.String.
-[EL Config]: metadata: 2018-04-08 00:20:47.07--ServerSession(1597655940)--Thread(Thread[main,5,main])--The target entity (reference) class for the one to many mapping element [field avaliacoes] is being defaulted to: class com.mycompany.personaltech.Avaliacao.
-[EL Config]: metadata: 2018-04-08 00:20:47.071--ServerSession(1597655940)--Thread(Thread[main,5,main])--The access type for the persistent class [class com.mycompany.personaltech.PersonalTrainer] is set to [FIELD].
-[EL Config]: metadata: 2018-04-08 00:20:47.072--ServerSession(1597655940)--Thread(Thread[main,5,main])--The target entity (reference) class for the one to many mapping element [field alunos] is being defaulted to: class com.mycompany.personaltech.Aluno.
-[EL Config]: metadata: 2018-04-08 00:20:47.072--ServerSession(1597655940)--Thread(Thread[main,5,main])--The target class (reference) class for the element collection mapping element [field telefones] is being defaulted to: class java.lang.String.
-[EL Config]: metadata: 2018-04-08 00:20:47.073--ServerSession(1597655940)--Thread(Thread[main,5,main])--The target entity (reference) class for the one to many mapping element [field avaliacoes] is being defaulted to: class com.mycompany.personaltech.Avaliacao.
-[EL Config]: metadata: 2018-04-08 00:20:47.074--ServerSession(1597655940)--Thread(Thread[main,5,main])--The access type for the persistent class [class com.mycompany.personaltech.Avaliacao] is set to [FIELD].
-[EL Config]: metadata: 2018-04-08 00:20:47.075--ServerSession(1597655940)--Thread(Thread[main,5,main])--The target entity (reference) class for the many to one mapping element [field aluno] is being defaulted to: class com.mycompany.personaltech.Aluno.
-[EL Config]: metadata: 2018-04-08 00:20:47.075--ServerSession(1597655940)--Thread(Thread[main,5,main])--The target entity (reference) class for the many to one mapping element [field personalTrainer] is being defaulted to: class com.mycompany.personaltech.PersonalTrainer.
-[EL Config]: metadata: 2018-04-08 00:20:47.076--ServerSession(1597655940)--Thread(Thread[main,5,main])--The target entity (reference) class for the one to many mapping element [field respostas] is being defaulted to: class com.mycompany.personaltech.RespostasAvaliacao.
-[EL Config]: metadata: 2018-04-08 00:20:47.076--ServerSession(1597655940)--Thread(Thread[main,5,main])--The access type for the persistent class [class com.mycompany.personaltech.Pergunta] is set to [FIELD].
-[EL Config]: metadata: 2018-04-08 00:20:47.077--ServerSession(1597655940)--Thread(Thread[main,5,main])--The access type for the persistent class [class com.mycompany.personaltech.Endereco] is set to [FIELD].
-[EL Config]: metadata: 2018-04-08 00:20:47.078--ServerSession(1597655940)--Thread(Thread[main,5,main])--The alias name for the entity class [class com.mycompany.personaltech.Exercicio] is being defaulted to: Exercicio.
-[EL Config]: metadata: 2018-04-08 00:20:47.157--ServerSession(1597655940)--Thread(Thread[main,5,main])--The column name for element [id] is being defaulted to: ID.
-[EL Config]: metadata: 2018-04-08 00:20:47.158--ServerSession(1597655940)--Thread(Thread[main,5,main])--The alias name for the entity class [class com.mycompany.personaltech.RespostasAvaliacao] is being defaulted to: RespostasAvaliacao.
-[EL Config]: metadata: 2018-04-08 00:20:47.159--ServerSession(1597655940)--Thread(Thread[main,5,main])--The column name for element [id] is being defaulted to: ID.
-[EL Config]: metadata: 2018-04-08 00:20:47.159--ServerSession(1597655940)--Thread(Thread[main,5,main])--The alias name for the entity class [class com.mycompany.personaltech.Aluno] is being defaulted to: Aluno.
-[EL Config]: metadata: 2018-04-08 00:20:47.161--ServerSession(1597655940)--Thread(Thread[main,5,main])--The column name for element [id] is being defaulted to: ID.
-[EL Config]: metadata: 2018-04-08 00:20:47.163--ServerSession(1597655940)--Thread(Thread[main,5,main])--The alias name for the entity class [class com.mycompany.personaltech.PersonalTrainer] is being defaulted to: PersonalTrainer.
-[EL Config]: metadata: 2018-04-08 00:20:47.164--ServerSession(1597655940)--Thread(Thread[main,5,main])--The column name for element [id] is being defaulted to: ID.
-[EL Config]: metadata: 2018-04-08 00:20:47.165--ServerSession(1597655940)--Thread(Thread[main,5,main])--The alias name for the entity class [class com.mycompany.personaltech.Avaliacao] is being defaulted to: Avaliacao.
-[EL Config]: metadata: 2018-04-08 00:20:47.166--ServerSession(1597655940)--Thread(Thread[main,5,main])--The column name for element [id] is being defaulted to: ID.
-[EL Config]: metadata: 2018-04-08 00:20:47.167--ServerSession(1597655940)--Thread(Thread[main,5,main])--The alias name for the entity class [class com.mycompany.personaltech.Pergunta] is being defaulted to: Pergunta.
-[EL Config]: metadata: 2018-04-08 00:20:47.167--ServerSession(1597655940)--Thread(Thread[main,5,main])--The column name for element [id] is being defaulted to: ID.
-[EL Config]: metadata: 2018-04-08 00:20:47.21--ServerSession(1597655940)--Thread(Thread[main,5,main])--The primary key column name for the mapping element [field telefones] is being defaulted to: ID.
-[EL Config]: metadata: 2018-04-08 00:20:47.213--ServerSession(1597655940)--Thread(Thread[main,5,main])--The primary key column name for the mapping element [field telefones] is being defaulted to: ID.
-[EL Info]: 2018-04-08 00:20:48.322--ServerSession(1597655940)--Thread(Thread[main,5,main])--EclipseLink, version: Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd
-[EL Fine]: connection: 2018-04-08 00:20:50.001--Thread(Thread[main,5,main])--Detected database platform: org.eclipse.persistence.platform.database.MySQLPlatform
-[EL Config]: connection: 2018-04-08 00:20:50.031--ServerSession(1597655940)--Connection(1487500813)--Thread(Thread[main,5,main])--connecting(DatabaseLogin(
-	platform=&gt;MySQLPlatform
-	user name=&gt; &quot;root&quot;
-	datasource URL=&gt; &quot;jdbc:mysql://localhost:3306/PERSONALTECH&quot;
-))
-[EL Config]: connection: 2018-04-08 00:20:50.21--ServerSession(1597655940)--Connection(1977310713)--Thread(Thread[main,5,main])--Connected: jdbc:mysql://localhost:3306/PERSONALTECH
-	User: root@localhost
-	Database: MySQL  Version: 5.7.21-0ubuntu0.17.10.1
-	Driver: MySQL Connector Java  Version: mysql-connector-java-5.1.34 ( Revision: jess.balint@oracle.com-20141014163213-wqbwpf1ok2kvo1om )
-[EL Warning]: metadata: 2018-04-08 00:20:50.232--ServerSession(1597655940)--Thread(Thread[main,5,main])--Reverting the lazy setting on the OneToOne or ManyToOne attribute [aluno] for the entity class [class com.mycompany.personaltech.Avaliacao] since weaving was not enabled or did not occur.
-[EL Warning]: metadata: 2018-04-08 00:20:50.232--ServerSession(1597655940)--Thread(Thread[main,5,main])--Reverting the lazy setting on the OneToOne or ManyToOne attribute [personalTrainer] for the entity class [class com.mycompany.personaltech.Avaliacao] since weaving was not enabled or did not occur.
-[EL Info]: connection: 2018-04-08 00:20:50.292--ServerSession(1597655940)--Thread(Thread[main,5,main])--file:/home/john/NetBeansProjects/PersonalTech/target/classes/_PersonalTech_PU login successful
-[EL Fine]: sql: 2018-04-08 00:20:50.374--ServerSession(1597655940)--Connection(1977310713)--Thread(Thread[main,5,main])--ALTER TABLE TB_EXERCICIO DROP FOREIGN KEY FK_TB_EXERCICIO_ID_ALUNO
-[EL Fine]: sql: 2018-04-08 00:20:51.217--ServerSession(1597655940)--Connection(1977310713)--Thread(Thread[main,5,main])--ALTER TABLE TB_ALUNO DROP FOREIGN KEY FK_TB_ALUNO_ID_PT
-[EL Fine]: sql: 2018-04-08 00:20:51.771--ServerSession(1597655940)--Connection(1977310713)--Thread(Thread[main,5,main])--ALTER TABLE TB_AVALIACAO DROP FOREIGN KEY FK_TB_AVALIACAO_ID_ALUNO
-[EL Fine]: sql: 2018-04-08 00:20:51.993--ServerSession(1597655940)--Connection(1977310713)--Thread(Thread[main,5,main])--ALTER TABLE TB_AVALIACAO DROP FOREIGN KEY FK_TB_AVALIACAO_ID_PT
-[EL Fine]: sql: 2018-04-08 00:20:52.115--ServerSession(1597655940)--Connection(1977310713)--Thread(Thread[main,5,main])--ALTER TABLE TB_RESP_ALUNO DROP FOREIGN KEY FK_TB_RESP_ALUNO_ID_PERGUNTA_AVAL
-[EL Fine]: sql: 2018-04-08 00:20:52.227--ServerSession(1597655940)--Connection(1977310713)--Thread(Thread[main,5,main])--ALTER TABLE TB_RESP_ALUNO DROP FOREIGN KEY FK_TB_RESP_ALUNO_ID_AVALIACAO
-[EL Fine]: sql: 2018-04-08 00:20:52.384--ServerSession(1597655940)--Connection(1977310713)--Thread(Thread[main,5,main])--ALTER TABLE TB_TELEFONE_ALUNO DROP FOREIGN KEY FK_TB_TELEFONE_ALUNO_ID_ALUNO
-[EL Fine]: sql: 2018-04-08 00:20:52.462--ServerSession(1597655940)--Connection(1977310713)--Thread(Thread[main,5,main])--ALTER TABLE TB_TELEFONE_PT DROP FOREIGN KEY FK_TB_TELEFONE_PT_ID_PERSONALTRAINER
-[EL Fine]: sql: 2018-04-08 00:20:52.608--ServerSession(1597655940)--Connection(1977310713)--Thread(Thread[main,5,main])--DROP TABLE TB_EXERCICIO
-[EL Fine]: sql: 2018-04-08 00:20:53.031--ServerSession(1597655940)--Connection(1977310713)--Thread(Thread[main,5,main])--DROP TABLE TB_ALUNO
-[EL Fine]: sql: 2018-04-08 00:20:53.333--ServerSession(1597655940)--Connection(1977310713)--Thread(Thread[main,5,main])--DROP TABLE TB_PERSONALTRAINER
-[EL Fine]: sql: 2018-04-08 00:20:53.711--ServerSession(1597655940)--Connection(1977310713)--Thread(Thread[main,5,main])--DROP TABLE TB_AVALIACAO
-[EL Fine]: sql: 2018-04-08 00:20:54.281--ServerSession(1597655940)--Connection(1977310713)--Thread(Thread[main,5,main])--DROP TABLE TB_RESP_ALUNO
-[EL Fine]: sql: 2018-04-08 00:20:54.672--ServerSession(1597655940)--Connection(1977310713)--Thread(Thread[main,5,main])--DROP TABLE TB_PERGUNTA
-[EL Fine]: sql: 2018-04-08 00:20:55.061--ServerSession(1597655940)--Connection(1977310713)--Thread(Thread[main,5,main])--DROP TABLE TB_TELEFONE_ALUNO
-[EL Fine]: sql: 2018-04-08 00:20:55.385--ServerSession(1597655940)--Connection(1977310713)--Thread(Thread[main,5,main])--DROP TABLE TB_TELEFONE_PT
-[EL Fine]: sql: 2018-04-08 00:20:56.072--ServerSession(1597655940)--Connection(1977310713)--Thread(Thread[main,5,main])--CREATE TABLE TB_EXERCICIO (ID BIGINT AUTO_INCREMENT NOT NULL, TXT_NOME_EXERCICIO VARCHAR(50), TXT_TIPO_EXERCICIO VARCHAR(20), ID_ALUNO BIGINT, PRIMARY KEY (ID))
-[EL Fine]: sql: 2018-04-08 00:20:58.572--ServerSession(1597655940)--Connection(1977310713)--Thread(Thread[main,5,main])--CREATE TABLE TB_ALUNO (ID BIGINT AUTO_INCREMENT NOT NULL, TXT_CPF VARCHAR(14) NOT NULL UNIQUE, DT_NASCIMENTO DATE, TXT_EMAIL VARCHAR(50) NOT NULL, TXT_LOGIN VARCHAR(50) NOT NULL UNIQUE, TXT_NOME VARCHAR(100) NOT NULL, TXT_SENHA VARCHAR(20) NOT NULL, TXT_SEXO VARCHAR(1) NOT NULL, TXT_SOBRENOME VARCHAR(100) NOT NULL, TXT_TIPO_USUARIO VARCHAR(20), END_TXT_BAIRRO VARCHAR(150) NOT NULL, END_TXT_CEP VARCHAR(20) NOT NULL, END_TXT_CIDADE VARCHAR(50) NOT NULL, END_TXT_COMPLEMENTO VARCHAR(30), END_TXT_ESTADO VARCHAR(50) NOT NULL, END_TXT_LOGRADOURO VARCHAR(150) NOT NULL, END_NUMERO INTEGER NOT NULL, ID_PT BIGINT, PRIMARY KEY (ID))
-[EL Fine]: sql: 2018-04-08 00:20:59.472--ServerSession(1597655940)--Connection(1977310713)--Thread(Thread[main,5,main])--CREATE TABLE TB_PERSONALTRAINER (ID BIGINT AUTO_INCREMENT NOT NULL, TXT_CPF VARCHAR(14) NOT NULL UNIQUE, DT_NASCIMENTO DATE, TXT_EMAIL VARCHAR(50) NOT NULL, TXT_LOGIN VARCHAR(50) NOT NULL UNIQUE, TXT_NOME VARCHAR(255) NOT NULL, TXT_SENHA VARCHAR(20) NOT NULL, TXT_SEXO VARCHAR(1) NOT NULL, TXT_SOBRENOME VARCHAR(255) NOT NULL, TXT_TIPO_USUARIO VARCHAR(20) NOT NULL, END_TXT_BAIRRO VARCHAR(150) NOT NULL, END_TXT_CEP VARCHAR(20) NOT NULL, END_TXT_CIDADE VARCHAR(50) NOT NULL, END_TXT_COMPLEMENTO VARCHAR(30), END_TXT_ESTADO VARCHAR(50) NOT NULL, END_TXT_LOGRADOURO VARCHAR(150) NOT NULL, END_NUMERO INTEGER NOT NULL, PRIMARY KEY (ID))
-[EL Fine]: sql: 2018-04-08 00:20:59.899--ServerSession(1597655940)--Connection(1977310713)--Thread(Thread[main,5,main])--CREATE TABLE TB_AVALIACAO (ID BIGINT AUTO_INCREMENT NOT NULL, DT_AVALIACAO DATE NOT NULL, ID_ALUNO BIGINT, ID_PT BIGINT, PRIMARY KEY (ID))
-[EL Fine]: sql: 2018-04-08 00:21:00.578--ServerSession(1597655940)--Connection(1977310713)--Thread(Thread[main,5,main])--CREATE TABLE TB_RESP_ALUNO (ID BIGINT AUTO_INCREMENT NOT NULL, TXT_RESP_ALUNO VARCHAR(1000), ID_PERGUNTA_AVAL BIGINT, ID_AVALIACAO BIGINT, PRIMARY KEY (ID))
-[EL Fine]: sql: 2018-04-08 00:21:01.59--ServerSession(1597655940)--Connection(1977310713)--Thread(Thread[main,5,main])--CREATE TABLE TB_PERGUNTA (ID BIGINT AUTO_INCREMENT NOT NULL, TXT_PERGUNTA VARCHAR(2000) NOT NULL, PRIMARY KEY (ID))
-[EL Fine]: sql: 2018-04-08 00:21:02.969--ServerSession(1597655940)--Connection(1977310713)--Thread(Thread[main,5,main])--CREATE TABLE TB_TELEFONE_ALUNO (ID_ALUNO BIGINT NOT NULL, TXT_NUM_TELEFONE VARCHAR(20) NOT NULL)
-[EL Fine]: sql: 2018-04-08 00:21:03.294--ServerSession(1597655940)--Connection(1977310713)--Thread(Thread[main,5,main])--CREATE TABLE TB_TELEFONE_PT (ID_PERSONALTRAINER BIGINT NOT NULL, TXT_NUM_TELEFONE VARCHAR(20) NOT NULL)
-[EL Fine]: sql: 2018-04-08 00:21:03.636--ServerSession(1597655940)--Connection(1977310713)--Thread(Thread[main,5,main])--ALTER TABLE TB_EXERCICIO ADD CONSTRAINT FK_TB_EXERCICIO_ID_ALUNO FOREIGN KEY (ID_ALUNO) REFERENCES TB_ALUNO (ID)
-[EL Fine]: sql: 2018-04-08 00:21:04.753--ServerSession(1597655940)--Connection(1977310713)--Thread(Thread[main,5,main])--ALTER TABLE TB_ALUNO ADD CONSTRAINT FK_TB_ALUNO_ID_PT FOREIGN KEY (ID_PT) REFERENCES TB_PERSONALTRAINER (ID)
-[EL Fine]: sql: 2018-04-08 00:21:06.492--ServerSession(1597655940)--Connection(1977310713)--Thread(Thread[main,5,main])--ALTER TABLE TB_AVALIACAO ADD CONSTRAINT FK_TB_AVALIACAO_ID_ALUNO FOREIGN KEY (ID_ALUNO) REFERENCES TB_ALUNO (ID)
-[EL Fine]: sql: 2018-04-08 00:21:07.663--ServerSession(1597655940)--Connection(1977310713)--Thread(Thread[main,5,main])--ALTER TABLE TB_AVALIACAO ADD CONSTRAINT FK_TB_AVALIACAO_ID_PT FOREIGN KEY (ID_PT) REFERENCES TB_PERSONALTRAINER (ID)
-[EL Fine]: sql: 2018-04-08 00:21:08.502--ServerSession(1597655940)--Connection(1977310713)--Thread(Thread[main,5,main])--ALTER TABLE TB_RESP_ALUNO ADD CONSTRAINT FK_TB_RESP_ALUNO_ID_PERGUNTA_AVAL FOREIGN KEY (ID_PERGUNTA_AVAL) REFERENCES TB_PERGUNTA (ID)
-[EL Fine]: sql: 2018-04-08 00:21:09.385--ServerSession(1597655940)--Connection(1977310713)--Thread(Thread[main,5,main])--ALTER TABLE TB_RESP_ALUNO ADD CONSTRAINT FK_TB_RESP_ALUNO_ID_AVALIACAO FOREIGN KEY (ID_AVALIACAO) REFERENCES TB_AVALIACAO (ID)
-[EL Fine]: sql: 2018-04-08 00:21:10.401--ServerSession(1597655940)--Connection(1977310713)--Thread(Thread[main,5,main])--ALTER TABLE TB_TELEFONE_ALUNO ADD CONSTRAINT FK_TB_TELEFONE_ALUNO_ID_ALUNO FOREIGN KEY (ID_ALUNO) REFERENCES TB_ALUNO (ID)
-[EL Fine]: sql: 2018-04-08 00:21:11.139--ServerSession(1597655940)--Connection(1977310713)--Thread(Thread[main,5,main])--ALTER TABLE TB_TELEFONE_PT ADD CONSTRAINT FK_TB_TELEFONE_PT_ID_PERSONALTRAINER FOREIGN KEY (ID_PERSONALTRAINER) REFERENCES TB_PERSONALTRAINER (ID)
-[EL Fine]: sql: 2018-04-08 00:21:18.526--ServerSession(1597655940)--Connection(1977310713)--Thread(Thread[main,5,main])--SELECT ID, TXT_CPF, DT_NASCIMENTO, TXT_EMAIL, TXT_LOGIN, TXT_NOME, TXT_SENHA, TXT_SEXO, TXT_SOBRENOME, TXT_TIPO_USUARIO, END_TXT_BAIRRO, END_TXT_CEP, END_TXT_CIDADE, END_TXT_COMPLEMENTO, END_TXT_ESTADO, END_TXT_LOGRADOURO, END_NUMERO FROM TB_ALUNO WHERE (ID = ?)
-	bind =&gt; [1]
-[EL Fine]: sql: 2018-04-08 00:21:18.624--ClientSession(1324843695)--Connection(1977310713)--Thread(Thread[main,5,main])--DELETE FROM TB_TELEFONE_ALUNO WHERE (ID_ALUNO = ?)
-	bind =&gt; [1]
-[EL Fine]: sql: 2018-04-08 00:21:18.692--ClientSession(1324843695)--Connection(1977310713)--Thread(Thread[main,5,main])--DELETE FROM TB_EXERCICIO WHERE (ID_ALUNO = ?)
-	bind =&gt; [1]
-[EL Fine]: sql: 2018-04-08 00:21:18.695--ClientSession(1324843695)--Connection(1977310713)--Thread(Thread[main,5,main])--DELETE FROM TB_ALUNO WHERE (ID = ?)
-	bind =&gt; [1]
-[EL Fine]: sql: 2018-04-08 00:21:18.754--ClientSession(1324843695)--Thread(Thread[main,5,main])--SELECT 1
-[EL Warning]: 2018-04-08 00:21:18.755--UnitOfWork(1129944640)--Thread(Thread[main,5,main])--Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd): org.eclipse.persistence.exceptions.DatabaseException
-Internal Exception: com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Cannot delete or update a parent row: a foreign key constraint fails (`PERSONALTECH`.`TB_AVALIACAO`, CONSTRAINT `FK_TB_AVALIACAO_ID_ALUNO` FOREIGN KEY (`ID_ALUNO`) REFERENCES `TB_ALUNO` (`ID`))
+    <system-out>[EL Fine]: sql: 2018-04-08 00:47:49.201--ServerSession(1121453612)--Connection(1966124444)--Thread(Thread[main,5,main])--SELECT ID, TXT_CPF, DT_NASCIMENTO, TXT_EMAIL, TXT_LOGIN, TXT_NOME, TXT_SENHA, TXT_SEXO, TXT_SOBRENOME, TXT_TIPO_USUARIO, END_TXT_BAIRRO, END_TXT_CEP, END_TXT_CIDADE, END_TXT_COMPLEMENTO, END_TXT_ESTADO, END_TXT_LOGRADOURO, END_NUMERO FROM TB_PERSONALTRAINER WHERE (ID = ?)
+	bind =&gt; [2]
+[EL Fine]: sql: 2018-04-08 00:47:49.206--ClientSession(1097324923)--Connection(1966124444)--Thread(Thread[main,5,main])--DELETE FROM TB_TELEFONE_PT WHERE (ID_PERSONALTRAINER = ?)
+	bind =&gt; [2]
+[EL Fine]: sql: 2018-04-08 00:47:49.208--ClientSession(1097324923)--Connection(1966124444)--Thread(Thread[main,5,main])--UPDATE TB_ALUNO SET ID_PT = ? WHERE (ID_PT = ?)
+	bind =&gt; [null, 2]
+[EL Fine]: sql: 2018-04-08 00:47:49.276--ClientSession(1097324923)--Connection(1966124444)--Thread(Thread[main,5,main])--DELETE FROM TB_PERSONALTRAINER WHERE (ID = ?)
+	bind =&gt; [2]
+[EL Fine]: sql: 2018-04-08 00:47:49.451--ClientSession(1097324923)--Thread(Thread[main,5,main])--SELECT 1
+[EL Warning]: 2018-04-08 00:47:49.452--UnitOfWork(519492428)--Thread(Thread[main,5,main])--Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd): org.eclipse.persistence.exceptions.DatabaseException
+Internal Exception: com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Cannot delete or update a parent row: a foreign key constraint fails (`PERSONALTECH`.`TB_AVALIACAO`, CONSTRAINT `FK_TB_AVALIACAO_ID_PT` FOREIGN KEY (`ID_PT`) REFERENCES `TB_PERSONALTRAINER` (`ID`))
 Error Code: 1451
-Call: DELETE FROM TB_ALUNO WHERE (ID = ?)
-	bind =&gt; [1]
-Query: DeleteObjectQuery(1 -&gt; CARL)
+Call: DELETE FROM TB_PERSONALTRAINER WHERE (ID = ?)
+	bind =&gt; [2]
+Query: DeleteObjectQuery(2 -&gt; JUCA)
 </system-out>
-    <system-err>SLF4J: Failed to load class &quot;org.slf4j.impl.StaticLoggerBinder&quot;.
-SLF4J: Defaulting to no-operation (NOP) logger implementation
-SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
-abr 08, 2018 12:21:18 AM com.mycompany.personaltech.AvaliacaoTest commitTransaction
+    <system-err>abr 08, 2018 12:47:49 AM com.mycompany.personaltech.AvaliacaoTest commitTransaction
 SEVERE: Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd): org.eclipse.persistence.exceptions.DatabaseException
-Internal Exception: com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Cannot delete or update a parent row: a foreign key constraint fails (`PERSONALTECH`.`TB_AVALIACAO`, CONSTRAINT `FK_TB_AVALIACAO_ID_ALUNO` FOREIGN KEY (`ID_ALUNO`) REFERENCES `TB_ALUNO` (`ID`))
+Internal Exception: com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Cannot delete or update a parent row: a foreign key constraint fails (`PERSONALTECH`.`TB_AVALIACAO`, CONSTRAINT `FK_TB_AVALIACAO_ID_PT` FOREIGN KEY (`ID_PT`) REFERENCES `TB_PERSONALTRAINER` (`ID`))
 Error Code: 1451
-Call: DELETE FROM TB_ALUNO WHERE (ID = ?)
-	bind =&gt; [1]
-Query: DeleteObjectQuery(1 -&gt; CARL)
+Call: DELETE FROM TB_PERSONALTRAINER WHERE (ID = ?)
+	bind =&gt; [2]
+Query: DeleteObjectQuery(2 -&gt; JUCA)
 javax.persistence.RollbackException: Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd): org.eclipse.persistence.exceptions.DatabaseException
-Internal Exception: com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Cannot delete or update a parent row: a foreign key constraint fails (`PERSONALTECH`.`TB_AVALIACAO`, CONSTRAINT `FK_TB_AVALIACAO_ID_ALUNO` FOREIGN KEY (`ID_ALUNO`) REFERENCES `TB_ALUNO` (`ID`))
+Internal Exception: com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Cannot delete or update a parent row: a foreign key constraint fails (`PERSONALTECH`.`TB_AVALIACAO`, CONSTRAINT `FK_TB_AVALIACAO_ID_PT` FOREIGN KEY (`ID_PT`) REFERENCES `TB_PERSONALTRAINER` (`ID`))
 Error Code: 1451
-Call: DELETE FROM TB_ALUNO WHERE (ID = ?)
-	bind =&gt; [1]
-Query: DeleteObjectQuery(1 -&gt; CARL)
+Call: DELETE FROM TB_PERSONALTRAINER WHERE (ID = ?)
+	bind =&gt; [2]
+Query: DeleteObjectQuery(2 -&gt; JUCA)
 	at org.eclipse.persistence.internal.jpa.transaction.EntityTransactionImpl.commit(EntityTransactionImpl.java:157)
 	at com.mycompany.personaltech.AvaliacaoTest.commitTransaction(AvaliacaoTest.java:70)
 	at com.mycompany.personaltech.AvaliacaoTest.tearDown(AvaliacaoTest.java:59)
@@ -241,7 +163,7 @@ Query: DeleteObjectQuery(1 -&gt; CARL)
 	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
 	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
 	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
-	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:45)
+	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:53)
 	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:123)
 	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:104)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -254,11 +176,11 @@ Query: DeleteObjectQuery(1 -&gt; CARL)
 	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
 Caused by: Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd): org.eclipse.persistence.exceptions.DatabaseException
-Internal Exception: com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Cannot delete or update a parent row: a foreign key constraint fails (`PERSONALTECH`.`TB_AVALIACAO`, CONSTRAINT `FK_TB_AVALIACAO_ID_ALUNO` FOREIGN KEY (`ID_ALUNO`) REFERENCES `TB_ALUNO` (`ID`))
+Internal Exception: com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Cannot delete or update a parent row: a foreign key constraint fails (`PERSONALTECH`.`TB_AVALIACAO`, CONSTRAINT `FK_TB_AVALIACAO_ID_PT` FOREIGN KEY (`ID_PT`) REFERENCES `TB_PERSONALTRAINER` (`ID`))
 Error Code: 1451
-Call: DELETE FROM TB_ALUNO WHERE (ID = ?)
-	bind =&gt; [1]
-Query: DeleteObjectQuery(1 -&gt; CARL)
+Call: DELETE FROM TB_PERSONALTRAINER WHERE (ID = ?)
+	bind =&gt; [2]
+Query: DeleteObjectQuery(2 -&gt; JUCA)
 	at org.eclipse.persistence.exceptions.DatabaseException.sqlException(DatabaseException.java:331)
 	at org.eclipse.persistence.internal.databaseaccess.DatabaseAccessor.executeDirectNoSelect(DatabaseAccessor.java:900)
 	at org.eclipse.persistence.internal.databaseaccess.DatabaseAccessor.executeNoSelect(DatabaseAccessor.java:962)
@@ -288,7 +210,7 @@ Query: DeleteObjectQuery(1 -&gt; CARL)
 	at org.eclipse.persistence.internal.sessions.UnitOfWorkImpl.commitAndResume(UnitOfWorkImpl.java:1169)
 	at org.eclipse.persistence.internal.jpa.transaction.EntityTransactionImpl.commit(EntityTransactionImpl.java:132)
 	... 33 more
-Caused by: com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Cannot delete or update a parent row: a foreign key constraint fails (`PERSONALTECH`.`TB_AVALIACAO`, CONSTRAINT `FK_TB_AVALIACAO_ID_ALUNO` FOREIGN KEY (`ID_ALUNO`) REFERENCES `TB_ALUNO` (`ID`))
+Caused by: com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Cannot delete or update a parent row: a foreign key constraint fails (`PERSONALTECH`.`TB_AVALIACAO`, CONSTRAINT `FK_TB_AVALIACAO_ID_PT` FOREIGN KEY (`ID_PT`) REFERENCES `TB_PERSONALTRAINER` (`ID`))
 	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
 	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
 	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
@@ -310,4 +232,5 @@ Caused by: com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationExce
 
 </system-err>
   </testcase>
+  <testcase classname="com.mycompany.personaltech.AvaliacaoTest" name="selecionarAvaliacao_04" time="0.001"/>
 </testsuite>

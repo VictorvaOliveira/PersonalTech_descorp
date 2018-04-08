@@ -1,14 +1,14 @@
 -------------------------------------------------------------------------------
 Test set: com.mycompany.personaltech.AvaliacaoTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 35.742 sec <<< FAILURE!
-rem(com.mycompany.personaltech.AvaliacaoTest)  Time elapsed: 0.845 sec  <<< FAILURE!
+Tests run: 4, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 31.85 sec <<< FAILURE!
+rem(com.mycompany.personaltech.AvaliacaoTest)  Time elapsed: 0.361 sec  <<< FAILURE!
 java.lang.AssertionError: Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd): org.eclipse.persistence.exceptions.DatabaseException
-Internal Exception: com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Cannot delete or update a parent row: a foreign key constraint fails (`PERSONALTECH`.`TB_AVALIACAO`, CONSTRAINT `FK_TB_AVALIACAO_ID_ALUNO` FOREIGN KEY (`ID_ALUNO`) REFERENCES `TB_ALUNO` (`ID`))
+Internal Exception: com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Cannot delete or update a parent row: a foreign key constraint fails (`PERSONALTECH`.`TB_AVALIACAO`, CONSTRAINT `FK_TB_AVALIACAO_ID_PT` FOREIGN KEY (`ID_PT`) REFERENCES `TB_PERSONALTRAINER` (`ID`))
 Error Code: 1451
-Call: DELETE FROM TB_ALUNO WHERE (ID = ?)
-	bind => [1]
-Query: DeleteObjectQuery(1 -> CARL)
+Call: DELETE FROM TB_PERSONALTRAINER WHERE (ID = ?)
+	bind => [2]
+Query: DeleteObjectQuery(2 -> JUCA)
 	at org.junit.Assert.fail(Assert.java:88)
 	at com.mycompany.personaltech.AvaliacaoTest.commitTransaction(AvaliacaoTest.java:76)
 	at com.mycompany.personaltech.AvaliacaoTest.tearDown(AvaliacaoTest.java:59)
@@ -31,7 +31,7 @@ Query: DeleteObjectQuery(1 -> CARL)
 	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
 	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
 	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
-	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:45)
+	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:53)
 	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:123)
 	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:104)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
