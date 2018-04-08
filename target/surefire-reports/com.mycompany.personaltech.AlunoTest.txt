@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.mycompany.personaltech.AlunoTest
 -------------------------------------------------------------------------------
-Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 22.149 sec
+Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 45.78 sec

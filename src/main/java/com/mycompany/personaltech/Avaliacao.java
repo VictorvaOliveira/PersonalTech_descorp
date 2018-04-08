@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -35,6 +36,14 @@ public class Avaliacao implements Serializable {
     @JoinColumn(name = "ID_AVALIACAO", referencedColumnName = "ID")
     private List<RespostasAvaliacao> respostas;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "ID_ALUNO", referencedColumnName = "ID")
+    private Aluno aluno;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "ID_PT", referencedColumnName = "ID")
+    private PersonalTrainer personalTrainer;
+
     public Long getId() {
         return id;
     }
@@ -45,6 +54,22 @@ public class Avaliacao implements Serializable {
 
     public Date getDataAvaliacao() {
         return dataAvaliacao;
+    }
+
+    public Aluno getAluno() {
+        return aluno;
+    }
+
+    public void setAluno(Aluno aluno) {
+        this.aluno = aluno;
+    }
+
+    public PersonalTrainer getPersonalTrainer() {
+        return personalTrainer;
+    }
+
+    public void setPersonalTrainer(PersonalTrainer personalTrainer) {
+        this.personalTrainer = personalTrainer;
     }
 
     public void setDataAvaliacao(Date dataAvaliacao) {

@@ -70,9 +70,8 @@ public class Aluno implements Serializable {
     @JoinColumn(name = "ID_ALUNO", referencedColumnName = "ID")
     private List<Exercicio> exercicios;
 
-    @OneToMany(fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "ID_TB_ALUNO", referencedColumnName = "ID")
+    @OneToMany(mappedBy = "aluno", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
     private List<Avaliacao> avaliacoes;
 
     public Long getId() {
@@ -206,6 +205,7 @@ public class Aluno implements Serializable {
             this.avaliacoes = new ArrayList<>();
         }
         this.avaliacoes.add(avaliacao);
+        avaliacao.setAluno(this);
     }
     
     
@@ -232,7 +232,7 @@ public class Aluno implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.personaltech.Aluno[ id=" + id + " ]";
+        return this.id + " -> " + this.nome;
     }
 
 }

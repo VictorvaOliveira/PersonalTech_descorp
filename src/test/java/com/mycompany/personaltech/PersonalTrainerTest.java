@@ -81,38 +81,15 @@ public class PersonalTrainerTest {
      */
     @Test
     public void inserirPersonalTrainer_01() {
+        logger.log(Level.INFO, "Inserção do Personal");
 
-        logger.log(Level.INFO, "Inserção do Personal id = 6");
         PersonalTrainer pt = new PersonalTrainer();
-
-        pt.setNome("Iron");
-        pt.setSobrenome("Man");
-        pt.setSexo("M");
-        pt.setCpf("222-222-746-22");
-        pt.setEmail("ironman@personaltech.com");
-        pt.setLogin("iron92man");
-        pt.setSenha("ironman123");
-
-        Calendar c = Calendar.getInstance();
-        c.set(Calendar.YEAR, 1992);
-        c.set(Calendar.MONTH, Calendar.AUGUST);
-        c.set(Calendar.DAY_OF_MONTH, 12);
-        pt.setDataNascimento(c.getTime());
-
-        pt.setTipo(TipoUsuario.PERSONAL_TRAINER);
-
-        Endereco end = new Endereco();
-        end.setBairro("Cordeiro");
-        end.setCep("50000-000");
-        end.setCidade("Recife");
-        end.setComplemento("Aptº 101");
-        end.setEstado("Pernambuco");
-        end.setLogradouro("Avenida Caxanga");
-        end.setNumero(101);
-        pt.setEndereco(end);
-
+        setPt(pt);
         em.persist(pt);
+        em.flush();
+        PersonalTrainer p = em.find(PersonalTrainer.class, (long) 7);
 
+        assertEquals(pt, p);
     }
 
     @Test
@@ -123,9 +100,9 @@ public class PersonalTrainerTest {
         em.flush();
         em.clear();
         logger.log(Level.INFO, "alterarPersonalPorId", pt.toString());
-
+        
         pt = em.find(PersonalTrainer.class, (long) 4);
-//        assertNotNull(aluno);
+        assertNotNull(pt);
         assertEquals("victor123@gmail.com", pt.getEmail());
     }
 
@@ -160,11 +137,39 @@ public class PersonalTrainerTest {
         assertEquals(5, a.size());
     }
 
-//    @Test
+    @Test
     public void coletarAluno_02() {
         logger.log(Level.INFO, "Contagem dos alunos vinculados ao Personal 4");
         PersonalTrainer pt = em.find(PersonalTrainer.class, (long) 4);
+        assertNotNull(pt);
         List<Aluno> a = pt.getAlunos();
-        assertEquals(0, a.size());
+        assertEquals(5, a.size());
+    }
+    
+    private void setPt(PersonalTrainer pt) {
+        pt.setNome("IRON");
+        pt.setSobrenome("MAN");
+        pt.setSexo("M");
+        pt.setCpf("222-222-746-22");
+        pt.setEmail("ironman@personaltech.com");
+        pt.setLogin("IRON92MAN");
+        pt.setSenha("IRONMAN123");
+        
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.YEAR, 1992);
+        c.set(Calendar.MONTH, Calendar.AUGUST);
+        c.set(Calendar.DAY_OF_MONTH, 12);
+        pt.setDataNascimento(c.getTime());
+        pt.setTipo(TipoUsuario.PERSONAL_TRAINER);
+        
+        Endereco end = new Endereco();
+        end.setBairro("CORDEIRO");
+        end.setCep("50000-000");
+        end.setCidade("RECFIFE");
+        end.setComplemento("Aptº 101");
+        end.setEstado("PERNAMBUCO");
+        end.setLogradouro("AV CAXANGA");
+        end.setNumero(101);
+        pt.setEndereco(end);
     }
 }

@@ -64,14 +64,12 @@ public class PersonalTrainer implements Serializable {
     @Embedded // Mapeada na Classe Endereco
     private Endereco endereco;
 
-    @OneToMany(fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "ID_PT", referencedColumnName = "ID")
     private List<Aluno> alunos;
 
-    @OneToMany(fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "ID_TB_PT", referencedColumnName = "ID")
+    @OneToMany(mappedBy = "personalTrainer", fetch = FetchType.LAZY,
+            cascade = CascadeType.PERSIST)
     private List<Avaliacao> avaliacoes;
 
     public Long getId() {
@@ -212,6 +210,7 @@ public class PersonalTrainer implements Serializable {
             this.avaliacoes = new ArrayList<>();
         }
         this.avaliacoes.add(avaliacao);
+        avaliacao.setPersonalTrainer(this);
     }
 
     void removeAvaliacao(Avaliacao avaliacao) {
@@ -243,7 +242,7 @@ public class PersonalTrainer implements Serializable {
 
     @Override
     public String toString() {
-        return "sistema.PersonalTrainer[ id=" + id + " ]";
+        return this.id + " -> " + this.nome;
     }
 
 }

@@ -1,4 +1,3 @@
-
 package com.mycompany.personaltech;
 
 import java.util.Calendar;
@@ -76,29 +75,29 @@ public class AlunoTest {
 
     @Test
     public void selecionarAlunoPorId() {
-        
+
         Aluno aluno = em.find(Aluno.class, (long) 23);
         assertNotNull(aluno);
         assertEquals("MICHEL", aluno.getNome());
+        String nome = aluno.getNome();
         assertEquals("05842569855", aluno.getCpf());
         logger.log(Level.INFO, "selecionarAlunoPorId: Aluno {0}", aluno.toString());
     }
 
     @Test
     public void atualizarAluno() {
-       
         Aluno aluno = em.find(Aluno.class, (long) 25);
         assertNotNull(aluno);
         aluno.setEmail("email@hotmail.com");
         em.flush();
         em.clear();
-        logger.log(Level.INFO, "selecionarAlunoPorId: Aluno {0}", aluno.toString());
+        logger.log(Level.INFO, "selecionarAlunoPorId: Aluno {0}", aluno.getNome());
         aluno = em.find(Aluno.class, (long) 25);
         assertEquals("email@hotmail.com", aluno.getEmail());
     }
+
     @Test
     public void selecionarAlunoPorCPF() {
-        
         String jpql = "SELECT a FROM Aluno a where a.cpf = ?1";
         Query query = em.createQuery(jpql);
         query.setParameter(1, "05842569855");
@@ -109,20 +108,18 @@ public class AlunoTest {
         logger.log(Level.INFO, "selecionarAlunoPorId: Aluno {0}", aluno.toString());
     }
 
-
     @Test
     public void inserirAluno() {
-        // Coment teste branch
         Aluno aluno = new Aluno();
-        aluno.setNome("Jurubeba");
-        aluno.setSobrenome("Alcoolica");
+        aluno.setNome("KEN");
+        aluno.setSobrenome("GALINDA");
         aluno.setCpf("123-321-436-12");
-        aluno.setLogin("juba");
+        aluno.setLogin("KENNYG");
         aluno.setSenha("123");
-        aluno.setEmail("juba@gmail");
-        aluno.setSexo("M");
+        aluno.setEmail("KENNYH@gmail");
+        aluno.setSexo("F");
         aluno.addTelefone("111 222 333");
-        
+
         Exercicio ex = new Exercicio();
         ex.setExercicio(NomeExercicio.COXAS_45_STIFF_BARRA);
         ex.setTipo(TipoExercicio.COXAS);
@@ -137,12 +134,12 @@ public class AlunoTest {
         aluno.setTipo(TipoUsuario.ALUNO);
 
         Endereco end = new Endereco();
-        end.setLogradouro("Rua do Cordeiro");
-        end.setBairro("Cordeiro");
+        end.setLogradouro("RUA DO CORDEIRO");
+        end.setBairro("CORDEIRO");
         end.setNumero(666);
         end.setCep("123456-88");
-        end.setCidade("Recife");
-        end.setEstado("Pernambuco");
+        end.setCidade("RECIFE");
+        end.setEstado("PERNAMBUCO");
 
         aluno.setEndereco(end);
 
@@ -153,24 +150,23 @@ public class AlunoTest {
         em.clear();
 
         assertNotNull(aluno.getId());
-        
+
         // Teste dados do aluno inserido
-        assertEquals("Cordeiro", aluno.getEndereco().getBairro());
-        assertEquals("Recife", aluno.getEndereco().getCidade());
+        assertEquals("CORDEIRO", aluno.getEndereco().getBairro());
+        assertEquals("RECIFE", aluno.getEndereco().getCidade());
         assertEquals(c.getTime(), aluno.getDataNascimento());
     }
 
     @Test
     public void inserirAluno_02() {
-        
         Aluno aluno = new Aluno();
-        aluno.setNome("Jurubeba2");
-        aluno.setSobrenome("Alcoolica");
+        aluno.setNome("KELLY");
+        aluno.setSobrenome("GÜIÇA");
         aluno.setCpf("123-321-416-13");
-        aluno.setLogin("juba2asd");
+        aluno.setLogin("KELLY");
         aluno.setSenha("123");
-        aluno.setEmail("juba@gmail");
-        aluno.setSexo("M");
+        aluno.setEmail("KELLY@gmail");
+        aluno.setSexo("F");
 
         Calendar c = Calendar.getInstance();
         c.set(Calendar.YEAR, 2000);
@@ -181,12 +177,12 @@ public class AlunoTest {
         aluno.setTipo(TipoUsuario.ALUNO);
 
         Endereco end = new Endereco();
-        end.setLogradouro("Rua do Cordeiro");
-        end.setBairro("Cordeiro");
+        end.setLogradouro("RUA DO CORDEIRO");
+        end.setBairro("CORDEIRO");
         end.setNumero(666);
         end.setCep("123456-88");
-        end.setCidade("Recife");
-        end.setEstado("Pernambuco");
+        end.setCidade("RECIFE");
+        end.setEstado("PERNAMBUCO");
 
         aluno.setEndereco(end);
 
@@ -198,7 +194,7 @@ public class AlunoTest {
 
         assertNotNull(aluno.getId());
     }
-    
+
     @Test
     public void deletarAluno_01() {
         Aluno aluno = em.find(Aluno.class, (long) 24);
@@ -211,12 +207,40 @@ public class AlunoTest {
     }
 
     @Test
-    public void deletarAluno_02() {
+    public void desvincularAluno_01() {
         Aluno aluno = em.find(Aluno.class, (long) 22);
         assertNotNull(aluno);
         PersonalTrainer pt = new PersonalTrainer();
         pt = em.find(PersonalTrainer.class, (long) 5);
         pt.removeAluno(aluno);
+        assertFalse(pt.getAlunos().contains(aluno));
+    }
+
+    @Test
+    public void vincularAluno_01() {
+        Aluno aluno = em.find(Aluno.class, (long) 22);
+        assertNotNull(aluno);
+        PersonalTrainer pt = new PersonalTrainer();
+        pt = em.find(PersonalTrainer.class, (long) 6);
+        pt.addAluno(aluno);
+        assertTrue(pt.getAlunos().contains(aluno));
+    }
+    
+    @Test
+    public void tranferirAluno_01() {
+        Aluno aluno = em.find(Aluno.class, (long) 23);
+        assertNotNull(aluno);
         
+        PersonalTrainer pt_output = new PersonalTrainer();
+        pt_output = em.find(PersonalTrainer.class, (long) 5);
+        pt_output.removeAluno(aluno);
+        
+        PersonalTrainer pt_input = new PersonalTrainer();
+        pt_input = em.find(PersonalTrainer.class, (long) 6);
+        pt_input.addAluno(aluno);
+        
+        assertTrue(pt_input.getAlunos().contains(aluno));
+        
+        assertFalse(pt_output.getAlunos().contains(aluno));
     }
 }
