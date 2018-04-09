@@ -1,8 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.mycompany.personaltech.AvaliacaoTest
 -------------------------------------------------------------------------------
-<<<<<<< HEAD
-Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 8.824 sec
-=======
-Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 20.558 sec
->>>>>>> master
+Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 18.384 sec
