@@ -69,7 +69,7 @@ public class PersonalTrainer implements Serializable {
     private List<Aluno> alunos;
 
     @OneToMany(mappedBy = "personalTrainer", fetch = FetchType.LAZY,
-            cascade = CascadeType.PERSIST)
+            cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Avaliacao> avaliacoes;
 
     public Long getId() {
@@ -218,7 +218,6 @@ public class PersonalTrainer implements Serializable {
             return;
         }
         this.avaliacoes.remove(avaliacao);
-        avaliacao.setPersonalTrainer(null);
     }
 
     @Override

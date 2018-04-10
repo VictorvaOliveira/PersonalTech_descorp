@@ -1,8 +1,6 @@
 package com.mycompany.personaltech;
 
 import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
@@ -102,7 +100,7 @@ public class AvaliacaoTest {
     @Test
     public void selecionarAvaliacao_04() {
 //    public void test04() {
-        Avaliacao av = em.find(Avaliacao.class, (long) 1);
+        Avaliacao av = em.find(Avaliacao.class, (long) 7);
         assertNotNull(av);
     }
     
@@ -124,6 +122,9 @@ public class AvaliacaoTest {
 //    public void test05() {
         PersonalTrainer pt = em.find(PersonalTrainer.class, (long) 2);
         em.remove(pt);
+        em.flush();
+        em.clear();
+        assertEquals(em.find(PersonalTrainer.class, (long) 2), null);
     }
     
 

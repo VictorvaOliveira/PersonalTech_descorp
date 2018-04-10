@@ -213,7 +213,6 @@ public class Aluno implements Serializable {
             return;
         }
         this.avaliacoes.remove(avaliacao);
-        avaliacao.setPersonalTrainer(null);
     }
     
     

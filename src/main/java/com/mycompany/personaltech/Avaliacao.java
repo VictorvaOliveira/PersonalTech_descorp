@@ -31,10 +31,10 @@ public class Avaliacao implements Serializable {
     @Column(name = "DT_AVALIACAO", nullable = false, unique = false)
     private Date dataAvaliacao;
 
-    @OneToMany(fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "ID_AVALIACAO", referencedColumnName = "ID")
-    private List<RespostasAvaliacao> respostas;
+//    @OneToMany(fetch = FetchType.LAZY,
+//            cascade = CascadeType.ALL, orphanRemoval = false)
+//    @JoinColumn(name = "ID_AVALIACAO", referencedColumnName = "ID")
+//    private List<RespostasAvaliacao> respostas;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "ID_ALUNO", referencedColumnName = "ID")
@@ -76,13 +76,13 @@ public class Avaliacao implements Serializable {
         this.dataAvaliacao = dataAvaliacao;
     }
 
-    public List<RespostasAvaliacao> getRespostas() {
-        return respostas;
-    }
-
-    public void setRespostas(List<RespostasAvaliacao> respostas) {
-        this.respostas = respostas;
-    }
+//    public List<RespostasAvaliacao> getRespostas() {
+//        return respostas;
+//    }
+//
+//    public void setRespostas(List<RespostasAvaliacao> respostas) {
+//        this.respostas = respostas;
+//    }
 
     public Date getdataAvaliacao() {
         return dataAvaliacao;
@@ -92,19 +92,19 @@ public class Avaliacao implements Serializable {
         this.dataAvaliacao = dataAvaliacao;
     }
 
-    public void addRespostaAvaliacao(RespostasAvaliacao resposta) {
-        if (this.respostas == null) {
-            this.respostas = new ArrayList<>();
-        }
-        this.respostas.add(resposta);
-    }
-
-    public void removeRespostaAvaliacao(RespostasAvaliacao resposta) {
-        if (this.respostas == null) {
-            return;
-        }
-        this.respostas.remove(resposta);
-    }
+//    public void addRespostaAvaliacao(RespostasAvaliacao resposta) {
+//        if (this.respostas == null) {
+//            this.respostas = new ArrayList<>();
+//        }
+//        this.respostas.add(resposta);
+//    }
+//
+//    public void removeRespostaAvaliacao(RespostasAvaliacao resposta) {
+//        if (this.respostas == null) {
+//            return;
+//        }
+//        this.respostas.remove(resposta);
+//    }
 
     @Override
     public int hashCode() {
