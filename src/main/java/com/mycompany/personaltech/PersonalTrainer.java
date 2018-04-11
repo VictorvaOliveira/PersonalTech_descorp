@@ -68,10 +68,6 @@ public class PersonalTrainer implements Serializable {
     @JoinColumn(name = "ID_PT", referencedColumnName = "ID")
     private List<Aluno> alunos;
 
-    @OneToMany(mappedBy = "personalTrainer", fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Avaliacao> avaliacoes;
-
     public Long getId() {
         return id;
     }
@@ -195,29 +191,6 @@ public class PersonalTrainer implements Serializable {
 
     public void setAlunos(List<Aluno> alunos) {
         this.alunos = alunos;
-    }
-
-    public List<Avaliacao> getAvaliacoes() {
-        return avaliacoes;
-    }
-
-    public void setAvaliacoes(List<Avaliacao> avaliacoes) {
-        this.avaliacoes = avaliacoes;
-    }
-
-    public void addAvaliacao(Avaliacao avaliacao) {
-        if (this.avaliacoes == null) {
-            this.avaliacoes = new ArrayList<>();
-        }
-        this.avaliacoes.add(avaliacao);
-        avaliacao.setPersonalTrainer(this);
-    }
-
-    public void removeAvaliacao(Avaliacao avaliacao) {
-        if (this.avaliacoes == null) {
-            return;
-        }
-        this.avaliacoes.remove(avaliacao);
     }
 
     @Override

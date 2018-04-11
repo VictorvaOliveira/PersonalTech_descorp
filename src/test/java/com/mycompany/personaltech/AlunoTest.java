@@ -75,7 +75,6 @@ public class AlunoTest {
 
     @Test
     public void selecionarAlunoPorId() {
-
         Aluno aluno = em.find(Aluno.class, (long) 23);
         assertNotNull(aluno);
         assertEquals("MICHEL", aluno.getNome());
@@ -242,5 +241,11 @@ public class AlunoTest {
         assertTrue(pt_input.getAlunos().contains(aluno));
         
         assertFalse(pt_output.getAlunos().contains(aluno));
+    }
+    
+    @Test
+    public void remAluno(){
+        Aluno aluno = em.find(Aluno.class, (long) 1);
+        em.remove(aluno);
     }
 }

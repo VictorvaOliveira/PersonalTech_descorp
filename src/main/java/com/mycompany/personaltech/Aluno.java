@@ -71,7 +71,7 @@ public class Aluno implements Serializable {
     private List<Exercicio> exercicios;
 
     @OneToMany(mappedBy = "aluno", fetch = FetchType.LAZY,
-            cascade = CascadeType.PERSIST)
+            cascade = CascadeType.ALL)
     private List<Avaliacao> avaliacoes;
 
     public Long getId() {

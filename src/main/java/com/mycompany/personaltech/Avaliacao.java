@@ -12,8 +12,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -31,18 +32,33 @@ public class Avaliacao implements Serializable {
     @Column(name = "DT_AVALIACAO", nullable = false, unique = false)
     private Date dataAvaliacao;
 
-//    @OneToMany(fetch = FetchType.LAZY,
-//            cascade = CascadeType.ALL, orphanRemoval = false)
-//    @JoinColumn(name = "ID_AVALIACAO", referencedColumnName = "ID")
-//    private List<RespostasAvaliacao> respostas;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "ID_ALUNO", referencedColumnName = "ID")
     private Aluno aluno;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "ID_PT", referencedColumnName = "ID")
-    private PersonalTrainer personalTrainer;
+    @Column(name = "TXT_NOME_PT", length = 50, nullable = false)
+    private String nome_personal;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "TB_AV_PERG", joinColumns = {
+        @JoinColumn(name = "ID_AV")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "ID_PERG")})
+    private List<Pergunta> perguntas;
+
+    public void addPerguntas(Pergunta p) {
+        if (perguntas == null) {
+            perguntas = new ArrayList<>();
+        }
+        perguntas.add(p);
+    }
+
+    public void removePergunta(Pergunta p) {
+        if (perguntas == null) {
+            return;
+        }
+        perguntas.remove(p);
+    }
 
     public Long getId() {
         return id;
@@ -50,6 +66,14 @@ public class Avaliacao implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getNome_personal() {
+        return nome_personal;
+    }
+
+    public void setNome_personal(String nome_personal) {
+        this.nome_personal = nome_personal;
     }
 
     public Date getDataAvaliacao() {
@@ -64,47 +88,13 @@ public class Avaliacao implements Serializable {
         this.aluno = aluno;
     }
 
-    public PersonalTrainer getPersonalTrainer() {
-        return personalTrainer;
-    }
-
-    public void setPersonalTrainer(PersonalTrainer personalTrainer) {
-        this.personalTrainer = personalTrainer;
-    }
-
     public void setDataAvaliacao(Date dataAvaliacao) {
         this.dataAvaliacao = dataAvaliacao;
     }
 
-//    public List<RespostasAvaliacao> getRespostas() {
-//        return respostas;
-//    }
-//
-//    public void setRespostas(List<RespostasAvaliacao> respostas) {
-//        this.respostas = respostas;
-//    }
-
     public Date getdataAvaliacao() {
         return dataAvaliacao;
     }
-
-    public void setdataAvaliacao(Date dataAvaliacao) {
-        this.dataAvaliacao = dataAvaliacao;
-    }
-
-//    public void addRespostaAvaliacao(RespostasAvaliacao resposta) {
-//        if (this.respostas == null) {
-//            this.respostas = new ArrayList<>();
-//        }
-//        this.respostas.add(resposta);
-//    }
-//
-//    public void removeRespostaAvaliacao(RespostasAvaliacao resposta) {
-//        if (this.respostas == null) {
-//            return;
-//        }
-//        this.respostas.remove(resposta);
-//    }
 
     @Override
     public int hashCode() {
