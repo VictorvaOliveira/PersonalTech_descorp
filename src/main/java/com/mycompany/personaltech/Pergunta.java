@@ -25,10 +25,6 @@ public class Pergunta implements Serializable {
     @Column(name = "TXT_PERGUNTA", nullable = false, length = 2000)
     private String pergunta;
 
-//    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "perguntas")
-//    @JoinColumn(name = "ID_AV", referencedColumnName = "ID")
-//    private List<Avaliacao> avaliacao;
-
     public Long getId() {
         return id;
     }
