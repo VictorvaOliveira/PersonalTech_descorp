@@ -194,14 +194,14 @@ public class AlunoTest {
         assertNotNull(aluno.getId());
     }
 
-    @Test
+//    @Test
     public void deletarAluno_01() {
-        Aluno aluno = em.find(Aluno.class, (long) 24);
+        Aluno aluno = em.find(Aluno.class, (long) 1);
         assertNotNull(aluno);
         em.remove(aluno);
         em.flush();
         em.clear();
-        aluno = em.find(Aluno.class, (long) 24);
+        aluno = em.find(Aluno.class, (long) 1);
         assertNull(aluno);
     }
 

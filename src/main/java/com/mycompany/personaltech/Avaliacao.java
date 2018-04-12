@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -39,25 +40,24 @@ public class Avaliacao implements Serializable {
     @Column(name = "TXT_NOME_PT", length = 50, nullable = false)
     private String nome_personal;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "TB_AV_PERG", joinColumns = {
-        @JoinColumn(name = "ID_AV")},
-            inverseJoinColumns = {
-                @JoinColumn(name = "ID_PERG")})
-    private List<Pergunta> perguntas;
+    @OneToMany(mappedBy = "avaliacao" ,fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL, orphanRemoval = false)
+//    @JoinColumn(name = "ID_AV", referencedColumnName = "ID")
+    private List<RespostasAvaliacao> respostas;
 
-    public void addPerguntas(Pergunta p) {
-        if (perguntas == null) {
-            perguntas = new ArrayList<>();
+    void addResposta(RespostasAvaliacao resposta) {
+        if (respostas == null) {
+            respostas = new ArrayList<>();
         }
-        perguntas.add(p);
+        respostas.add(resposta);
+        resposta.setAvaliacao(this);
     }
 
-    public void removePergunta(Pergunta p) {
-        if (perguntas == null) {
+    void removeResposta(RespostasAvaliacao resposta) {
+        if (respostas == null) {
             return;
         }
-        perguntas.remove(p);
+        respostas.remove(resposta);
     }
 
     public Long getId() {

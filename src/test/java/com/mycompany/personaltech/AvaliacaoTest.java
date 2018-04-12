@@ -79,23 +79,36 @@ public class AvaliacaoTest {
      * Test of getId method, of class Aluno.
      */
     @Test
-    public void inserirAvaliacaoNew() {
-        Avaliacao av = new Avaliacao();
-        av.setAluno(em.find(Aluno.class, (long)1));
-
-        av.setNome_personal("MARINA SILVA");
-        setAvaliacao(av);        
-        av.addPerguntas(em.find(Pergunta.class, (long)1));
-        em.persist(av);
-        // Falta Assert
+    public void A() {
+        Avaliacao av = em.find(Avaliacao.class, (long) 1);
+        Pergunta p = em.find(Pergunta.class, (long) 1);
+        RespostasAvaliacao resp = new RespostasAvaliacao();
+        av.addResposta(resp);
+        p.addResposta(resp);
+        resp.setTxt_resposta("SIM");
+        em.persist(resp);
     }
-    
+
     @Test
+    public void B() {
+        Aluno aluno = em.find(Aluno.class, (long) 1);
+        assertNotNull(aluno);
+        em.remove(aluno);
+        em.flush();
+        em.clear();
+        aluno = em.find(Aluno.class, (long) 1);
+        assertNull(aluno);
+    }
+//    @Test
+
     public void remAvaliacaoNew() {
-        Avaliacao av = em.find(Avaliacao.class, (long)7);
+
+//        RespostasAvaliacao resp = em.find(RespostasAvaliacao.class, (long)1);
+//        em.remove(resp);
+        Avaliacao av = em.find(Avaliacao.class, (long) 1);
         em.remove(av);
     }
-    
+
 //    @Test
 //    public void inserirAvaliacao_01() {
 //    public void test01() {
