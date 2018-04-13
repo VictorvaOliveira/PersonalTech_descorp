@@ -1,200 +1,157 @@
-//package com.mycompany.personaltech;
-//
-//import java.util.Calendar;
-//import java.util.logging.Level;
-//import java.util.logging.Logger;
-//import javax.persistence.EntityManager;
-//import javax.persistence.EntityManagerFactory;
-//import javax.persistence.EntityTransaction;
-//import javax.persistence.Persistence;
-//import org.junit.After;
-//import org.junit.AfterClass;
-//import org.junit.Before;
-//import org.junit.BeforeClass;
-//import org.junit.Test;
-//import static org.junit.Assert.*;
-//import org.junit.FixMethodOrder;
-//import org.junit.runners.MethodSorters;
-//
-///**
-// *
-// * @author john
-// */
-//@FixMethodOrder(MethodSorters.NAME_ASCENDING)
-//public class AvaliacaoTest {
-//
-//    private static EntityManagerFactory emf;
-//    private static Logger logger;
-//    private EntityManager em;
-//    private EntityTransaction et;
-//
-//    public AvaliacaoTest() {
-//    }
-//
-//    @BeforeClass
-//    public static void setUpClass() {
-//        logger = Logger.getGlobal();
-//        logger.setLevel(Level.INFO);
-//        //logger.setLevel(Level.SEVERE);
-//        emf = Persistence.createEntityManagerFactory("PersonalTech_PU");
-////        emf.createEntityManager();
-//        DbUnitUtil.inserirDados();
-//    }
-//
-//    @AfterClass
-//    public static void tearDownClass() {
-//        emf.close();
-//    }
-//
-//    @Before
-//    public void setUp() {
-//        em = emf.createEntityManager();
-//        beginTransaction();
-//    }
-//
-//    @After
-//    public void tearDown() {
-//        commitTransaction();
-//        em.close();
-//    }
-//
-//    private void beginTransaction() {
-//        et = em.getTransaction();
-//        et.begin();
-//    }
-//
-//    private void commitTransaction() {
-//        try {
-//            et.commit();
-//        } catch (Exception ex) {
-//            logger.log(Level.SEVERE, ex.getMessage(), ex);
-//            if (et.isActive()) {
-//                et.rollback();
-//            }
-//            fail(ex.getMessage());
-//        }
-//    }
-//
-//    /**
-//     * Test of getId method, of class Aluno.
-//     */
-//    @Test
-//    public void A() {
-//        Avaliacao av = em.find(Avaliacao.class, (long) 1);
-//        Pergunta p = em.find(Pergunta.class, (long) 1);
-//        RespostasAvaliacao resp = new RespostasAvaliacao();
-//        av.addResposta(resp);
-//        p.addResposta(resp);
-//        resp.setTxt_resposta("SIM");
-//        em.persist(resp);
-//    }
-//
-//    @Test
-//    public void B() {
-//        Aluno aluno = em.find(Aluno.class, (long) 1);
-//        assertNotNull(aluno);
-//        em.remove(aluno);
-//        em.flush();
-//        em.clear();
-//        aluno = em.find(Aluno.class, (long) 1);
-//        assertNull(aluno);
-//    }
-////    @Test
-//
-//    public void remAvaliacaoNew() {
-//
-////        RespostasAvaliacao resp = em.find(RespostasAvaliacao.class, (long)1);
-////        em.remove(resp);
-//        Avaliacao av = em.find(Avaliacao.class, (long) 1);
-//        em.remove(av);
-//    }
-//
-////    @Test
-////    public void inserirAvaliacao_01() {
-////    public void test01() {
-////        Avaliacao av = new Avaliacao();
-////        setAvaliacao(av);
-////        av.setNome_personal("EVA");
-////        
-////        Aluno aluno = em.find(Aluno.class, (long) 2);
-////        aluno.addAvaliacao(av);
-////        em.flush();
-////        
-////        assertNotNull(aluno.getId());
-////    }
-////
-////    @Test
-////    public void selecionarAvaliacao_04() {
-//////    public void test04() {
-////        Avaliacao av = em.find(Avaliacao.class, (long) 7);
-////        assertNotNull(av);
-////    }
-////    
-////    @Test
-////    public void alterarAvaliacao_05() {
-//////    public void test05() {
-////        Avaliacao av = em.find(Avaliacao.class, (long) 1);
-////        Calendar c = Calendar.getInstance();
-////        c.set(Calendar.YEAR, 2017);
-////        c.set(Calendar.MONTH, Calendar.JULY);
-////        c.set(Calendar.DAY_OF_MONTH, 9);
-////        av.setDataAvaliacao(c.getTime());
-////        assertNotNull(av);
-////        assertEquals(c.getTime(), av.getDataAvaliacao());
-////    }
-////    
-////    @Test
-////    public void rem() {
-//////    public void test05() {
-////        PersonalTrainer pt = em.find(PersonalTrainer.class, (long) 2);
-////        em.remove(pt);
-////        em.flush();
-////        em.clear();
-////        assertEquals(em.find(PersonalTrainer.class, (long) 2), null);
-////    }
-////    
-////
-//////    public void testarPerguntasDaAvaliacao_07() {
-//////    public void test07() {
-//////        Pergunta p = em.find(Pergunta.class, (long) 2);
-//////        logger.log(Level.INFO, "selecionarAlunoPorId: Pergunta {0}", p.toString());
-//////        assertNotNull(p);
-//////    }
-//////    @Test
-//////    public void retornarListaDeAvaliacoesPorPersonal_08() {
-//////    public void test08() {
-//////        logger.log(Level.INFO, "Contagem dos alunos vinculados ao Personal 2");
-//////        PersonalTrainer pt = em.find(PersonalTrainer.class, (long) 2);
-//////        List<Avaliacao> avaliacoes = pt.getAvaliacoes();
-//////        assertEquals(2, avaliacoes.size());
-//////    }
-//////    @Test
-//////    public void retornarListaDeAvaliacoesPorAluno_09() {
-//////    public void test09() {
-//////        logger.log(Level.INFO, "Contagem dos alunos vinculados ao Personal 1");
-//////        Aluno aluno = em.find(Aluno.class, (long) 1);
-//////        List<Avaliacao> avaliacoes = aluno.getAvaliacoes();
-//////        assertNotNull(avaliacoes);
-//////    }
-//////    @Test
-//////    public void removerAvaliacao_10() {
-//////    public void test10() {
-//////        PersonalTrainer pt = em.find(PersonalTrainer.class, (long) 2);
-//////        Avaliacao av = em.find(Avaliacao.class, (long) 1);
-//////        pt.removeAvaliacao(av);
-//////    }
-//////    @Test
-//////    public void removerAvaliacaoPorDelecaoDeAluno_11() {
-//////    public void test11() {
-//////        PersonalTrainer pt = em.find(PersonalTrainer.class, (long) 2);
-//////        Aluno aluno = em.find(Aluno.class, (long) 1);
-//////        pt.removeAluno(aluno);
-//////    }
-//    private void setAvaliacao(Avaliacao av) {
-//        Calendar c = Calendar.getInstance();
-//        c.set(Calendar.YEAR, 2018);
-//        c.set(Calendar.MONTH, Calendar.JANUARY);
-//        c.set(Calendar.DAY_OF_MONTH, 25);
-//        av.setDataAvaliacao(c.getTime());
-//    }
-//}
+package com.mycompany.personaltech;
+
+import java.util.Calendar;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import static org.junit.Assert.*;
+import org.junit.FixMethodOrder;
+import org.junit.runners.MethodSorters;
+
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+public class AvaliacaoTest {
+
+    private static EntityManagerFactory emf;
+    private static Logger logger;
+    private EntityManager em;
+    private EntityTransaction et;
+
+    public AvaliacaoTest() {
+    }
+
+    @BeforeClass
+    public static void setUpClass() {
+        logger = Logger.getGlobal();
+        logger.setLevel(Level.INFO);
+
+        emf = Persistence.createEntityManagerFactory("PersonalTech_PU");
+
+        DbUnitUtil.inserirDados();
+    }
+
+    @AfterClass
+    public static void tearDownClass() {
+        emf.close();
+    }
+
+    @Before
+    public void setUp() {
+        em = emf.createEntityManager();
+        beginTransaction();
+    }
+
+    @After
+    public void tearDown() {
+        commitTransaction();
+        em.close();
+    }
+
+    private void beginTransaction() {
+        et = em.getTransaction();
+        et.begin();
+    }
+
+    private void commitTransaction() {
+        try {
+            et.commit();
+        } catch (Exception ex) {
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            if (et.isActive()) {
+                et.rollback();
+            }
+            fail(ex.getMessage());
+        }
+    }
+
+    /**
+     * Test of getId method, of class Aluno.
+     */
+    @Test
+    public void inserirAvaliacao_01() {
+        Avaliacao av = new Avaliacao();
+        setAvaliacao(av);
+        av.setNome_personal("EVA");
+
+        Avaliacao av2 = new Avaliacao();
+        setAvaliacao(av2);
+        av2.setNome_personal("EVA");
+
+        Aluno aluno = em.find(Aluno.class, (long) 3);
+        aluno.addAvaliacao(av);
+        aluno.addAvaliacao(av2);
+        em.flush();
+        Aluno aluno2 = em.find(Aluno.class, (long) 3);
+        assertEquals(aluno.getAvaliacoes().size(), 2);
+    }
+
+    @Test
+    public void inserirAvaliacao_02() {
+        Avaliacao av = new Avaliacao();
+        setAvaliacao(av);
+        av.setNome_personal("EVA");
+
+        Aluno aluno = em.find(Aluno.class, (long) 4);
+        aluno.addAvaliacao(av);
+        em.flush();
+
+        assertNotNull(aluno.getId());
+    }
+
+    @Test
+    public void removeAvaliacao_01() {
+
+        Avaliacao av = em.find(Avaliacao.class, (long) 3);
+        em.remove(av);
+        em.flush();
+        av = em.find(Avaliacao.class, (long) 3);
+        assertNull(av);
+    }
+
+    @Test
+    public void removerAvaliacaoPorAluno_01() {
+        Aluno aluno = em.find(Aluno.class, (long) 5);
+        aluno.removeAvaliacao(aluno.getAvaliacoes().get(0));
+        aluno.removeAvaliacao(aluno.getAvaliacoes().get(0));
+        em.persist(aluno);
+        aluno = em.find(Aluno.class, (long) 5);
+        int size = aluno.getAvaliacoes().size();
+        assertEquals(0, size);
+    }
+
+    @Test
+    public void removerAvaliacaoPorAluno_02() {
+        Aluno aluno = em.find(Aluno.class, (long) 15);
+        em.remove(aluno);
+        Avaliacao avaliacao = em.find(Avaliacao.class, (long) 1);
+        assertNull(avaliacao);
+    }
+
+    @Test
+    public void selecionarAvaliacoes() {
+        String jpql = "SELECT a FROM Avaliacao a";
+        Query query = em.createQuery(jpql);
+
+        List<Avaliacao> avaliacao = query.getResultList();
+
+        assertNotNull(avaliacao);
+
+    }
+
+    private void setAvaliacao(Avaliacao av) {
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.YEAR, 2018);
+        c.set(Calendar.MONTH, Calendar.JANUARY);
+        c.set(Calendar.DAY_OF_MONTH, 25);
+        av.setDataAvaliacao(c.getTime());
+    }
+}

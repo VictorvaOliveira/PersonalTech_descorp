@@ -37,7 +37,7 @@ public class Aluno extends Usuario implements Serializable {
     @OneToMany(mappedBy = "aluno", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
     private List<Avaliacao> avaliacoes;
-    
+
     public List<Exercicio> getExercicios() {
         return exercicios;
     }
@@ -47,6 +47,13 @@ public class Aluno extends Usuario implements Serializable {
             this.exercicios = new ArrayList<>();
         }
         this.exercicios.add(exercicio);
+    }
+
+    public void removeExercicio(Exercicio exercicio) {
+        if (this.exercicios == null) {
+            return;
+        }
+        this.exercicios.remove(exercicio);
     }
 
     public Collection<String> getTelefones() {
@@ -75,7 +82,7 @@ public class Aluno extends Usuario implements Serializable {
     public void setAvaliacoes(List<Avaliacao> avaliacoes) {
         this.avaliacoes = avaliacoes;
     }
-    
+
     public void addAvaliacao(Avaliacao avaliacao) {
         if (this.avaliacoes == null) {
             this.avaliacoes = new ArrayList<>();
@@ -83,14 +90,14 @@ public class Aluno extends Usuario implements Serializable {
         this.avaliacoes.add(avaliacao);
         avaliacao.setAluno(this);
     }
-    
+
     public void removeAvaliacao(Avaliacao avaliacao) {
         if (this.avaliacoes == null) {
             return;
         }
         this.avaliacoes.remove(avaliacao);
     }
-    
+
     @Override
     public String toString() {
         return "TOSTRING ALUNO";

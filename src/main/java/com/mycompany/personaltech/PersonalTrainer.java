@@ -31,7 +31,7 @@ public class PersonalTrainer extends Usuario implements Serializable {
 
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "ID_PT", referencedColumnName = "ID")
+    @JoinColumn(name = "ID_PT",referencedColumnName = "ID")
     private List<Aluno> alunos;
 
     public Collection<String> getTelefones() {
@@ -45,7 +45,7 @@ public class PersonalTrainer extends Usuario implements Serializable {
         telefones.add(telefone);
     }
 
-    public void addAluno(Aluno aluno) {;
+    public void addAluno(Aluno aluno) {
         if (this.alunos == null) {
             this.alunos = new ArrayList<>();
         }

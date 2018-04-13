@@ -19,10 +19,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author john
- */
 public class PersonalTrainerTest {
 
     private static EntityManagerFactory emf;
@@ -184,24 +180,5 @@ public class PersonalTrainerTest {
         pt = em.find(PersonalTrainer.class, (long) 14);
         assertNotNull(pt);
         assertEquals("victor123@gmail.com", pt.getEmail());
-    }
-
-
-//    @Test
-//    public void coletarAlunos_01() {
-//        logger.log(Level.INFO, "Contagem dos alunos vinculados ao Personal 3");
-//        PersonalTrainer pt = em.find(PersonalTrainer.class, (long) 3);
-//        List<Aluno> a = pt.getAlunos();
-//        assertEquals(5, a.size());
-//    }
-//
-//    @Test
-//    public void coletarAluno_02() {
-//        logger.log(Level.INFO, "Contagem dos alunos vinculados ao Personal 4");
-//        PersonalTrainer pt = em.find(PersonalTrainer.class, (long) 4);
-//        assertNotNull(pt);
-//        List<Aluno> a = pt.getAlunos();
-//        assertEquals(5, a.size());
-//    }
-    
+    } 
 }

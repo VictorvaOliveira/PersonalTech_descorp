@@ -1,6 +1,7 @@
 package com.mycompany.personaltech;
 
 import java.util.Calendar;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
@@ -15,10 +16,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author john
- */
 public class AlunoTest {
 
     private static EntityManagerFactory emf;
@@ -33,9 +30,7 @@ public class AlunoTest {
     public static void setUpClass() {
         logger = Logger.getGlobal();
         logger.setLevel(Level.INFO);
-        //logger.setLevel(Level.SEVERE);
         emf = Persistence.createEntityManagerFactory("PersonalTech_PU");
-//        emf.createEntityManager();
         DbUnitUtil.inserirDados();
     }
 
@@ -100,12 +95,11 @@ public class AlunoTest {
 
         aluno.setEndereco(end);
 
-//        PersonalTrainer pt = new PersonalTrainer();
-//        pt = em.find(PersonalTrainer.class, (long) 1);
-//        pt.addAluno(aluno);
-//        em.flush();
-//        em.clear();
         em.persist(aluno);
+
+        em.flush();
+        assertNotNull(em.find(Aluno.class, (long) 37));
+
     }
 
     @Test
@@ -141,18 +135,10 @@ public class AlunoTest {
 
         aluno.setEndereco(end);
 
-//        PersonalTrainer pt = new PersonalTrainer();
-//        pt = em.find(PersonalTrainer.class, (long) 1);
-//        pt.addAluno(aluno);
-//        em.flush();
-//        em.clear();
-//        assertNotNull(aluno.getId());
-
-        // Teste dados do aluno inserido
-//        assertEquals("CORDEIRO", aluno.getEndereco().getBairro());
-//        assertEquals("RECIFE", aluno.getEndereco().getCidade());
-//        assertEquals(c.getTime(), aluno.getDataNascimento());
         em.persist(aluno);
+
+        em.flush();
+        assertNotNull(em.find(Aluno.class, (long) 38));
     }
 
     @Test
@@ -219,40 +205,13 @@ public class AlunoTest {
         assertEquals(null, em.find(Aluno.class, (long) 36));
     }
 
-//    @Test
-//    public void desvincularAluno_01() {
-//        Aluno aluno = em.find(Aluno.class, (long) 22);
-//        assertNotNull(aluno);
-//        PersonalTrainer pt = new PersonalTrainer();
-//        pt = em.find(PersonalTrainer.class, (long) 5);
-//        pt.removeAluno(aluno);
-//        assertFalse(pt.getAlunos().contains(aluno));
-//    }
-//
-//    @Test
-//    public void vincularAluno_01() {
-//        Aluno aluno = em.find(Aluno.class, (long) 22);
-//        assertNotNull(aluno);
-//        PersonalTrainer pt = new PersonalTrainer();
-//        pt = em.find(PersonalTrainer.class, (long) 6);
-//        pt.addAluno(aluno);
-//        assertTrue(pt.getAlunos().contains(aluno));
-//    }
-//    @Test
-//    public void tranferirAluno_01() {
-//        Aluno aluno = em.find(Aluno.class, (long) 23);
-//        assertNotNull(aluno);
-//        
-//        PersonalTrainer pt_output = new PersonalTrainer();
-//        pt_output = em.find(PersonalTrainer.class, (long) 5);
-//        pt_output.removeAluno(aluno);
-//        
-//        PersonalTrainer pt_input = new PersonalTrainer();
-//        pt_input = em.find(PersonalTrainer.class, (long) 6);
-//        pt_input.addAluno(aluno);
-//        
-//        assertTrue(pt_input.getAlunos().contains(aluno));
-//        
-//        assertFalse(pt_output.getAlunos().contains(aluno));
-//    }
+    @Test
+    public void selecionarAvaliacoes() {
+        String jpql = "SELECT COUNT(a) FROM Aluno a";
+        Query query = em.createQuery(jpql);
+
+        Long alunos = (Long) query.getSingleResult();
+
+        assertTrue(alunos == 30);
+    }
 }
