@@ -28,7 +28,8 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "TB_USUARIO")
 @Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(name = "TXT_TIPO_USUARIO", discriminatorType = DiscriminatorType.STRING, length = 1)
+@DiscriminatorColumn(name = "TXT_TIPO_USUARIO", 
+        discriminatorType = DiscriminatorType.STRING, length = 1)
 public abstract class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;

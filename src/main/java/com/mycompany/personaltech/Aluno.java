@@ -31,7 +31,7 @@ public class Aluno extends Usuario implements Serializable {
 
     @OneToMany(fetch = FetchType.LAZY,
             cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "ID_ALUNO", referencedColumnName = "ID")
+    @JoinColumn(name = "ID_ALUNO", referencedColumnName = "ID_USUARIO")
     private List<Exercicio> exercicios;
 
     @OneToMany(mappedBy = "aluno", fetch = FetchType.LAZY,
