@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mycompany.personaltech;
 
 import java.util.Calendar;
@@ -145,7 +140,7 @@ public class ExercicioTest {
         ex.setExercicio(NomeExercicio.ABD_INFRA_PRANCHA_ABD);
         ex.setTipo(TipoExercicio.ABDOMINAIS);
         em.persist(ex);
-        Exercicio ex2 = em.find(Exercicio.class, (long) 14);
+        em.flush();
         assertEquals(NomeExercicio.ABD_INFRA_PRANCHA_ABD, ex.getExercicio());
         assertEquals(TipoExercicio.ABDOMINAIS, ex.getTipo());
     }
@@ -157,7 +152,7 @@ public class ExercicioTest {
         ex.setExercicio(NomeExercicio.BICEPS_ROSCA_SCOTT_HALT_90_ROSCA_SCOTT_UNI);
         ex.setTipo(TipoExercicio.BICEPS);
         em.persist(ex);
-        Exercicio ex2 = em.find(Exercicio.class, (long) 12);
+        em.flush();
         assertEquals(NomeExercicio.BICEPS_ROSCA_SCOTT_HALT_90_ROSCA_SCOTT_UNI, ex.getExercicio());
         assertEquals(TipoExercicio.BICEPS, ex.getTipo());
     }
@@ -167,6 +162,7 @@ public class ExercicioTest {
         Exercicio ex = em.find(Exercicio.class, (long) 10);
         assertNotNull(ex);
         em.remove(ex);
+        em.flush();
         assertNull(em.find(Exercicio.class, (long) 10));
     }
 

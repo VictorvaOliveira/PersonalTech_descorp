@@ -73,9 +73,6 @@ public class AvaliacaoTest {
         }
     }
 
-    /**
-     * Test of getId method, of class Aluno.
-     */
     @Test
     public void inserirAvaliacao_01() {
         Avaliacao av = new Avaliacao();

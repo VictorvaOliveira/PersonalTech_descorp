@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.mycompany.personaltech.PersonalTrainerTest
 -------------------------------------------------------------------------------
-Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 30.724 sec
+Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 21.687 sec

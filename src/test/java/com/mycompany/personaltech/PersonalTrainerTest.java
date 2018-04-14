@@ -1,17 +1,12 @@
 package com.mycompany.personaltech;
 
 import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
-import jdk.nashorn.internal.objects.NativeArray;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -71,9 +66,6 @@ public class PersonalTrainerTest {
         }
     }
 
-    /**
-     * Test of getId method, of class Aluno.
-     */
     @Test
     public void inserirPersonalTech_01() {
         PersonalTrainer pt = new PersonalTrainer();
@@ -103,7 +95,10 @@ public class PersonalTrainerTest {
         pt.setEndereco(end);
 
         em.persist(pt);
-
+        em.flush();
+        pt = em.find(PersonalTrainer.class, (long) 37);
+        assertNotNull(pt);
+        
     }
 
     @Test
@@ -135,6 +130,9 @@ public class PersonalTrainerTest {
         pt.setEndereco(end);
 
         em.persist(pt);
+        em.flush();
+        pt = em.find(PersonalTrainer.class, (long) 38);
+        assertNotNull(pt);
 
     }
 
