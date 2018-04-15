@@ -97,7 +97,7 @@ public class AlunoTest {
         em.persist(aluno);
 
         em.flush();
-        assertNotNull(em.find(Aluno.class, (long) 37));
+        assertNotNull(aluno.getId());
 
     }
 
@@ -201,6 +201,8 @@ public class AlunoTest {
     public void deletarAluno_02() {
         Aluno aluno = em.find(Aluno.class, (long) 36);
         em.remove(aluno);
+        em.flush();
+        em.clear();
         assertEquals(null, em.find(Aluno.class, (long) 36));
     }
 

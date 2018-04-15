@@ -72,7 +72,7 @@ public class Aluno extends Usuario implements Serializable {
     }
 
     public void setExercicios(List<Exercicio> exercicios) {
-        this.exercicios = exercicios;
+        this.exercicios = exercicios;//errado! corrigir!
     }
 
     public List<Avaliacao> getAvaliacoes() {
@@ -80,7 +80,11 @@ public class Aluno extends Usuario implements Serializable {
     }
 
     public void setAvaliacoes(List<Avaliacao> avaliacoes) {
-        this.avaliacoes = avaliacoes;
+        this.avaliacoes = avaliacoes;//errado! corrigir
+        //para cada avaliação da lista recebida, invocar add para uma única avaliação
+        //for (Avaliacao avaliacao : avaliacoes) {
+        //    addAvaliacao(avaliacao);
+        //}
     }
 
     public void addAvaliacao(Avaliacao avaliacao) {
