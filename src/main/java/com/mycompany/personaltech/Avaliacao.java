@@ -33,7 +33,7 @@ public class Avaliacao implements Serializable {
     @Column(name = "DT_AVALIACAO", nullable = false, unique = false)
     private Date dataAvaliacao;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "ID_ALUNO", referencedColumnName = "ID")
     private Aluno aluno;
 

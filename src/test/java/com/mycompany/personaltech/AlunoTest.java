@@ -188,12 +188,12 @@ public class AlunoTest {
 
     @Test
     public void deletarAluno_01() {
-        Aluno aluno = em.find(Aluno.class, (long) 12);
+        Aluno aluno = em.find(Aluno.class, (long) 4);
         assertNotNull(aluno);
         em.remove(aluno);
         em.flush();
         em.clear();
-        aluno = em.find(Aluno.class, (long) 12);
+        aluno = em.find(Aluno.class, (long) 4);
         assertNull(aluno);
     }
 

@@ -106,12 +106,25 @@ public class AvaliacaoTest {
 
     @Test
     public void removeAvaliacao_01() {
+        Avaliacao av_1 = new Avaliacao();
+        setAvaliacao(av_1);
+        av_1.setNome_personal("EVA");
 
-        Avaliacao av = em.find(Avaliacao.class, (long) 3);
+        Aluno aluno_1 = em.find(Aluno.class, (long) 4);
+        aluno_1.addAvaliacao(av_1);
+        em.flush();
+        em.clear();
+
+        assertNotNull(aluno_1.getId());
+        
+        Avaliacao av = em.find(Avaliacao.class, (long) 7);
+        Aluno aluno = av.getAluno();
         em.remove(av);
         em.flush();
-        av = em.find(Avaliacao.class, (long) 3);
+        em.clear();
+        av = em.find(Avaliacao.class, (long) 7);
         assertNull(av);
+        assertNotNull(em.find(Aluno.class, aluno.getId()));
     }
 
     @Test

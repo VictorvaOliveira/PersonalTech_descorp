@@ -1,6 +1,7 @@
 package com.mycompany.personaltech;
 
 import java.util.Calendar;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
@@ -100,6 +101,40 @@ public class PersonalTrainerTest {
         assertNotNull(pt);
         
     }
+    
+    @Test
+    public void inserirPersonalTech_03() {
+        Aluno aluno = new Aluno();
+        aluno.setNome("JONAS");
+        aluno.setSobrenome("BALAO");
+
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.YEAR, 2018);
+        c.set(Calendar.MONTH, Calendar.JULY);
+        c.set(Calendar.DAY_OF_MONTH, 24);
+
+        aluno.setDataNascimento(c.getTime());
+        aluno.setCpf("00324246273");
+        aluno.setLogin("JONAS");
+        aluno.setSenha("12345");
+        aluno.setEmail("jubinha@gmail.com");
+        aluno.setSexo("M");
+
+        Endereco end = new Endereco();
+        end.setLogradouro("Miramar");
+        end.setBairro("Miro");
+        end.setNumero(765);
+        end.setCep("123123");
+        end.setCidade("Recife");
+        end.setEstado("PE");
+
+        aluno.setEndereco(end);
+
+        em.persist(aluno);
+        em.flush();
+
+        assertNotNull(aluno.getId());
+    }
 
     @Test
     public void inserirPersonalTech_02() {
@@ -139,8 +174,14 @@ public class PersonalTrainerTest {
     @Test
     public void removerPersonalTech_01() {
         PersonalTrainer pt = em.find(PersonalTrainer.class, (long) 25);
+        List<Aluno> alunos = pt.getAlunos();
+        assertNotEquals(0, alunos.size());
+        Aluno aluno = alunos.get(0);
         em.remove(pt);
+        em.flush();
+        em.clear();
         assertEquals(null, em.find(PersonalTrainer.class, (long) 25));
+        assertNotNull(em.find(Aluno.class, aluno.getId()));
     }
 
     @Test
