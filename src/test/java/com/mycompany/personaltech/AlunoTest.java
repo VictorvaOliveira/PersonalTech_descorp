@@ -1,6 +1,7 @@
 package com.mycompany.personaltech;
 
 import java.util.Calendar;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
@@ -8,6 +9,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -65,6 +67,69 @@ public class AlunoTest {
             }
             fail(ex.getMessage());
         }
+    }
+
+    @Test
+    public void testeJohnJPQL_01() {
+        TypedQuery<Aluno> query = em.createQuery("SELECT a FROM Aluno a WHERE a.nome LIKE :nome ORDER BY a.id", Aluno.class);
+        query.setParameter("nome", "j%");
+        List<Aluno> alunos = query.getResultList();
+        for (Aluno aluno : alunos) {
+            System.out.println(aluno.getNome());
+        }
+        assertNotNull(alunos);
+    }
+
+    @Test
+    public void testeJohnNamedquery_01() {
+        TypedQuery<Aluno> query = em.createNamedQuery("Aluno.PorNome", Aluno.class);
+        query.setParameter("nome", "j%");
+        List<Aluno> alunos = query.getResultList();
+        for (Aluno aluno : alunos) {
+            System.out.println(aluno.getNome());
+        }
+        assertNotNull(alunos);
+    }
+
+    @Test
+    public void testeJohnJPQL_02() {
+        TypedQuery<Aluno> query = em.createQuery("SELECT a FROM Aluno a WHERE a.exercicios IS NOT EMPTY", Aluno.class);
+        List<Aluno> alunos = query.getResultList();
+        for (Aluno aluno : alunos) {
+            System.out.println(aluno.getNome());
+        }
+        assertNotNull(alunos);
+    }
+    
+    @Test
+    public void testeJohnJPQL_03() {
+        TypedQuery<Aluno> query = em.createQuery("SELECT a FROM Aluno a JOIN a.exercicios xs WHERE xs.exercicio = :ex", Aluno.class);
+        query.setParameter("ex", NomeExercicio.PEIT_SUP_KINESIS);
+        List<Aluno> alunos = query.getResultList();
+        for (Aluno aluno : alunos) {
+            System.out.println(aluno.getNome());
+        }
+        assertNotNull(alunos);
+    }
+    
+    @Test
+    public void testeJohnJPQL_04() {
+        TypedQuery<Exercicio> query = em.createQuery("SELECT e FROM Exercicio e", Exercicio.class);
+        List<Exercicio> exercicios = query.getResultList();
+        for (Exercicio exercicio : exercicios) {
+            System.out.println(exercicio.getExercicio());
+        }
+        assertNotNull(exercicios);
+    }
+    
+    @Test
+    public void testeJohnJPQL_05() {
+        TypedQuery<Aluno> query = em.createQuery("SELECT e FROM Aluno e", Aluno.class);
+        List<Aluno> exercicios = query.getResultList();
+        for (Aluno exercicio : exercicios) {
+            System.out.println(exercicio.getNome());
+        }
+        assertNotNull(exercicios);
     }
 
     @Test

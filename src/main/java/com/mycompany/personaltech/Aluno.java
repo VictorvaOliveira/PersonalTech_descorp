@@ -13,6 +13,8 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -21,6 +23,14 @@ import javax.persistence.Table;
 @Table(name = "TB_ALUNO")
 @DiscriminatorValue(value = "A")
 @PrimaryKeyJoinColumn(name = "ID_USUARIO", referencedColumnName = "ID")
+@NamedQueries(
+        {
+            @NamedQuery(
+                    name = "Aluno.PorNome",
+                    query = "SELECT a FROM Aluno a WHERE a.nome LIKE :nome ORDER BY a.id"
+            )
+        }
+)
 public class Aluno extends Usuario implements Serializable {
 
     @ElementCollection
