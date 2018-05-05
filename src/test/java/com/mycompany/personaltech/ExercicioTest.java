@@ -29,9 +29,7 @@ public class ExercicioTest {
     public static void setUpClass() {
         logger = Logger.getGlobal();
         logger.setLevel(Level.INFO);
-        //logger.setLevel(Level.SEVERE);
         emf = Persistence.createEntityManagerFactory("PersonalTech_PU");
-//        emf.createEntityManager();
         DbUnitUtil.inserirDados();
     }
 
@@ -86,9 +84,9 @@ public class ExercicioTest {
         Aluno aluno = new Aluno();
         aluno.setNome("CUCA");
         aluno.setSobrenome("RECA");
-        aluno.setCpf("123-321-466-66");
-        aluno.setLogin("CUCAA");
-        aluno.setSenha("123");
+        aluno.setCpf("020.161.884-21");
+        aluno.setLogin("cucaaa");
+        aluno.setSenha("aA1-personal");
         aluno.setEmail("KELLY@gmail");
         aluno.setSexo("M");
 

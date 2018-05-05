@@ -13,6 +13,8 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -28,6 +30,10 @@ import javax.persistence.Table;
             @NamedQuery(
                     name = "Aluno.PorNome",
                     query = "SELECT a FROM Aluno a WHERE a.nome LIKE :nome ORDER BY a.id"
+            ),
+                @NamedQuery(
+                    name = "Aluno.PorTipoDeExercicio",
+                    query = "SELECT DISTINCT a FROM Aluno a JOIN a.exercicios xs WHERE xs.tipo = :ex"
             )
         }
 )

@@ -70,76 +70,88 @@ public class AlunoTest {
     }
 
     @Test
-    public void testeJohnJPQL_01() {
-        TypedQuery<Aluno> query = em.createQuery("SELECT a FROM Aluno a WHERE a.nome LIKE :nome ORDER BY a.id", Aluno.class);
+    public void JPQLretornaAlunosComInicial_J() {
+        TypedQuery<Aluno> query = em.createQuery("SELECT a FROM Aluno a WHERE a.nome LIKE :nome ORDER BY a.id DESC", Aluno.class);
         query.setParameter("nome", "j%");
         List<Aluno> alunos = query.getResultList();
         for (Aluno aluno : alunos) {
-            System.out.println(aluno.getNome());
+            assertEquals("J", aluno.getNome().substring(0, 1).toUpperCase());
         }
-        assertNotNull(alunos);
+        if (alunos.isEmpty()) {
+            assertEquals(0, alunos.size());
+        }
     }
 
     @Test
-    public void testeJohnNamedquery_01() {
+    public void NQretornaAlunosComInicial_J() {
         TypedQuery<Aluno> query = em.createNamedQuery("Aluno.PorNome", Aluno.class);
         query.setParameter("nome", "j%");
         List<Aluno> alunos = query.getResultList();
         for (Aluno aluno : alunos) {
-            System.out.println(aluno.getNome());
+            assertEquals("J", aluno.getNome().substring(0, 1).toUpperCase());
         }
+        if (alunos.isEmpty()) {
+            assertEquals(0, alunos.size());
+        }
+    }
+
+    @Test
+    public void JPQLretornaAlunosQueTemExercicios() {
+        TypedQuery<Aluno> query = em.createQuery("SELECT a FROM Aluno a WHERE a.exercicios IS NOT EMPTY", Aluno.class);
+        List<Aluno> alunos = query.getResultList();
+        assertNotEquals(alunos.size(), 0);
+    }
+
+    @Test
+    public void JPQLexistenciaDeEntidadeEmColecao() {
+        Exercicio ex = em.find(Exercicio.class, (long) 1);
+        TypedQuery<Aluno> query = em.createQuery("SELECT a FROM Aluno a JOIN FETCH a.exercicios xs WHERE :ex MEMBER OF a.exercicios", Aluno.class);
+        query.setParameter("ex", ex);
+        List<Aluno> alunos = query.getResultList();
         assertNotNull(alunos);
     }
 
     @Test
-    public void testeJohnJPQL_02() {
-        TypedQuery<Aluno> query = em.createQuery("SELECT a FROM Aluno a WHERE a.exercicios IS NOT EMPTY", Aluno.class);
+    public void NQretornaAlunoPorTipoDeExercicio() {
+        TypedQuery<Aluno> query = em.createNamedQuery("Aluno.PorTipoDeExercicio", Aluno.class);
+        query.setParameter("ex", TipoExercicio.BICEPS);
         List<Aluno> alunos = query.getResultList();
-        for (Aluno aluno : alunos) {
-            System.out.println(aluno.getNome());
-        }
-        assertNotNull(alunos);
+        System.out.println(alunos.size());
+        assertEquals(alunos.size(), 4);
+    }
+
+    @Test
+    public void JPQLretornaTotalDoTipoDeExercico() {
+        TypedQuery<Long> query = em.createQuery("SELECT count(e) FROM Exercicio e WHERE e.tipo = ?1", Long.class);
+        query.setParameter(1, TipoExercicio.PEITORAL);
+        long total = query.getSingleResult();
+        assertEquals(total, (long) 8);
+    }
+
+    @Test
+    public void NativeRetornaNomeAluno() {
+        Query query = em.createNativeQuery("SELECT TXT_NOME FROM TB_USUARIO WHERE ID = 4");
+        String nomeAluno = (String) query.getSingleResult();
+        System.out.println(nomeAluno);
+//        assertNull(null);
     }
     
-    @Test
-    public void testeJohnJPQL_03() {
-        TypedQuery<Aluno> query = em.createQuery("SELECT a FROM Aluno a JOIN a.exercicios xs WHERE xs.exercicio = :ex", Aluno.class);
-        query.setParameter("ex", NomeExercicio.PEIT_SUP_KINESIS);
-        List<Aluno> alunos = query.getResultList();
-        for (Aluno aluno : alunos) {
-            System.out.println(aluno.getNome());
-        }
-        assertNotNull(alunos);
-    }
-    
-    @Test
-    public void testeJohnJPQL_04() {
-        TypedQuery<Exercicio> query = em.createQuery("SELECT e FROM Exercicio e", Exercicio.class);
-        List<Exercicio> exercicios = query.getResultList();
-        for (Exercicio exercicio : exercicios) {
-            System.out.println(exercicio.getExercicio());
-        }
-        assertNotNull(exercicios);
-    }
-    
-    @Test
-    public void testeJohnJPQL_05() {
-        TypedQuery<Aluno> query = em.createQuery("SELECT e FROM Aluno e", Aluno.class);
-        List<Aluno> exercicios = query.getResultList();
-        for (Aluno exercicio : exercicios) {
-            System.out.println(exercicio.getNome());
-        }
-        assertNotNull(exercicios);
-    }
+//    @Test
+//    public void NamedNativeRetornaNomeAluno() {
+//        Query query = em.createNamedQuery("Usuario.RetornaNome");
+//        String nomeAluno = (String) query.getSingleResult();
+//        System.out.println(nomeAluno);
+//        assertNull(null);
+//    }
 
     @Test
     public void inserirAluno_01() {
         Aluno aluno = new Aluno();
         aluno.setNome("KELLY");
         aluno.setSobrenome("GÜIÇA");
-        aluno.setCpf("123-321-416-13");
-        aluno.setLogin("KELLY");
-        aluno.setSenha("123");
+        aluno.setCpf("567.031.524-38");
+        aluno.setLogin("kelly1");
+        aluno.setSenha("aA1-personal");
         aluno.setEmail("KELLY@gmail");
         aluno.setSexo("F");
 
@@ -171,9 +183,9 @@ public class AlunoTest {
         Aluno aluno = new Aluno();
         aluno.setNome("KEN");
         aluno.setSobrenome("GALINDA");
-        aluno.setCpf("123-321-436-12");
-        aluno.setLogin("KENNYG");
-        aluno.setSenha("123");
+        aluno.setCpf("999.331.824-80");
+        aluno.setLogin("kennygg");
+        aluno.setSenha("aA1-personal");
         aluno.setEmail("KENNYH@gmail");
         aluno.setSexo("F");
         aluno.addTelefone("111 222 333");
@@ -233,11 +245,11 @@ public class AlunoTest {
     public void selecionarAlunoPorCPF_01() {
         String jpql = "SELECT a FROM Aluno a where a.cpf = ?1";
         Query query = em.createQuery(jpql);
-        query.setParameter(1, "05842569855");
+        query.setParameter(1, "456.636.524-77");
 
         Aluno aluno = (Aluno) query.getSingleResult();
 
-        assertEquals("05842569855", aluno.getCpf());
+        assertEquals("456.636.524-77", aluno.getCpf());
         logger.log(Level.INFO, "selecionarAlunoPorId: Aluno {0}", aluno.toString());
     }
 
@@ -247,7 +259,7 @@ public class AlunoTest {
         assertNotNull(aluno);
         assertEquals("MICHEL", aluno.getNome());
         String nome = aluno.getNome();
-        assertEquals("05842569855", aluno.getCpf());
+        assertEquals("111.688.604-90", aluno.getCpf());
         logger.log(Level.INFO, "selecionarAlunoPorId: Aluno {0}", aluno.toString());
     }
 

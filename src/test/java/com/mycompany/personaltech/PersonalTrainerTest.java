@@ -74,14 +74,14 @@ public class PersonalTrainerTest {
         pt.setSobrenome("Silva");
 
         Calendar c = Calendar.getInstance();
-        c.set(Calendar.YEAR, 2018);
+        c.set(Calendar.YEAR, 1990);
         c.set(Calendar.MONTH, Calendar.JULY);
         c.set(Calendar.DAY_OF_MONTH, 24);
 
         pt.setDataNascimento(c.getTime());
-        pt.setCpf("00346246273");
+        pt.setCpf("210.488.974-00");
         pt.setLogin("jubileu");
-        pt.setSenha("12345");
+        pt.setSenha("aA1-personal");
         pt.setEmail("jubinha@gmail.com");
         pt.setSexo("M");
 
@@ -109,14 +109,14 @@ public class PersonalTrainerTest {
         aluno.setSobrenome("BALAO");
 
         Calendar c = Calendar.getInstance();
-        c.set(Calendar.YEAR, 2018);
+        c.set(Calendar.YEAR, 1990);
         c.set(Calendar.MONTH, Calendar.JULY);
         c.set(Calendar.DAY_OF_MONTH, 24);
 
         aluno.setDataNascimento(c.getTime());
-        aluno.setCpf("00324246273");
-        aluno.setLogin("JONAS");
-        aluno.setSenha("12345");
+        aluno.setCpf("044.879.794-12");
+        aluno.setLogin("jonas1");
+        aluno.setSenha("aA1-personal");
         aluno.setEmail("jubinha@gmail.com");
         aluno.setSexo("M");
 
@@ -143,14 +143,14 @@ public class PersonalTrainerTest {
         pt.setSobrenome("Sousa");
 
         Calendar c = Calendar.getInstance();
-        c.set(Calendar.YEAR, 2018);
+        c.set(Calendar.YEAR, 1990);
         c.set(Calendar.MONTH, Calendar.JULY);
         c.set(Calendar.DAY_OF_MONTH, 24);
 
         pt.setDataNascimento(c.getTime());
-        pt.setCpf("00346246212");
+        pt.setCpf("866.036.024-90");
         pt.setLogin("julian");
-        pt.setSenha("12345");
+        pt.setSenha("aA1-personal");
         pt.setEmail("jubinha@gmail.com");
         pt.setSexo("M");
 
@@ -203,7 +203,7 @@ public class PersonalTrainerTest {
         Usuario pt = em.find(Usuario.class, (long)13 );
         assertNotNull(pt);
         assertEquals("THOR", pt.getNome());
-        assertEquals("THORP", pt.getLogin());
+        assertEquals("thorpp", pt.getLogin());
         logger.log(Level.INFO, "selecionarPersonalTrainerPorId: PT {0}", pt.toString());
     }
 
