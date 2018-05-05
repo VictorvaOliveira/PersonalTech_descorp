@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="16" failures="0" name="com.mycompany.personaltech.AlunoTest" time="30.825" errors="0" skipped="0">
+<testsuite tests="18" failures="0" name="com.mycompany.personaltech.AlunoTest" time="23.386" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/home/john/jdk1.8.0_161/jre/lib/amd64"/>
@@ -62,20 +62,22 @@
     <property name="sun.desktop" value="gnome"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="com.mycompany.personaltech.AlunoTest" name="NQretornaAlunoPorTipoDeExercicio" time="0.431"/>
-  <testcase classname="com.mycompany.personaltech.AlunoTest" name="JPQLretornaAlunosComInicial_J" time="0.044"/>
-  <testcase classname="com.mycompany.personaltech.AlunoTest" name="NQretornaAlunosComInicial_J" time="0.031"/>
-  <testcase classname="com.mycompany.personaltech.AlunoTest" name="JPQLexistenciaDeEntidadeEmColecao" time="0.039"/>
+  <testcase classname="com.mycompany.personaltech.AlunoTest" name="NQretornaAlunoPorTipoDeExercicio" time="0.408"/>
+  <testcase classname="com.mycompany.personaltech.AlunoTest" name="JPQLretornaAlunosComInicial_J" time="0.034"/>
+  <testcase classname="com.mycompany.personaltech.AlunoTest" name="NQretornaAlunosComInicial_J" time="0.027"/>
+  <testcase classname="com.mycompany.personaltech.AlunoTest" name="z" time="0.032"/>
+  <testcase classname="com.mycompany.personaltech.AlunoTest" name="JPQLexistenciaDeEntidadeEmColecao" time="0.034"/>
   <testcase classname="com.mycompany.personaltech.AlunoTest" name="inserirAluno_01" time="0.077"/>
-  <testcase classname="com.mycompany.personaltech.AlunoTest" name="inserirAluno_02" time="0.21"/>
-  <testcase classname="com.mycompany.personaltech.AlunoTest" name="JPQLretornaAlunosQueTemExercicios" time="0.05"/>
-  <testcase classname="com.mycompany.personaltech.AlunoTest" name="selecionarAlunoPorId" time="0.01"/>
-  <testcase classname="com.mycompany.personaltech.AlunoTest" name="atualizarAluno_01" time="0.093"/>
-  <testcase classname="com.mycompany.personaltech.AlunoTest" name="atualizarAluno_02" time="0.109"/>
-  <testcase classname="com.mycompany.personaltech.AlunoTest" name="selecionarAlunoPorCPF_01" time="0.009"/>
-  <testcase classname="com.mycompany.personaltech.AlunoTest" name="JPQLretornaTotalDoTipoDeExercico" time="0.011"/>
-  <testcase classname="com.mycompany.personaltech.AlunoTest" name="NativeRetornaNomeAluno" time="0.004"/>
-  <testcase classname="com.mycompany.personaltech.AlunoTest" name="deletarAluno_01" time="0.165"/>
-  <testcase classname="com.mycompany.personaltech.AlunoTest" name="deletarAluno_02" time="0.045"/>
-  <testcase classname="com.mycompany.personaltech.AlunoTest" name="selecionarAvaliacoes" time="0.008"/>
+  <testcase classname="com.mycompany.personaltech.AlunoTest" name="inserirAluno_02" time="0.074"/>
+  <testcase classname="com.mycompany.personaltech.AlunoTest" name="JPQLretornaAlunosQueTemExercicios" time="0.035"/>
+  <testcase classname="com.mycompany.personaltech.AlunoTest" name="selecionarAlunoPorId" time="0.008"/>
+  <testcase classname="com.mycompany.personaltech.AlunoTest" name="NamedNativeRetornaNomeAluno" time="0.004"/>
+  <testcase classname="com.mycompany.personaltech.AlunoTest" name="atualizarAluno_01" time="0.075"/>
+  <testcase classname="com.mycompany.personaltech.AlunoTest" name="atualizarAluno_02" time="0.054"/>
+  <testcase classname="com.mycompany.personaltech.AlunoTest" name="selecionarAlunoPorCPF_01" time="0.01"/>
+  <testcase classname="com.mycompany.personaltech.AlunoTest" name="JPQLretornaTotalDoTipoDeExercico" time="0.009"/>
+  <testcase classname="com.mycompany.personaltech.AlunoTest" name="NativeRetornaNomeAluno" time="0.002"/>
+  <testcase classname="com.mycompany.personaltech.AlunoTest" name="deletarAluno_01" time="0.255"/>
+  <testcase classname="com.mycompany.personaltech.AlunoTest" name="deletarAluno_02" time="0.056"/>
+  <testcase classname="com.mycompany.personaltech.AlunoTest" name="selecionarAvaliacoes" time="0.003"/>
 </testsuite>

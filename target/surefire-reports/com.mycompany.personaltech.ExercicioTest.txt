@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.mycompany.personaltech.ExercicioTest
 -------------------------------------------------------------------------------
-Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 25.408 sec
+Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 19.321 sec

@@ -76,11 +76,9 @@ public class AvaliacaoTest {
     @Test
     public void inserirAvaliacao_01() {
         Avaliacao av = new Avaliacao();
-        setAvaliacao(av);
         av.setNome_personal("EVA");
 
         Avaliacao av2 = new Avaliacao();
-        setAvaliacao(av2);
         av2.setNome_personal("EVA");
 
         Aluno aluno = em.find(Aluno.class, (long) 3);
@@ -94,29 +92,29 @@ public class AvaliacaoTest {
     @Test
     public void inserirAvaliacao_02() {
         Avaliacao av = new Avaliacao();
-        setAvaliacao(av);
         av.setNome_personal("EVA");
 
         Aluno aluno = em.find(Aluno.class, (long) 4);
         aluno.addAvaliacao(av);
         em.flush();
 
-        assertNotNull(aluno.getId());
+        assertNotNull(av.getId());
+        assertNotNull(av.getDataAvaliacao());
     }
 
     @Test
     public void removeAvaliacao_01() {
-        Avaliacao av_1 = new Avaliacao();
-        setAvaliacao(av_1);
-        av_1.setNome_personal("EVA");
 
+        // Tirar (inserir no dataset)
+        Avaliacao av_1 = new Avaliacao();
+        av_1.setNome_personal("EVA");
         Aluno aluno_1 = em.find(Aluno.class, (long) 4);
         aluno_1.addAvaliacao(av_1);
         em.flush();
         em.clear();
-
         assertNotNull(aluno_1.getId());
-        
+        //fecha tirar
+
         Avaliacao av = em.find(Avaliacao.class, (long) 7);
         Aluno aluno = av.getAluno();
         em.remove(av);
@@ -154,14 +152,5 @@ public class AvaliacaoTest {
         List<Avaliacao> avaliacao = query.getResultList();
 
         assertNotNull(avaliacao);
-
-    }
-
-    private void setAvaliacao(Avaliacao av) {
-        Calendar c = Calendar.getInstance();
-        c.set(Calendar.YEAR, 2018);
-        c.set(Calendar.MONTH, Calendar.JANUARY);
-        c.set(Calendar.DAY_OF_MONTH, 25);
-        av.setDataAvaliacao(c.getTime());
     }
 }

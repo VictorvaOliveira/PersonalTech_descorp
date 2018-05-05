@@ -39,15 +39,14 @@ import org.hibernate.validator.constraints.br.CPF;
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "TXT_TIPO_USUARIO",
         discriminatorType = DiscriminatorType.STRING, length = 1)
-//@NamedNativeQueries(
-//        {
-//            @NamedNativeQuery(
-//                    name = "Usuario.RetornaNome",
-//                    query = "SELECT TXT_NOME FROM TB_USUARIO WHERE ID = 4",
-//                    resultClass = Usuario.class
-//            )
-//        }
-//)
+@NamedNativeQueries(
+        {
+            @NamedNativeQuery(
+                    name = "Usuario.RetornaNome",
+                    query = "SELECT TXT_NOME FROM TB_USUARIO WHERE ID = 4"
+            )
+        }
+)
 public abstract class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -77,7 +76,8 @@ public abstract class Usuario implements Serializable {
     )
     @Column(name = "TXT_LOGIN", length = 30, unique = true, nullable = false)
     private String login;
-
+    
+    // mensagem deve vir de um arquivo de configuração, olhar exemplo do github e aula
     @Pattern(
             regexp = "((?=.*\\p{Digit})(?=.*\\p{Lower})(?=.*\\p{Upper})(?=.*\\p{Punct}).{6,20})",
             message = "ERRO DE SENHA"

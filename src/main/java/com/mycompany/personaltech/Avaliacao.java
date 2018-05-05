@@ -16,6 +16,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -28,7 +29,8 @@ public class Avaliacao implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    
+    
     @Temporal(TemporalType.DATE)
     @Column(name = "DT_AVALIACAO", nullable = false, unique = false)
     private Date dataAvaliacao;
@@ -94,6 +96,11 @@ public class Avaliacao implements Serializable {
 
     public Date getdataAvaliacao() {
         return dataAvaliacao;
+    }
+    
+    @PrePersist
+    private void setDataAvaliacao() {
+        setDataAvaliacao(new Date());
     }
 
     @Override
