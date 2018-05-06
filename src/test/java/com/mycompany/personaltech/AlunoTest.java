@@ -138,12 +138,14 @@ public class AlunoTest {
     }
     
     @Test
-    public void z() {
-        Query query = em.createNativeQuery("SELECT ID, DT_AVALIACAO, ID_ALUNO, TXT_NOME_PT  FROM TB_AVALIACAO WHERE ID = ?1", Avaliacao.class);
-        query.setParameter(1, 1);// Zeus, 1980-11-02, aluno 4
+    public void NativeRetornaEntidadeAvaliacao() {
+        Query query = em.createNativeQuery("SELECT ID, DT_AVALIACAO, ID_ALUNO, TXT_NOME_PT  FROM TB_AVALIACAO WHERE DT_AVALIACAO = ?1", Avaliacao.class);
+        query.setParameter(1, "1950-12-02");//id av = 6
         Avaliacao avaliacao = (Avaliacao) query.getSingleResult();
-        assertEquals(1,(long)avaliacao.getId());
+        assertEquals("THOR", avaliacao.getNome_personal());
+        
     }
+    
     
     @Test
     public void NamedNativeRetornaNomeAluno() {

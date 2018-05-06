@@ -93,10 +93,6 @@ public class Avaliacao implements Serializable {
     public void setDataAvaliacao(Date dataAvaliacao) {
         this.dataAvaliacao = dataAvaliacao;
     }
-
-    public Date getdataAvaliacao() {
-        return dataAvaliacao;
-    }
     
     @PrePersist
     private void setDataAvaliacao() {
