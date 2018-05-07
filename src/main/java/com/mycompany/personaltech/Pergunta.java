@@ -1,22 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mycompany.personaltech;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-/**
- *
- * @author john
- */
 @Entity
 @Table(name = "TB_PERGUNTA")
 public class Pergunta implements Serializable {
@@ -28,6 +26,26 @@ public class Pergunta implements Serializable {
 
     @Column(name = "TXT_PERGUNTA", nullable = false, length = 2000)
     private String pergunta;
+
+    @OneToMany(mappedBy ="pergunta" ,fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL, orphanRemoval = false)
+//    @JoinColumn(name = "ID_PG", referencedColumnName = "ID")
+    private List<RespostasAvaliacao> respostas;
+
+    void addResposta(RespostasAvaliacao resposta) {
+        if (respostas == null) {
+            respostas = new ArrayList<>();
+        }
+        respostas.add(resposta);
+        resposta.setPergunta(this);
+    }
+
+    void removeResposta(RespostasAvaliacao resposta) {
+        if (respostas == null) {
+            return;
+        }
+        respostas.remove(resposta);
+    }
 
     public Long getId() {
         return id;

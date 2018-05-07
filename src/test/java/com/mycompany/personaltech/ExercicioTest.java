@@ -1,16 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mycompany.personaltech;
 
+import java.util.Calendar;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -18,10 +17,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author john
- */
 public class ExercicioTest {
 
     private static EntityManagerFactory emf;
@@ -36,9 +31,7 @@ public class ExercicioTest {
     public static void setUpClass() {
         logger = Logger.getGlobal();
         logger.setLevel(Level.INFO);
-        //logger.setLevel(Level.SEVERE);
         emf = Persistence.createEntityManagerFactory("PersonalTech_PU");
-//        emf.createEntityManager();
         DbUnitUtil.inserirDados();
     }
 
@@ -76,27 +69,102 @@ public class ExercicioTest {
         }
     }
 
-    /**
-     * Test of getId method, of class Aluno.
-     */
     @Test
     public void inserirExercicio_01() {
         Exercicio ex = new Exercicio();
-        // TODO
+        ex.setExercicio(NomeExercicio.ABD_BOSU);
+        ex.setTipo(TipoExercicio.ABDOMINAIS);
+
+        Aluno al = em.find(Aluno.class, (long) 22);
+        al.addExercicio(ex);
+
+        em.persist(al);
     }
-    
+
     @Test
     public void selecionarExercicio_01() {
-        // TODO
+        Exercicio ex = em.find(Exercicio.class, (long) 5);
+        assertEquals(ex.getTipo(), TipoExercicio.PEITORAL);
+        logger.log(Level.INFO, "selecionarExercicio: Exercicio {0}", ex.toString());
     }
-    
+
+    @Test
+    public void selecionarExercicio_02() {
+        Aluno al = em.find(Aluno.class, (long)17);
+        List<Exercicio> ex = al.getExercicios();
+        assertNotNull(ex);
+        for (Exercicio exercicio : ex) {
+            System.out.println(exercicio.getExercicio());
+        }
+        assertEquals(ex.size(), 2);
+    }
+
     @Test
     public void alterarExercicio_01() {
-        // TODO
+        Exercicio ex = em.find(Exercicio.class, (long) 13);
+        assertNotNull(ex);
+        ex.setExercicio(NomeExercicio.ABD_INFRA_PRANCHA_ABD);
+        ex.setTipo(TipoExercicio.ABDOMINAIS);
+        em.persist(ex);
+        em.flush();
+        assertEquals(NomeExercicio.ABD_INFRA_PRANCHA_ABD, ex.getExercicio());
+        assertEquals(TipoExercicio.ABDOMINAIS, ex.getTipo());
+    }
+
+    @Test
+    public void alterarExercicio_02() {
+        Exercicio ex = em.find(Exercicio.class, (long) 12);
+        assertNotNull(ex);
+        ex.setExercicio(NomeExercicio.BICEPS_ROSCA_SCOTT_HALT_90_ROSCA_SCOTT_UNI);
+        ex.setTipo(TipoExercicio.BICEPS);
+        em.persist(ex);
+        em.flush();
+        assertEquals(NomeExercicio.BICEPS_ROSCA_SCOTT_HALT_90_ROSCA_SCOTT_UNI, ex.getExercicio());
+        assertEquals(TipoExercicio.BICEPS, ex.getTipo());
+    }
+
+    @Test
+    public void removerExercicio_01() {
+        Exercicio ex = em.find(Exercicio.class, (long) 10);
+        assertNotNull(ex);
+        em.remove(ex);
+        em.flush();
+        assertNull(em.find(Exercicio.class, (long) 10));
+    }
+
+    @Test
+    public void removerExercicio_02() {
+        Aluno al = em.find(Aluno.class, (long) 16);
+        Exercicio ex = al.getExercicios().get(0);
+        assertNotNull(ex);
+        if (ex != null) {
+            al.removeExercicio(ex);
+            em.persist(al);
+            em.flush();
+        }
+        al = em.find(Aluno.class, (long) 16);
+        int size = al.getExercicios().size();
+        assertEquals(2, size);
     }
     
     @Test
-    public void removerExercicio_01() {
-        // TODO
+    public void NamedNativeRetornaNomeAluno() {
+        Query query = em.createNamedQuery("Exercicio.RetornaTipoExercicio");
+        query.setParameter(1, 12);
+        List result = query.getResultList();
+        Object[] item = (Object[]) result.get(0);
+        assertEquals(1, result.size());
+        assertEquals("BIANCA", item[1]);
+    }
+    
+    @Test
+    public void retonarAlunosQuePraticamExercicioX() {
+        Exercicio ex = em.find(Exercicio.class, (long) 1);
+        NomeExercicio nome = NomeExercicio.BICEPS_BARRA_ROSCA_PRON_POLIA;
+        TypedQuery<Aluno> query = em.createQuery("SELECT DISTINCT a FROM Aluno a JOIN FETCH a.exercicios xs WHERE xs.exercicio = :tipo", Aluno.class);
+        query.setParameter("tipo", nome);
+        List<Aluno> alunos = query.getResultList();
+        assertEquals(alunos.size(), 4);
+        assertNotNull(alunos);
     }
 }

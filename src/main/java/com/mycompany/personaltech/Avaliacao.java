@@ -12,7 +12,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -25,15 +27,38 @@ public class Avaliacao implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    
+    
     @Temporal(TemporalType.DATE)
     @Column(name = "DT_AVALIACAO", nullable = false, unique = false)
     private Date dataAvaliacao;
 
-    @OneToMany(fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "ID_AVALIACAO", referencedColumnName = "ID")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "ID_ALUNO", referencedColumnName = "ID")
+    private Aluno aluno;
+
+    @Column(name = "TXT_NOME_PT", length = 50, nullable = false)
+    private String nome_personal;
+
+    @OneToMany(mappedBy = "avaliacao" ,fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL, orphanRemoval = false)
+//    @JoinColumn(name = "ID_AV", referencedColumnName = "ID")
     private List<RespostasAvaliacao> respostas;
+
+    void addResposta(RespostasAvaliacao resposta) {
+        if (respostas == null) {
+            respostas = new ArrayList<>();
+        }
+        respostas.add(resposta);
+        resposta.setAvaliacao(this);
+    }
+
+    void removeResposta(RespostasAvaliacao resposta) {
+        if (respostas == null) {
+            return;
+        }
+        respostas.remove(resposta);
+    }
 
     public Long getId() {
         return id;
@@ -43,42 +68,33 @@ public class Avaliacao implements Serializable {
         this.id = id;
     }
 
+    public String getNome_personal() {
+        return nome_personal;
+    }
+
+    public void setNome_personal(String nome_personal) {
+        this.nome_personal = nome_personal;
+    }
+
     public Date getDataAvaliacao() {
         return dataAvaliacao;
+    }
+
+    public Aluno getAluno() {
+        return aluno;
+    }
+
+    public void setAluno(Aluno aluno) {
+        this.aluno = aluno;
     }
 
     public void setDataAvaliacao(Date dataAvaliacao) {
         this.dataAvaliacao = dataAvaliacao;
     }
-
-    public List<RespostasAvaliacao> getRespostas() {
-        return respostas;
-    }
-
-    public void setRespostas(List<RespostasAvaliacao> respostas) {
-        this.respostas = respostas;
-    }
-
-    public Date getdataAvaliacao() {
-        return dataAvaliacao;
-    }
-
-    public void setdataAvaliacao(Date dataAvaliacao) {
-        this.dataAvaliacao = dataAvaliacao;
-    }
-
-    public void addRespostaAvaliacao(RespostasAvaliacao resposta) {
-        if (this.respostas == null) {
-            this.respostas = new ArrayList<>();
-        }
-        this.respostas.add(resposta);
-    }
-
-    public void removeRespostaAvaliacao(RespostasAvaliacao resposta) {
-        if (this.respostas == null) {
-            return;
-        }
-        this.respostas.remove(resposta);
+    
+    @PrePersist
+    private void setDataAvaliacao() {
+        setDataAvaliacao(new Date());
     }
 
     @Override

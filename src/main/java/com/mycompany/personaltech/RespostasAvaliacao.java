@@ -6,7 +6,6 @@
 package com.mycompany.personaltech;
 
 import java.io.Serializable;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,7 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -22,7 +21,7 @@ import javax.persistence.Table;
  * @author john
  */
 @Entity
-@Table(name = "TB_RESP_ALUNO")
+@Table(name = "TB_AV_PERG")
 public class RespostasAvaliacao implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -33,13 +32,34 @@ public class RespostasAvaliacao implements Serializable {
     @Column(name = "TXT_RESP_ALUNO", nullable = true, length = 1000)
     private String txt_resposta;
 
-//    @Column(name = "TXT_PERGUNTA", nullable = false)
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = false)
-    @JoinColumn(name = "ID_PERGUNTA_AVAL", referencedColumnName = "ID")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "ID_AV", referencedColumnName = "ID")
+    private Avaliacao avaliacao;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "ID_PERG", referencedColumnName = "ID")
     private Pergunta pergunta;
+
+    public Pergunta getPergunta() {
+        return pergunta;
+    }
+
+    public void setPergunta(Pergunta pergunta) {
+        this.pergunta = pergunta;
+    }
+    
+    
 
     public Long getId() {
         return id;
+    }
+
+    public Avaliacao getAvaliacao() {
+        return avaliacao;
+    }
+
+    public void setAvaliacao(Avaliacao avaliacao) {
+        this.avaliacao = avaliacao;
     }
 
     public void setId(Long id) {
@@ -52,14 +72,6 @@ public class RespostasAvaliacao implements Serializable {
 
     public void setTxt_resposta(String txt_resposta) {
         this.txt_resposta = txt_resposta;
-    }
-
-    public Pergunta getPergunta() {
-        return pergunta;
-    }
-
-    public void setPergunta(Pergunta pergunta) {
-        this.pergunta = pergunta;
     }
 
     @Override

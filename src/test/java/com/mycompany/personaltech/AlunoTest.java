@@ -1,7 +1,8 @@
-
 package com.mycompany.personaltech;
 
 import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
@@ -9,6 +10,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -16,10 +18,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author john
- */
 public class AlunoTest {
 
     private static EntityManagerFactory emf;
@@ -34,9 +32,7 @@ public class AlunoTest {
     public static void setUpClass() {
         logger = Logger.getGlobal();
         logger.setLevel(Level.INFO);
-        //logger.setLevel(Level.SEVERE);
         emf = Persistence.createEntityManagerFactory("PersonalTech_PU");
-//        emf.createEntityManager();
         DbUnitUtil.inserirDados();
     }
 
@@ -75,54 +71,136 @@ public class AlunoTest {
     }
 
     @Test
-    public void selecionarAlunoPorId() {
-        
-        Aluno aluno = em.find(Aluno.class, (long) 23);
-        assertNotNull(aluno);
-        assertEquals("MICHEL", aluno.getNome());
-        assertEquals("05842569855", aluno.getCpf());
-        logger.log(Level.INFO, "selecionarAlunoPorId: Aluno {0}", aluno.toString());
+    public void JPQLretornaAlunosComInicial_J() {
+        TypedQuery<Aluno> query = em.createQuery("SELECT a FROM Aluno a WHERE a.nome LIKE :nome ORDER BY a.id DESC", Aluno.class);
+        query.setParameter("nome", "j%");
+        List<Aluno> alunos = query.getResultList();
+        for (Aluno aluno : alunos) {
+            assertEquals("J", aluno.getNome().substring(0, 1).toUpperCase());
+        }
+        if (alunos.isEmpty()) {
+            assertEquals(0, alunos.size());
+        }
     }
 
     @Test
-    public void atualizarAluno() {
-       
-        Aluno aluno = em.find(Aluno.class, (long) 25);
-        assertNotNull(aluno);
-        aluno.setEmail("email@hotmail.com");
-        em.flush();
-        em.clear();
-        logger.log(Level.INFO, "selecionarAlunoPorId: Aluno {0}", aluno.toString());
-        aluno = em.find(Aluno.class, (long) 25);
-        assertEquals("email@hotmail.com", aluno.getEmail());
-    }
-    @Test
-    public void selecionarAlunoPorCPF() {
-        
-        String jpql = "SELECT a FROM Aluno a where a.cpf = ?1";
-        Query query = em.createQuery(jpql);
-        query.setParameter(1, "05842569855");
-
-        Aluno aluno = (Aluno) query.getSingleResult();
-
-        assertEquals("05842569855", aluno.getCpf());
-        logger.log(Level.INFO, "selecionarAlunoPorId: Aluno {0}", aluno.toString());
+    public void NQretornaAlunosComInicial_J() {
+        TypedQuery<Aluno> query = em.createNamedQuery("Aluno.PorNome", Aluno.class);
+        query.setParameter("nome", "j%");
+        List<Aluno> alunos = query.getResultList();
+        for (Aluno aluno : alunos) {
+            assertEquals("J", aluno.getNome().substring(0, 1).toUpperCase());
+        }
+        if (alunos.isEmpty()) {
+            assertEquals(0, alunos.size());
+        }
     }
 
+    @Test
+    public void JPQLretornaAlunosQueTemExercicios() {
+        TypedQuery<Aluno> query = em.createQuery("SELECT a FROM Aluno a WHERE a.exercicios IS NOT EMPTY", Aluno.class);
+        List<Aluno> alunos = query.getResultList();
+        assertNotEquals(alunos.size(), 0);
+    }
 
     @Test
-    public void inserirAluno() {
-        // Coment teste branch
+    public void JPQLexistenciaDeEntidadeEmColecao() {
+        Exercicio ex = em.find(Exercicio.class, (long) 1);
+        TypedQuery<Aluno> query = em.createQuery("SELECT a FROM Aluno a JOIN FETCH a.exercicios xs WHERE :ex MEMBER OF a.exercicios", Aluno.class);
+        query.setParameter("ex", ex);
+        List<Aluno> alunos = query.getResultList();
+        assertNotNull(alunos);
+    }
+
+    @Test
+    public void NQretornaAlunoPorTipoDeExercicio() {
+        TypedQuery<Aluno> query = em.createNamedQuery("Aluno.PorTipoDeExercicio", Aluno.class);
+        query.setParameter("ex", TipoExercicio.BICEPS);
+        List<Aluno> alunos = query.getResultList();
+        System.out.println(alunos.size());
+        assertEquals(alunos.size(), 6);
+    }
+
+    @Test
+    public void JPQLretornaTotalDoTipoDeExercico() {
+        TypedQuery<Long> query = em.createQuery("SELECT COUNT(e) FROM Exercicio e WHERE e.tipo = ?1", Long.class);
+        query.setParameter(1, TipoExercicio.PEITORAL);
+        long total = query.getSingleResult();
+        assertEquals(total, (long) 11);
+    }
+
+    @Test
+    public void NativeRetornaNomeAluno() {
+        Query query = em.createNativeQuery("SELECT TXT_NOME FROM TB_USUARIO WHERE ID = 4");
+        String nomeAluno = (String) query.getSingleResult();
+        System.out.println(nomeAluno);
+        assertNull(null);
+    }
+    
+    @Test
+    public void NativeRetornaEntidadeAvaliacao() {
+        Query query = em.createNativeQuery("SELECT ID, DT_AVALIACAO, ID_ALUNO, TXT_NOME_PT  FROM TB_AVALIACAO WHERE DT_AVALIACAO = ?1", Avaliacao.class);
+        query.setParameter(1, "1950-12-02");//id av = 6
+        Avaliacao avaliacao = (Avaliacao) query.getSingleResult();
+        assertEquals("THOR", avaliacao.getNome_personal());
+    }
+    
+    
+    @Test
+    public void NamedNativeRetornaNomeAluno() {
+        Query query = em.createNamedQuery("Usuario.RetornaNome");
+        String nomeAluno = (String) query.getSingleResult();
+        System.out.println(nomeAluno);
+        // assertNull(null);
+        //fazer um assert decente
+    }
+
+    @Test
+    public void inserirAluno_01() {
         Aluno aluno = new Aluno();
-        aluno.setNome("Jurubeba");
-        aluno.setSobrenome("Alcoolica");
-        aluno.setCpf("123-321-436-12");
-        aluno.setLogin("juba");
-        aluno.setSenha("123");
-        aluno.setEmail("juba@gmail");
-        aluno.setSexo("M");
+        aluno.setNome("KELLY");
+        aluno.setSobrenome("GÜIÇA");
+        aluno.setCpf("567.031.524-38");
+        aluno.setLogin("kelly1");
+        aluno.setSenha("aA1-personal");
+        aluno.setEmail("KELLY@gmail");
+        aluno.setSexo("F");
+
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.YEAR, 2000);
+        c.set(Calendar.MONTH, Calendar.AUGUST);
+        c.set(Calendar.DAY_OF_MONTH, 27);
+        aluno.setDataNascimento(c.getTime());
+
+        Endereco end = new Endereco();
+        end.setLogradouro("RUA DO CORDEIRO");
+        end.setBairro("CORDEIRO");
+        end.setNumero(666);
+        end.setCep("123456-88");
+        end.setCidade("RECIFE");
+        end.setEstado("PERNAMBUCO");
+
+        aluno.setEndereco(end);
+
+        em.persist(aluno);
+
+        em.flush();
+        assertNotNull(aluno.getId());
+
+    }
+
+    @Test
+    public void inserirAluno_02() {
+        Aluno aluno = new Aluno();
+        aluno.setNome("KEN");
+        aluno.setSobrenome("GALINDA");
+        aluno.setCpf("999.331.824-80");
+        aluno.setLogin("kennygg");
+        aluno.setSenha("aA1-personal");
+        aluno.setEmail("KENNYH@gmail");
+        aluno.setSexo("F");
         aluno.addTelefone("111 222 333");
-        
+
         Exercicio ex = new Exercicio();
         ex.setExercicio(NomeExercicio.COXAS_45_STIFF_BARRA);
         ex.setTipo(TipoExercicio.COXAS);
@@ -134,89 +212,95 @@ public class AlunoTest {
         c.set(Calendar.DAY_OF_MONTH, 27);
         aluno.setDataNascimento(c.getTime());
 
-        aluno.setTipo(TipoUsuario.ALUNO);
-
         Endereco end = new Endereco();
-        end.setLogradouro("Rua do Cordeiro");
-        end.setBairro("Cordeiro");
+        end.setLogradouro("RUA DO CORDEIRO");
+        end.setBairro("CORDEIRO");
         end.setNumero(666);
         end.setCep("123456-88");
-        end.setCidade("Recife");
-        end.setEstado("Pernambuco");
+        end.setCidade("RECIFE");
+        end.setEstado("PERNAMBUCO");
 
         aluno.setEndereco(end);
 
-        PersonalTrainer pt = new PersonalTrainer();
-        pt = em.find(PersonalTrainer.class, (long) 1);
-        pt.addAluno(aluno);
-        em.flush();
-        em.clear();
+        em.persist(aluno);
 
-        assertNotNull(aluno.getId());
-        
-        // Teste dados do aluno inserido
-        assertEquals("Cordeiro", aluno.getEndereco().getBairro());
-        assertEquals("Recife", aluno.getEndereco().getCidade());
-        assertEquals(c.getTime(), aluno.getDataNascimento());
+        em.flush();
+        assertNotNull(em.find(Aluno.class, (long) 38));
     }
 
     @Test
-    public void inserirAluno_02() {
-        
-        Aluno aluno = new Aluno();
-        aluno.setNome("Jurubeba2");
-        aluno.setSobrenome("Alcoolica");
-        aluno.setCpf("123-321-416-13");
-        aluno.setLogin("juba2asd");
-        aluno.setSenha("123");
-        aluno.setEmail("juba@gmail");
-        aluno.setSexo("M");
-
-        Calendar c = Calendar.getInstance();
-        c.set(Calendar.YEAR, 2000);
-        c.set(Calendar.MONTH, Calendar.AUGUST);
-        c.set(Calendar.DAY_OF_MONTH, 27);
-        aluno.setDataNascimento(c.getTime());
-
-        aluno.setTipo(TipoUsuario.ALUNO);
-
-        Endereco end = new Endereco();
-        end.setLogradouro("Rua do Cordeiro");
-        end.setBairro("Cordeiro");
-        end.setNumero(666);
-        end.setCep("123456-88");
-        end.setCidade("Recife");
-        end.setEstado("Pernambuco");
-
-        aluno.setEndereco(end);
-
-        PersonalTrainer pt = new PersonalTrainer();
-        pt = em.find(PersonalTrainer.class, (long) 1);
-        pt.addAluno(aluno);
+    public void atualizarAluno_01() {
+        Aluno aluno = em.find(Aluno.class, (long) 24);
+        assertNotNull(aluno);
+        aluno.setEmail("email@hotmail.com");
         em.flush();
         em.clear();
-
-        assertNotNull(aluno.getId());
+        logger.log(Level.INFO, "selecionarAlunoPorId: Aluno {0}", aluno.getNome());
+        aluno = em.find(Aluno.class, (long) 24);
+        assertEquals("email@hotmail.com", aluno.getEmail());
     }
-    
+
+    @Test
+    public void atualizarAluno_02() {
+        Aluno aluno = em.find(Aluno.class, (long) 27);
+        assertNotNull(aluno);
+        aluno.setEmail("email@hotmail.com");
+        em.flush();
+        em.clear();
+        logger.log(Level.INFO, "selecionarAlunoPorId: Aluno {0}", aluno.getNome());
+        aluno = em.find(Aluno.class, (long) 24);
+        assertEquals("email@hotmail.com", aluno.getEmail());
+    }
+
+    @Test
+    public void selecionarAlunoPorCPF_01() {
+        String jpql = "SELECT a FROM Aluno a where a.cpf = ?1";
+        Query query = em.createQuery(jpql);
+        query.setParameter(1, "456.636.524-77");
+
+        Aluno aluno = (Aluno) query.getSingleResult();
+
+        assertEquals("456.636.524-77", aluno.getCpf());
+        logger.log(Level.INFO, "selecionarAlunoPorId: Aluno {0}", aluno.toString());
+    }
+
+    @Test
+    public void selecionarAlunoPorId() {
+        Aluno aluno = em.find(Aluno.class, (long) 29);
+        assertNotNull(aluno);
+        assertEquals("MICHEL", aluno.getNome());
+        String nome = aluno.getNome();
+        assertEquals("111.688.604-90", aluno.getCpf());
+        logger.log(Level.INFO, "selecionarAlunoPorId: Aluno {0}", aluno.toString());
+    }
+
     @Test
     public void deletarAluno_01() {
-        Aluno aluno = em.find(Aluno.class, (long) 24);
+        Aluno aluno = em.find(Aluno.class, (long) 4);
         assertNotNull(aluno);
         em.remove(aluno);
         em.flush();
         em.clear();
-        aluno = em.find(Aluno.class, (long) 24);
+        aluno = em.find(Aluno.class, (long) 4);
         assertNull(aluno);
     }
 
     @Test
     public void deletarAluno_02() {
-        Aluno aluno = em.find(Aluno.class, (long) 22);
-        assertNotNull(aluno);
-        PersonalTrainer pt = new PersonalTrainer();
-        pt = em.find(PersonalTrainer.class, (long) 5);
-        pt.removeAluno(aluno);
-        
+        Aluno aluno = em.find(Aluno.class, (long) 36);
+        em.remove(aluno);
+        em.flush();
+        em.clear();
+        assertEquals(null, em.find(Aluno.class, (long) 36));
+    }
+
+    @Test
+    public void selecionarAvaliacoes() {
+        String jpql = "SELECT COUNT(a) FROM Aluno a";
+        Query query = em.createQuery(jpql);
+
+        Long alunos = (Long) query.getSingleResult();
+
+        assertTrue(alunos == 30);
     }
 }

@@ -8,9 +8,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
-import jdk.nashorn.internal.objects.NativeArray;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -18,10 +15,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author john
- */
 public class PersonalTrainerTest {
 
     private static EntityManagerFactory emf;
@@ -36,9 +29,7 @@ public class PersonalTrainerTest {
     public static void setUpClass() {
         logger = Logger.getGlobal();
         logger.setLevel(Level.INFO);
-        //logger.setLevel(Level.SEVERE);
         emf = Persistence.createEntityManagerFactory("PersonalTech_PU");
-//        emf.createEntityManager();
         DbUnitUtil.inserirDados();
     }
 
@@ -76,95 +67,157 @@ public class PersonalTrainerTest {
         }
     }
 
-    /**
-     * Test of getId method, of class Aluno.
-     */
     @Test
-    public void inserirPersonalTrainer_01() {
-
-        logger.log(Level.INFO, "Inserção do Personal id = 6");
+    public void inserirPersonalTech_01() {
         PersonalTrainer pt = new PersonalTrainer();
-
-        pt.setNome("Iron");
-        pt.setSobrenome("Man");
-        pt.setSexo("M");
-        pt.setCpf("222-222-746-22");
-        pt.setEmail("ironman@personaltech.com");
-        pt.setLogin("iron92man");
-        pt.setSenha("ironman123");
+        pt.setNome("Jubileu");
+        pt.setSobrenome("Silva");
 
         Calendar c = Calendar.getInstance();
-        c.set(Calendar.YEAR, 1992);
-        c.set(Calendar.MONTH, Calendar.AUGUST);
-        c.set(Calendar.DAY_OF_MONTH, 12);
-        pt.setDataNascimento(c.getTime());
+        c.set(Calendar.YEAR, 1990);
+        c.set(Calendar.MONTH, Calendar.JULY);
+        c.set(Calendar.DAY_OF_MONTH, 24);
 
-        pt.setTipo(TipoUsuario.PERSONAL_TRAINER);
+        pt.setDataNascimento(c.getTime());
+        pt.setCpf("210.488.974-00");
+        pt.setLogin("jubileu");
+        pt.setSenha("aA1-personal");
+        pt.setEmail("jubinha@gmail.com");
+        pt.setSexo("M");
 
         Endereco end = new Endereco();
-        end.setBairro("Cordeiro");
-        end.setCep("50000-000");
+        end.setLogradouro("Miramar");
+        end.setBairro("Miro");
+        end.setNumero(765);
+        end.setCep("123123");
         end.setCidade("Recife");
-        end.setComplemento("Aptº 101");
-        end.setEstado("Pernambuco");
-        end.setLogradouro("Avenida Caxanga");
-        end.setNumero(101);
+        end.setEstado("PE");
+
         pt.setEndereco(end);
 
         em.persist(pt);
+        em.flush();
+        pt = em.find(PersonalTrainer.class, (long) 37);
+        assertNotNull(pt);
+        
+    }
+    
+    @Test
+    public void inserirPersonalTech_03() {
+        Aluno aluno = new Aluno();
+        aluno.setNome("JONAS");
+        aluno.setSobrenome("BALAO");
+
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.YEAR, 1990);
+        c.set(Calendar.MONTH, Calendar.JULY);
+        c.set(Calendar.DAY_OF_MONTH, 24);
+
+        aluno.setDataNascimento(c.getTime());
+        aluno.setCpf("044.879.794-12");
+        aluno.setLogin("jonas1");
+        aluno.setSenha("aA1-personal");
+        aluno.setEmail("jubinha@gmail.com");
+        aluno.setSexo("M");
+
+        Endereco end = new Endereco();
+        end.setLogradouro("Miramar");
+        end.setBairro("Miro");
+        end.setNumero(765);
+        end.setCep("123123");
+        end.setCidade("Recife");
+        end.setEstado("PE");
+
+        aluno.setEndereco(end);
+
+        em.persist(aluno);
+        em.flush();
+
+        assertNotNull(aluno.getId());
+    }
+
+    @Test
+    public void inserirPersonalTech_02() {
+        PersonalTrainer pt = new PersonalTrainer();
+        pt.setNome("Julian");
+        pt.setSobrenome("Sousa");
+
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.YEAR, 1990);
+        c.set(Calendar.MONTH, Calendar.JULY);
+        c.set(Calendar.DAY_OF_MONTH, 24);
+
+        pt.setDataNascimento(c.getTime());
+        pt.setCpf("866.036.024-90");
+        pt.setLogin("julian");
+        pt.setSenha("aA1-personal");
+        pt.setEmail("jubinha@gmail.com");
+        pt.setSexo("M");
+
+        Endereco end = new Endereco();
+        end.setLogradouro("Miramar");
+        end.setBairro("Miro");
+        end.setNumero(765);
+        end.setCep("123123");
+        end.setCidade("Recife");
+        end.setEstado("PE");
+
+        pt.setEndereco(end);
+
+        em.persist(pt);
+        em.flush();
+        pt = em.find(PersonalTrainer.class, (long) 38);
+        assertNotNull(pt);
 
     }
 
     @Test
+    public void removerPersonalTech_01() {
+        PersonalTrainer pt = em.find(PersonalTrainer.class, (long) 25);
+        List<Aluno> alunos = pt.getAlunos();
+        assertNotEquals(0, alunos.size());
+        Aluno aluno = alunos.get(0);
+        em.remove(pt);
+        em.flush();
+        em.clear();
+        assertEquals(null, em.find(PersonalTrainer.class, (long) 25));
+        assertNotNull(em.find(Aluno.class, aluno.getId()));
+    }
+
+    @Test
+    public void removerPersonalTech_02() {
+        PersonalTrainer pt = em.find(PersonalTrainer.class, (long) 26);
+        em.remove(pt);
+        assertEquals(null, em.find(PersonalTrainer.class, (long) 26));
+    }
+
+    @Test
+    public void selecionarPersonalTrainerPorId_01() {
+        PersonalTrainer pt = em.find(PersonalTrainer.class, (long) 14);
+        assertNotNull(pt);
+        assertEquals("VICTOR", pt.getNome());
+        logger.log(Level.INFO, "selecionarPersonalTrainerPorId: PT {0}", pt.toString());
+    }
+    @Test
+    public void selecionarPersonalTrainerPorId_02() {
+        Usuario pt = em.find(Usuario.class, (long)13 );
+        assertNotNull(pt);
+        assertEquals("THOR", pt.getNome());
+        assertEquals("thorpp", pt.getLogin());
+        logger.log(Level.INFO, "selecionarPersonalTrainerPorId: PT {0}", pt.toString());
+    }
+
+    @Test
     public void alterarPersonalTrainerPorId() {
-        PersonalTrainer pt = em.find(PersonalTrainer.class, (long) 4);
+        PersonalTrainer pt = em.find(PersonalTrainer.class, (long) 14);
         assertNotNull(pt);
         pt.setEmail("victor123@gmail.com");
         em.flush();
         em.clear();
         logger.log(Level.INFO, "alterarPersonalPorId", pt.toString());
 
-        pt = em.find(PersonalTrainer.class, (long) 4);
-//        assertNotNull(aluno);
+        pt = em.find(PersonalTrainer.class, (long) 14);
+        assertNotNull(pt);
         assertEquals("victor123@gmail.com", pt.getEmail());
-    }
-
-    @Test
-    public void selecionarPersonalTrainerPorId() {
-        PersonalTrainer pt = em.find(PersonalTrainer.class, (long) 4);
-        assertNotNull(pt);
-        assertEquals("VICTOR", pt.getNome());
-        assertEquals("VICTOR98", pt.getLogin());
-        logger.log(Level.INFO, "selecionarPersonalTrainerPorId: PT {0}", pt.toString());
-    }
-
-    @Test
-    public void removerPersonalTrainerPorId() {
-        logger.log(Level.INFO, "Remoção do Personal id = 4");
-        PersonalTrainer pt = em.find(PersonalTrainer.class, (long) 4);
-        
-        assertNotNull(pt);
-        em.remove(pt);
-        em.flush();
-        em.clear();
-        
-        pt = em.find(PersonalTrainer.class, (long) 4);
-        assertNull(pt);
-    }
-
-    @Test
-    public void coletarAlunos_01() {
-        logger.log(Level.INFO, "Contagem dos alunos vinculados ao Personal 3");
-        PersonalTrainer pt = em.find(PersonalTrainer.class, (long) 3);
-        List<Aluno> a = pt.getAlunos();
-        assertEquals(5, a.size());
-    }
-
-//    @Test
-    public void coletarAluno_02() {
-        logger.log(Level.INFO, "Contagem dos alunos vinculados ao Personal 4");
-        PersonalTrainer pt = em.find(PersonalTrainer.class, (long) 4);
-        List<Aluno> a = pt.getAlunos();
-        assertEquals(0, a.size());
-    }
+    } 
 }
