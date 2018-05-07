@@ -160,11 +160,10 @@ public class ExercicioTest {
     @Test
     public void retonarAlunosQuePraticamExercicioX() {
         Exercicio ex = em.find(Exercicio.class, (long) 1);
-        NomeExercicio nome = NomeExercicio.BICEPS_ROSCA_LIFE;
+        NomeExercicio nome = NomeExercicio.BICEPS_BARRA_ROSCA_PRON_POLIA;
         TypedQuery<Aluno> query = em.createQuery("SELECT DISTINCT a FROM Aluno a JOIN FETCH a.exercicios xs WHERE xs.exercicio = :tipo", Aluno.class);
         query.setParameter("tipo", nome);
         List<Aluno> alunos = query.getResultList();
-        System.out.println("SIZE->"+alunos.size());
         assertEquals(alunos.size(), 4);
         assertNotNull(alunos);
     }
