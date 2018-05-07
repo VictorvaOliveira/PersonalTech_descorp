@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="8" failures="0" name="com.mycompany.personaltech.ExercicioTest" time="20.749" errors="0" skipped="0">
+<testsuite tests="9" failures="0" name="com.mycompany.personaltech.ExercicioTest" time="20.757" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/home/john/jdk1.8.0_161/jre/lib/amd64"/>
@@ -62,12 +62,13 @@
     <property name="sun.desktop" value="gnome"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="com.mycompany.personaltech.ExercicioTest" name="inserirExercicio_01" time="0.178"/>
-  <testcase classname="com.mycompany.personaltech.ExercicioTest" name="inserirExercicio_02" time="0.124"/>
-  <testcase classname="com.mycompany.personaltech.ExercicioTest" name="removerExercicio_01" time="0.044"/>
-  <testcase classname="com.mycompany.personaltech.ExercicioTest" name="removerExercicio_02" time="0.055"/>
-  <testcase classname="com.mycompany.personaltech.ExercicioTest" name="alterarExercicio_01" time="0.034"/>
+  <testcase classname="com.mycompany.personaltech.ExercicioTest" name="retonarAlunosQuePraticamExercicioX" time="0.076"/>
+  <testcase classname="com.mycompany.personaltech.ExercicioTest" name="inserirExercicio_01" time="0.047"/>
+  <testcase classname="com.mycompany.personaltech.ExercicioTest" name="removerExercicio_01" time="0.078"/>
+  <testcase classname="com.mycompany.personaltech.ExercicioTest" name="removerExercicio_02" time="0.068"/>
+  <testcase classname="com.mycompany.personaltech.ExercicioTest" name="alterarExercicio_01" time="0.043"/>
   <testcase classname="com.mycompany.personaltech.ExercicioTest" name="alterarExercicio_02" time="0.044"/>
-  <testcase classname="com.mycompany.personaltech.ExercicioTest" name="selecionarExercicio_01" time="0.004"/>
-  <testcase classname="com.mycompany.personaltech.ExercicioTest" name="selecionarExercicio_02" time="0.011"/>
+  <testcase classname="com.mycompany.personaltech.ExercicioTest" name="NamedNativeRetornaNomeAluno" time="0.006"/>
+  <testcase classname="com.mycompany.personaltech.ExercicioTest" name="selecionarExercicio_01" time="0.005"/>
+  <testcase classname="com.mycompany.personaltech.ExercicioTest" name="selecionarExercicio_02" time="0.039"/>
 </testsuite>

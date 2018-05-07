@@ -88,9 +88,9 @@ public class AvaliacaoTest {
         aluno.addAvaliacao(av);
         aluno.addAvaliacao(av2);
         em.flush();
-        
+
         Aluno aluno2 = em.find(Aluno.class, (long) 3);
-        
+
         assertEquals(aluno.getAvaliacoes().size(), 2);
     }
 
@@ -125,7 +125,7 @@ public class AvaliacaoTest {
     public void removerAvaliacaoPorAluno_01() {
         // Remover uma avaliação via aluno
         Aluno aluno = em.find(Aluno.class, (long) 5); // RICARDO
-        aluno.removeAvaliacao(aluno.getAvaliacoes().get(0));
+        aluno.removeAvaliacao(aluno.getAvaliacoes().get(0)); // remove o primeiro exercicio da lista
         em.persist(aluno);
         aluno = em.find(Aluno.class, (long) 5);
         int size = aluno.getAvaliacoes().size();
@@ -133,8 +133,8 @@ public class AvaliacaoTest {
     }
 
     @Test
-    public void removerAvaliacaoPorAluno_02() {
-        // Ao remover aluno, avaliações devem ser deletadas
+    public void removerAlunoCascadeAvaliacoes_02() {
+        // Ao remover aluno, avaliações deste devem ser removidas
         Aluno aluno = em.find(Aluno.class, (long) 15);
         em.remove(aluno);
         Avaliacao avaliacao = em.find(Avaliacao.class, (long) 1);
@@ -150,49 +150,47 @@ public class AvaliacaoTest {
 
         assertNotNull(avaliacao);
     }
-    
+
     @Test
-    public void UpdateAvaliacaoDate_01() {
+    public void JPQLupdateAvaliacaoDate_01() {
         Query query = em.createQuery("UPDATE Avaliacao a SET a.dataAvaliacao = :strNewDate WHERE a.dataAvaliacao = :strOldDate");
-        
-        Date newDate = setNewDate(1993, 7, 6); //1993-AUG-16 *7 is August because the month index is 0 based
+
+        Date newDate = setDate(1993, 7, 6); //1993-AUG-16 *7 is August because the month index is 0 based
         query.setParameter("strNewDate", newDate);
-        
-        Date oldDate = setOldNewDate(1980, 10, 2); // 1980-NOV-02
+
+        Date oldDate = setDate(1980, 10, 2); // 1980-NOV-02
         query.setParameter("strOldDate", oldDate);
-        
+
         query.executeUpdate();
-        
-//        Precisa ou não?
-//        commitTransaction();
-//        beginTransaction();
-        
+
         Query newQuery = em.createQuery("SELECT av.dataAvaliacao FROM Avaliacao av WHERE av.id = :idAval");
         newQuery.setParameter("idAval", 3);
         Date resultDate = (Date) newQuery.getSingleResult();
-        
+
         assertEquals(newDate.getYear(), resultDate.getYear());
     }
-    
-    
-    
-    
+
+    @Test
+    public void JPQLdeleteAvaliacaoDate_01() {
+        Query query = em.createQuery("DELETE FROM Avaliacao a WHERE a.id = :id AND a.dataAvaliacao = :date");
+
+        Calendar c = Calendar.getInstance(); // CURRENT DATE
+        c.setTime(new Date());
+        Date date = c.getTime();
+        query.setParameter("date", date);
+        query.setParameter("id", 7);
+        query.executeUpdate();
+        
+        assertNull(em.find(Avaliacao.class, (long) 7));
+    }
+
     // Métodos Auxiliares
-    private Date setNewDate(int ano, int mes, int dia) {
+    private Date setDate(int ano, int mes, int dia) {
         Calendar c = Calendar.getInstance();
         c.set(Calendar.YEAR, ano);
         c.set(Calendar.MONTH, mes);
         c.set(Calendar.DAY_OF_MONTH, dia);
-        Date newDate = c.getTime();
-        return newDate;
-    }
-
-    private Date setOldNewDate(int ano, int mes, int dia) {
-        Calendar c1 = Calendar.getInstance();
-        c1.set(Calendar.YEAR, ano);
-        c1.set(Calendar.MONTH, mes);
-        c1.set(Calendar.DAY_OF_MONTH, dia);
-        Date oldDate = c1.getTime();
-        return oldDate;
+        Date date = c.getTime();
+        return date;
     }
 }

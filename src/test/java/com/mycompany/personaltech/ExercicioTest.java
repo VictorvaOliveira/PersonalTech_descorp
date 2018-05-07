@@ -8,6 +8,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -80,60 +82,26 @@ public class ExercicioTest {
     }
 
     @Test
-    public void inserirExercicio_02() {
-        Aluno aluno = new Aluno();
-        aluno.setNome("CUCA");
-        aluno.setSobrenome("RECA");
-        aluno.setCpf("020.161.884-21");
-        aluno.setLogin("cucaaa");
-        aluno.setSenha("aA1-personal");
-        aluno.setEmail("KELLY@gmail");
-        aluno.setSexo("M");
-
-        Calendar c = Calendar.getInstance();
-        c.set(Calendar.YEAR, 2000);
-        c.set(Calendar.MONTH, Calendar.AUGUST);
-        c.set(Calendar.DAY_OF_MONTH, 27);
-        aluno.setDataNascimento(c.getTime());
-
-        Endereco end = new Endereco();
-        end.setLogradouro("RUA DO CORDEIRO");
-        end.setBairro("CORDEIRO");
-        end.setNumero(666);
-        end.setCep("123456-88");
-        end.setCidade("RECIFE");
-        end.setEstado("PERNAMBUCO");
-        aluno.setEndereco(end);
-
-        Exercicio ex = new Exercicio();
-        ex.setExercicio(NomeExercicio.BICEPS_ROSCA_LIFE);
-        ex.setTipo(TipoExercicio.BICEPS);
-        aluno.addExercicio(ex);
-
-        em.persist(aluno);
-        em.flush();
-        assertNotNull(em.find(Exercicio.class, (long) ex.getId()));
-    }
-
-    @Test
     public void selecionarExercicio_01() {
         Exercicio ex = em.find(Exercicio.class, (long) 5);
-        assertNotNull(ex);
+        assertEquals(ex.getTipo(), TipoExercicio.PEITORAL);
         logger.log(Level.INFO, "selecionarExercicio: Exercicio {0}", ex.toString());
     }
 
     @Test
     public void selecionarExercicio_02() {
-        Aluno al = em.find(Aluno.class, (long) 21);
+        Aluno al = em.find(Aluno.class, (long)17);
         List<Exercicio> ex = al.getExercicios();
         assertNotNull(ex);
-        assertEquals(ex.size(), 4);
-        logger.log(Level.INFO, "selecionarExercicio: Exercicio {0}", ex.toString());
+        for (Exercicio exercicio : ex) {
+            System.out.println(exercicio.getExercicio());
+        }
+        assertEquals(ex.size(), 2);
     }
 
     @Test
     public void alterarExercicio_01() {
-        Exercicio ex = em.find(Exercicio.class, (long) 14);
+        Exercicio ex = em.find(Exercicio.class, (long) 13);
         assertNotNull(ex);
         ex.setExercicio(NomeExercicio.ABD_INFRA_PRANCHA_ABD);
         ex.setTipo(TipoExercicio.ABDOMINAIS);
@@ -166,7 +134,7 @@ public class ExercicioTest {
 
     @Test
     public void removerExercicio_02() {
-        Aluno al = em.find(Aluno.class, (long) 15);
+        Aluno al = em.find(Aluno.class, (long) 16);
         Exercicio ex = al.getExercicios().get(0);
         assertNotNull(ex);
         if (ex != null) {
@@ -174,8 +142,30 @@ public class ExercicioTest {
             em.persist(al);
             em.flush();
         }
-        al = em.find(Aluno.class, (long) 15);
+        al = em.find(Aluno.class, (long) 16);
         int size = al.getExercicios().size();
-        assertEquals(1, size);
+        assertEquals(2, size);
+    }
+    
+    @Test
+    public void NamedNativeRetornaNomeAluno() {
+        Query query = em.createNamedQuery("Exercicio.RetornaTipoExercicio");
+        query.setParameter(1, 12);
+        List result = query.getResultList();
+        Object[] item = (Object[]) result.get(0);
+        assertEquals(1, result.size());
+        assertEquals("BIANCA", item[1]);
+    }
+    
+    @Test
+    public void retonarAlunosQuePraticamExercicioX() {
+        Exercicio ex = em.find(Exercicio.class, (long) 1);
+        NomeExercicio nome = NomeExercicio.BICEPS_ROSCA_LIFE;
+        TypedQuery<Aluno> query = em.createQuery("SELECT DISTINCT a FROM Aluno a JOIN FETCH a.exercicios xs WHERE xs.exercicio = :tipo", Aluno.class);
+        query.setParameter("tipo", nome);
+        List<Aluno> alunos = query.getResultList();
+        System.out.println("SIZE->"+alunos.size());
+        assertEquals(alunos.size(), 4);
+        assertNotNull(alunos);
     }
 }

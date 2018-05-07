@@ -2,16 +2,39 @@ package com.mycompany.personaltech;
 
 import java.io.Serializable;
 import javax.persistence.Column;
+import javax.persistence.ColumnResult;
 import javax.persistence.Entity;
+import javax.persistence.EntityResult;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
+import javax.persistence.SqlResultSetMapping;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "TB_EXERCICIO")
+@NamedNativeQueries(
+        {
+            @NamedNativeQuery(
+                    name = "Exercicio.RetornaTipoExercicio",
+                    query = "SELECT ex.ID, ex.TXT_NOME_EXERCICIO, ex.TXT_TIPO_EXERCICIO, a.TXT_NOME mapa FROM TB_EXERCICIO ex JOIN TB_USUARIO a ON ex.ID_ALUNO = a.ID WHERE ex.ID = ?1",
+                    resultSetMapping = "mapping"
+            )
+        }
+)
+@SqlResultSetMapping(
+name = "mapping",
+        entities = {
+            @EntityResult(entityClass = Exercicio.class)
+        },
+        columns = {
+            @ColumnResult(name = "mapa", type = String.class)
+        }
+)
 public class Exercicio implements Serializable {
     
     @Id

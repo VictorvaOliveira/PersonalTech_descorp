@@ -118,15 +118,15 @@ public class AlunoTest {
         query.setParameter("ex", TipoExercicio.BICEPS);
         List<Aluno> alunos = query.getResultList();
         System.out.println(alunos.size());
-        assertEquals(alunos.size(), 4);
+        assertEquals(alunos.size(), 6);
     }
 
     @Test
     public void JPQLretornaTotalDoTipoDeExercico() {
-        TypedQuery<Long> query = em.createQuery("SELECT count(e) FROM Exercicio e WHERE e.tipo = ?1", Long.class);
+        TypedQuery<Long> query = em.createQuery("SELECT COUNT(e) FROM Exercicio e WHERE e.tipo = ?1", Long.class);
         query.setParameter(1, TipoExercicio.PEITORAL);
         long total = query.getSingleResult();
-        assertEquals(total, (long) 8);
+        assertEquals(total, (long) 11);
     }
 
     @Test
@@ -143,7 +143,6 @@ public class AlunoTest {
         query.setParameter(1, "1950-12-02");//id av = 6
         Avaliacao avaliacao = (Avaliacao) query.getSingleResult();
         assertEquals("THOR", avaliacao.getNome_personal());
-        
     }
     
     
@@ -152,7 +151,8 @@ public class AlunoTest {
         Query query = em.createNamedQuery("Usuario.RetornaNome");
         String nomeAluno = (String) query.getSingleResult();
         System.out.println(nomeAluno);
-        assertNull(null);
+        // assertNull(null);
+        //fazer um assert decente
     }
 
     @Test
