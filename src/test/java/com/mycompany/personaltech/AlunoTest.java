@@ -178,7 +178,7 @@ public class AlunoTest {
         end.setNumero(666);
         end.setCep("123456-88");
         end.setCidade("RECIFE");
-        end.setEstado("PERNAMBUCO");
+        end.setEstado("PE");
 
         aluno.setEndereco(end);
 
@@ -218,7 +218,7 @@ public class AlunoTest {
         end.setNumero(666);
         end.setCep("123456-88");
         end.setCidade("RECIFE");
-        end.setEstado("PERNAMBUCO");
+        end.setEstado("PE");
 
         aluno.setEndereco(end);
 

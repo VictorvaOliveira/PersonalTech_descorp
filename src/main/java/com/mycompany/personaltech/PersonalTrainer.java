@@ -16,6 +16,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name = "TB_PERSONALTRAINER")
@@ -23,13 +25,14 @@ import javax.persistence.Table;
 @PrimaryKeyJoinColumn(name = "ID_USUARIO", referencedColumnName = "ID")
 public class PersonalTrainer extends Usuario implements Serializable {
     
+    @Size(max = 5)
     @ElementCollection
     @CollectionTable(name = "TB_TELEFONE_PT",
             joinColumns = @JoinColumn(name = "ID_PERSONALTRAINER", nullable = false))
     @Column(name = "TXT_NUM_TELEFONE", nullable = false, length = 20)
     private Collection<String> telefones;
-
-
+    
+    @Size(max = 100)
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "ID_PT",referencedColumnName = "ID_USUARIO")
     private List<Aluno> alunos;
@@ -60,7 +63,9 @@ public class PersonalTrainer extends Usuario implements Serializable {
     }
 
     public void setTelefones(Collection<String> telefones) {
-        this.telefones = telefones;
+        for (String telefone : telefones) {
+            this.telefones.add(telefone);
+        }
     }
 
     public void setAlunos(List<Aluno> alunos) {
@@ -75,7 +80,7 @@ public class PersonalTrainer extends Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "TOSTRING PERSONAL";
+        return "com.mycompany.personaltech.Exercicio[ id=" + id + " ]";
     }
 
 }

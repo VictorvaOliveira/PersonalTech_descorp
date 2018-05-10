@@ -18,6 +18,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "TB_ALUNO")
@@ -37,17 +38,19 @@ import javax.persistence.Table;
 )
 public class Aluno extends Usuario implements Serializable {
 
+    @Size(max = 5)
     @ElementCollection
     @CollectionTable(name = "TB_TELEFONE_ALUNO",
             joinColumns = @JoinColumn(name = "ID_ALUNO", nullable = false))
     @Column(name = "TXT_NUM_TELEFONE", nullable = false, length = 20)
     private Collection<String> telefones;
-
+    
+    @Size(max = 10)
     @OneToMany(fetch = FetchType.LAZY,
             cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "ID_ALUNO", referencedColumnName = "ID_USUARIO")
     private List<Exercicio> exercicios;
-
+    
     @OneToMany(mappedBy = "aluno", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
     private List<Avaliacao> avaliacoes;
@@ -82,11 +85,16 @@ public class Aluno extends Usuario implements Serializable {
     }
 
     public void setTelefones(Collection<String> telefones) {
-        this.telefones = telefones;
+        for (String telefone : telefones) {
+            this.telefones.add(telefone);
+        }
     }
 
     public void setExercicios(List<Exercicio> exercicios) {
-        this.exercicios = exercicios;//errado! corrigir!
+        // corrigido
+        for (Exercicio exercicio : exercicios) {
+            exercicios.add(exercicio);
+        }
     }
 
     public List<Avaliacao> getAvaliacoes() {
@@ -94,11 +102,10 @@ public class Aluno extends Usuario implements Serializable {
     }
 
     public void setAvaliacoes(List<Avaliacao> avaliacoes) {
-        this.avaliacoes = avaliacoes;//errado! corrigir
-        //para cada avaliação da lista recebida, invocar add para uma única avaliação
-        //for (Avaliacao avaliacao : avaliacoes) {
-        //    addAvaliacao(avaliacao);
-        //}
+        // corrigido
+        for (Avaliacao avaliacao : avaliacoes) {
+            addAvaliacao(avaliacao);
+        }
     }
 
     public void addAvaliacao(Avaliacao avaliacao) {
@@ -118,7 +125,7 @@ public class Aluno extends Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "TOSTRING ALUNO";
+        return "com.mycompany.personaltech.Aluno[ id=" + id + " ]";
     }
 
 }

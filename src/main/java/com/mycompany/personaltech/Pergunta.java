@@ -10,10 +10,10 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name = "TB_PERGUNTA")
@@ -23,13 +23,16 @@ public class Pergunta implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    
+    @NotNull
+    @NotBlank
     @Column(name = "TXT_PERGUNTA", nullable = false, length = 2000)
     private String pergunta;
-
+    
+    @NotNull
+    @NotBlank
     @OneToMany(mappedBy ="pergunta" ,fetch = FetchType.LAZY,
             cascade = CascadeType.ALL, orphanRemoval = false)
-//    @JoinColumn(name = "ID_PG", referencedColumnName = "ID")
     private List<RespostasAvaliacao> respostas;
 
     void addResposta(RespostasAvaliacao resposta) {

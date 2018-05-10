@@ -52,7 +52,7 @@ public abstract class Usuario implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    protected Long id;
 
     @NotBlank
     @NotNull
@@ -69,7 +69,7 @@ public abstract class Usuario implements Serializable {
     private String cpf;
     @NotBlank
     @NotNull
-    @Size(max = 30)
+    @Size(min = 6, max = 30)
     @Pattern(
             regexp = "((?=.*\\p{Lower}).{6,30})",
             message = "ERRO DE LOGIN"
@@ -78,6 +78,9 @@ public abstract class Usuario implements Serializable {
     private String login;
     
     // mensagem deve vir de um arquivo de configuração, olhar exemplo do github e aula
+    @NotBlank
+    @NotNull
+    @Size(min = 6, max = 20)
     @Pattern(
             regexp = "((?=.*\\p{Digit})(?=.*\\p{Lower})(?=.*\\p{Upper})(?=.*\\p{Punct}).{6,20})",
             message = "ERRO DE SENHA"
@@ -91,8 +94,10 @@ public abstract class Usuario implements Serializable {
 
     @NotNull
     @NotBlank
+    @Size(min = 1, max = 1)
     @Column(name = "TXT_SEXO", length = 1, nullable = false)
     private String sexo;
+    
     @Past
     @Temporal(TemporalType.DATE)
     @Column(name = "DT_NASCIMENTO", nullable = true)
