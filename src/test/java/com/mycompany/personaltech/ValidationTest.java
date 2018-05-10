@@ -84,7 +84,7 @@ public class ValidationTest {
         }
     }
 
-//    @Test
+    @Test
     public void Test_01() {
         Aluno aluno = null;
         try {

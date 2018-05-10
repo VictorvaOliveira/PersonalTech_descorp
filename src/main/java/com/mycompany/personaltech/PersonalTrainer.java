@@ -63,7 +63,9 @@ public class PersonalTrainer extends Usuario implements Serializable {
     }
 
     public void setTelefones(Collection<String> telefones) {
-        this.telefones = telefones;
+        for (String telefone : telefones) {
+            this.telefones.add(telefone);
+        }
     }
 
     public void setAlunos(List<Aluno> alunos) {
