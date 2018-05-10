@@ -1,5 +1,6 @@
 package com.mycompany.personaltech;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -136,7 +137,7 @@ public class AlunoTest {
         System.out.println(nomeAluno);
         assertNull(null);
     }
-    
+
     @Test
     public void NativeRetornaEntidadeAvaliacao() {
         Query query = em.createNativeQuery("SELECT ID, DT_AVALIACAO, ID_ALUNO, TXT_NOME_PT  FROM TB_AVALIACAO WHERE DT_AVALIACAO = ?1", Avaliacao.class);
@@ -144,17 +145,42 @@ public class AlunoTest {
         Avaliacao avaliacao = (Avaliacao) query.getSingleResult();
         assertEquals("THOR", avaliacao.getNome_personal());
     }
-    
-    
+
     @Test
-    public void NamedNativeRetornaNomeAluno() {
+    public void NamedNativeRetornaNomeUsuario() {
         Query query = em.createNamedQuery("Usuario.RetornaNome");
         String nomeAluno = (String) query.getSingleResult();
-        System.out.println(nomeAluno);
-        // assertNull(null);
-        //fazer um assert decente
+        assertEquals("JOAO", nomeAluno);
     }
 
+    @Test
+    public void JPQLretornaDatasMinEMax() {
+        Query query = em.createQuery("SELECT MIN(u.dataNascimento), MAX(u.dataNascimento) FROM Usuario u");
+        Object[] resultado = (Object[]) query.getSingleResult();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        String menorData = dateFormat.format((Date) resultado[0]);
+        String maiorData = dateFormat.format((Date) resultado[1]);
+
+        assertEquals("12-09-1968", menorData);
+        assertEquals("17-09-2000", maiorData);
+
+    }
+
+    @Test
+    public void NativeGroupBy() {
+        Query query = em.createNativeQuery("SELECT TB_USUARIO.TXT_NOME, COUNT(TB_ALUNO.ID_USUARIO) FROM TB_ALUNO INNER JOIN TB_USUARIO ON TB_ALUNO.ID_PT = TB_USUARIO.ID GROUP BY TXT_NOME ORDER BY COUNT(TB_ALUNO.ID_USUARIO) DESC");
+        List lista = query.getResultList();
+        for (int i = 0; i < lista.size(); i++) {
+            Object[] item = (Object[]) lista.get(i);
+            System.out.println(item[0] + " : " + item[1]);
+            assertEquals(2, item.length);
+        }
+        Object[] item = (Object[]) lista.get(0);
+        assertEquals(item[0], "VICTOR");
+        assertEquals(item[1], (long) 6);
+    }
+
+    // 1ª apresentação
     @Test
     public void inserirAluno_01() {
         Aluno aluno = new Aluno();

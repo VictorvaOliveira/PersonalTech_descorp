@@ -80,7 +80,7 @@ public class ValidationTest {
             if (et.isActive()) {
                 et.rollback();
             }
-            fail(ex.getMessage());
+//            fail(ex.getMessage());
         }
     }
 
@@ -91,11 +91,11 @@ public class ValidationTest {
             aluno = new Aluno();
             aluno.setNome("Serj");
             aluno.setSobrenome(""); // não pode ser Blank
-            aluno.setCpf("123.123.123-12");// CPF Inválido
-            aluno.setLogin("Serj@Tankian");
-            aluno.setSenha("aA1-personal");
-            aluno.setEmail("serj@gmail.com");
-            aluno.setSexo("M");
+            aluno.setCpf("123.123.123-12"); // CPF Inválido
+            aluno.setLogin("SERJTANKIAN"); // login inválido
+            aluno.setSenha("aA1personal"); // senha inválida
+            aluno.setEmail("serj"); // email inválido
+            aluno.setSexo(""); // inválido (reprova em @NotNull e @NotBlank)
 
             Calendar c = Calendar.getInstance();
             c.set(Calendar.YEAR, 2019); // É uma data do futuro
@@ -126,7 +126,7 @@ public class ValidationTest {
                     Logger.getGlobal().log(Level.INFO, "{0}.{1}: {2}\n\n", new Object[]{violation.getRootBeanClass(), violation.getPropertyPath(), violation.getMessage()});
                 }
             }
-            assertEquals(3, constraintViolations.size());
+            assertEquals(8, constraintViolations.size());
             assertNull(aluno.getId());
         }
     }
