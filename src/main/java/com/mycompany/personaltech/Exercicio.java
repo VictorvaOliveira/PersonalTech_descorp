@@ -14,6 +14,8 @@ import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
 import javax.persistence.SqlResultSetMapping;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "TB_EXERCICIO")
@@ -27,7 +29,7 @@ import javax.persistence.Table;
         }
 )
 @SqlResultSetMapping(
-name = "mapping",
+        name = "mapping",
         entities = {
             @EntityResult(entityClass = Exercicio.class)
         },
@@ -36,16 +38,19 @@ name = "mapping",
         }
 )
 public class Exercicio implements Serializable {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
+    @NotNull
     @Enumerated(EnumType.STRING)
-    @Column(name = "TXT_TIPO_EXERCICIO", length = 20, nullable = true)
+    @Column(name = "TXT_TIPO_EXERCICIO", length = 20, nullable = false)
     private TipoExercicio tipo;
+    
+    @NotNull
     @Enumerated(EnumType.STRING)
-    @Column(name = "TXT_NOME_EXERCICIO", length = 50, nullable = true)
+    @Column(name = "TXT_NOME_EXERCICIO", length = 50, nullable = false)
     private NomeExercicio exercicio;
 
     public Long getId() {
@@ -95,5 +100,5 @@ public class Exercicio implements Serializable {
     @Override
     public String toString() {
         return "com.mycompany.personaltech.Exercicio[ id=" + id + " ]";
-    }    
+    }
 }

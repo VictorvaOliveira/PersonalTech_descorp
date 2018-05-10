@@ -15,6 +15,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.NotBlank;
 
 /**
  *
@@ -28,14 +30,18 @@ public class RespostasAvaliacao implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(name = "TXT_RESP_ALUNO", nullable = true, length = 1000)
+    
+    @NotNull
+    @NotBlank
+    @Column(name = "TXT_RESP_ALUNO", nullable = false, length = 1000)
     private String txt_resposta;
-
+    
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "ID_AV", referencedColumnName = "ID")
     private Avaliacao avaliacao;
-
+    
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "ID_PERG", referencedColumnName = "ID")
     private Pergunta pergunta;

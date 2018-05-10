@@ -18,6 +18,9 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name = "TB_AVALIACAO")
@@ -27,22 +30,25 @@ public class Avaliacao implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
-    
+
+    // usando @Prepersist
     @Temporal(TemporalType.DATE)
     @Column(name = "DT_AVALIACAO", nullable = false, unique = false)
     private Date dataAvaliacao;
 
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "ID_ALUNO", referencedColumnName = "ID")
     private Aluno aluno;
 
+    @NotNull
+    @NotBlank
+    @Size(max = 50)
     @Column(name = "TXT_NOME_PT", length = 50, nullable = false)
     private String nome_personal;
-
-    @OneToMany(mappedBy = "avaliacao" ,fetch = FetchType.LAZY,
+    
+    @OneToMany(mappedBy = "avaliacao", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL, orphanRemoval = false)
-//    @JoinColumn(name = "ID_AV", referencedColumnName = "ID")
     private List<RespostasAvaliacao> respostas;
 
     void addResposta(RespostasAvaliacao resposta) {
@@ -58,6 +64,16 @@ public class Avaliacao implements Serializable {
             return;
         }
         respostas.remove(resposta);
+    }
+
+    public List<RespostasAvaliacao> getRespostas() {
+        return respostas;
+    }
+
+    public void setRespostas(List<RespostasAvaliacao> respostas) {
+        for (RespostasAvaliacao resposta : respostas) {
+            this.respostas.add(resposta);
+        }
     }
 
     public Long getId() {
@@ -91,7 +107,7 @@ public class Avaliacao implements Serializable {
     public void setDataAvaliacao(Date dataAvaliacao) {
         this.dataAvaliacao = dataAvaliacao;
     }
-    
+
     @PrePersist
     private void setDataAvaliacao() {
         setDataAvaliacao(new Date());
