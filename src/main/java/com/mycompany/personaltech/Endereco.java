@@ -49,7 +49,6 @@ public class Endereco implements Serializable {
     private String cidade;
     
     @NotBlank
-    @ValidaEstado
     @Size(min = 2, max = 2)
     @Column(name = "END_TXT_ESTADO", length = 2, nullable = false)
     private String estado;

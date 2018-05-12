@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="9" failures="0" name="com.mycompany.personaltech.AlunoTest" time="23.821" errors="0" skipped="0">
+<testsuite tests="9" failures="0" name="com.mycompany.personaltech.AlunoTest" time="27.84" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/home/john/jdk1.8.0_161/jre/lib/amd64"/>
@@ -62,13 +62,13 @@
     <property name="sun.desktop" value="gnome"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="com.mycompany.personaltech.AlunoTest" name="inserirAluno_01" time="0.623"/>
-  <testcase classname="com.mycompany.personaltech.AlunoTest" name="inserirAluno_02" time="0.134"/>
-  <testcase classname="com.mycompany.personaltech.AlunoTest" name="selecionarAlunoPorId" time="0.019"/>
-  <testcase classname="com.mycompany.personaltech.AlunoTest" name="atualizarAluno_01" time="0.059"/>
-  <testcase classname="com.mycompany.personaltech.AlunoTest" name="atualizarAluno_02" time="0.075"/>
-  <testcase classname="com.mycompany.personaltech.AlunoTest" name="selecionarAlunoPorCPF_01" time="0.018"/>
-  <testcase classname="com.mycompany.personaltech.AlunoTest" name="deletarAluno_01" time="0.181"/>
-  <testcase classname="com.mycompany.personaltech.AlunoTest" name="deletarAluno_02" time="0.061"/>
-  <testcase classname="com.mycompany.personaltech.AlunoTest" name="selecionarAvaliacoes" time="0.013"/>
+  <testcase classname="com.mycompany.personaltech.AlunoTest" name="inserirAluno_01" time="0.588"/>
+  <testcase classname="com.mycompany.personaltech.AlunoTest" name="inserirAluno_02" time="0.284"/>
+  <testcase classname="com.mycompany.personaltech.AlunoTest" name="selecionarAlunoPorId" time="0.059"/>
+  <testcase classname="com.mycompany.personaltech.AlunoTest" name="atualizarAluno_01" time="0.094"/>
+  <testcase classname="com.mycompany.personaltech.AlunoTest" name="atualizarAluno_02" time="0.165"/>
+  <testcase classname="com.mycompany.personaltech.AlunoTest" name="selecionarAlunoPorCPF_01" time="0.019"/>
+  <testcase classname="com.mycompany.personaltech.AlunoTest" name="deletarAluno_01" time="0.216"/>
+  <testcase classname="com.mycompany.personaltech.AlunoTest" name="deletarAluno_02" time="0.077"/>
+  <testcase classname="com.mycompany.personaltech.AlunoTest" name="selecionarAvaliacoes" time="0.014"/>
 </testsuite>

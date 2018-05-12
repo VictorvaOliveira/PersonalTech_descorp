@@ -72,7 +72,7 @@ public abstract class Usuario implements Serializable {
     @Size(min = 6, max = 30)
     @Pattern(
             regexp = "((?=.*\\p{Lower}).{6,30})",
-            message = "ERRO DE LOGIN"
+            message = "{com.mycompany.personaltech.Usuario.login}"
     )
     @Column(name = "TXT_LOGIN", length = 30, unique = true, nullable = false)
     private String login;
@@ -83,7 +83,7 @@ public abstract class Usuario implements Serializable {
     @Size(min = 6, max = 20)
     @Pattern(
             regexp = "((?=.*\\p{Digit})(?=.*\\p{Lower})(?=.*\\p{Upper})(?=.*\\p{Punct}).{6,20})",
-            message = "ERRO DE SENHA"
+            message = "{com.mycompany.personaltech.Usuario.senha}"
     )
     @Column(name = "TXT_SENHA", length = 20, nullable = false)
     private String senha;
