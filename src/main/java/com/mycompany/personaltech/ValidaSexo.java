@@ -19,10 +19,10 @@ import javax.validation.Payload;
 
 @Target( {ElementType.FIELD, ElementType.METHOD, ElementType.ANNOTATION_TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = ValidadorEstado.class)
+@Constraint(validatedBy = ValidadorSexo.class)
 @Documented
-public @interface ValidaEstado {
-    String message() default "{src.main.java.com.mycompany.Endereco.estado}";
+public @interface ValidaSexo {
+    String message() default "{com.mycompany.personaltech.Aluno.sexo}";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

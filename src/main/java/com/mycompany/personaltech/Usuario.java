@@ -43,7 +43,7 @@ import org.hibernate.validator.constraints.br.CPF;
         {
             @NamedNativeQuery(
                     name = "Usuario.RetornaNome",
-                    query = "SELECT TXT_NOME FROM TB_USUARIO WHERE ID = 4"
+                    query = "SELECT TXT_NOME FROM TB_USUARIO WHERE ID = ?1"
             )
         }
 )
@@ -72,7 +72,7 @@ public abstract class Usuario implements Serializable {
     @Size(min = 6, max = 30)
     @Pattern(
             regexp = "((?=.*\\p{Lower}).{6,30})",
-            message = "ERRO DE LOGIN"
+            message = "{com.mycompany.personaltech.Usuario.login}"
     )
     @Column(name = "TXT_LOGIN", length = 30, unique = true, nullable = false)
     private String login;
@@ -83,7 +83,7 @@ public abstract class Usuario implements Serializable {
     @Size(min = 6, max = 20)
     @Pattern(
             regexp = "((?=.*\\p{Digit})(?=.*\\p{Lower})(?=.*\\p{Upper})(?=.*\\p{Punct}).{6,20})",
-            message = "ERRO DE SENHA"
+            message = "{com.mycompany.personaltech.Usuario.senha}"
     )
     @Column(name = "TXT_SENHA", length = 20, nullable = false)
     private String senha;
@@ -92,8 +92,8 @@ public abstract class Usuario implements Serializable {
     @Column(name = "TXT_EMAIL", length = 50, nullable = false)
     private String email;
 
-    @NotNull
     @NotBlank
+    @ValidaSexo
     @Size(min = 1, max = 1)
     @Column(name = "TXT_SEXO", length = 1, nullable = false)
     private String sexo;

@@ -1,5 +1,6 @@
 package com.mycompany.personaltech;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -70,91 +71,7 @@ public class AlunoTest {
         }
     }
 
-    @Test
-    public void JPQLretornaAlunosComInicial_J() {
-        TypedQuery<Aluno> query = em.createQuery("SELECT a FROM Aluno a WHERE a.nome LIKE :nome ORDER BY a.id DESC", Aluno.class);
-        query.setParameter("nome", "j%");
-        List<Aluno> alunos = query.getResultList();
-        for (Aluno aluno : alunos) {
-            assertEquals("J", aluno.getNome().substring(0, 1).toUpperCase());
-        }
-        if (alunos.isEmpty()) {
-            assertEquals(0, alunos.size());
-        }
-    }
-
-    @Test
-    public void NQretornaAlunosComInicial_J() {
-        TypedQuery<Aluno> query = em.createNamedQuery("Aluno.PorNome", Aluno.class);
-        query.setParameter("nome", "j%");
-        List<Aluno> alunos = query.getResultList();
-        for (Aluno aluno : alunos) {
-            assertEquals("J", aluno.getNome().substring(0, 1).toUpperCase());
-        }
-        if (alunos.isEmpty()) {
-            assertEquals(0, alunos.size());
-        }
-    }
-
-    @Test
-    public void JPQLretornaAlunosQueTemExercicios() {
-        TypedQuery<Aluno> query = em.createQuery("SELECT a FROM Aluno a WHERE a.exercicios IS NOT EMPTY", Aluno.class);
-        List<Aluno> alunos = query.getResultList();
-        assertNotEquals(alunos.size(), 0);
-    }
-
-    @Test
-    public void JPQLexistenciaDeEntidadeEmColecao() {
-        Exercicio ex = em.find(Exercicio.class, (long) 1);
-        TypedQuery<Aluno> query = em.createQuery("SELECT a FROM Aluno a JOIN FETCH a.exercicios xs WHERE :ex MEMBER OF a.exercicios", Aluno.class);
-        query.setParameter("ex", ex);
-        List<Aluno> alunos = query.getResultList();
-        assertNotNull(alunos);
-    }
-
-    @Test
-    public void NQretornaAlunoPorTipoDeExercicio() {
-        TypedQuery<Aluno> query = em.createNamedQuery("Aluno.PorTipoDeExercicio", Aluno.class);
-        query.setParameter("ex", TipoExercicio.BICEPS);
-        List<Aluno> alunos = query.getResultList();
-        System.out.println(alunos.size());
-        assertEquals(alunos.size(), 6);
-    }
-
-    @Test
-    public void JPQLretornaTotalDoTipoDeExercico() {
-        TypedQuery<Long> query = em.createQuery("SELECT COUNT(e) FROM Exercicio e WHERE e.tipo = ?1", Long.class);
-        query.setParameter(1, TipoExercicio.PEITORAL);
-        long total = query.getSingleResult();
-        assertEquals(total, (long) 11);
-    }
-
-    @Test
-    public void NativeRetornaNomeAluno() {
-        Query query = em.createNativeQuery("SELECT TXT_NOME FROM TB_USUARIO WHERE ID = 4");
-        String nomeAluno = (String) query.getSingleResult();
-        System.out.println(nomeAluno);
-        assertNull(null);
-    }
-    
-    @Test
-    public void NativeRetornaEntidadeAvaliacao() {
-        Query query = em.createNativeQuery("SELECT ID, DT_AVALIACAO, ID_ALUNO, TXT_NOME_PT  FROM TB_AVALIACAO WHERE DT_AVALIACAO = ?1", Avaliacao.class);
-        query.setParameter(1, "1950-12-02");//id av = 6
-        Avaliacao avaliacao = (Avaliacao) query.getSingleResult();
-        assertEquals("THOR", avaliacao.getNome_personal());
-    }
-    
-    
-    @Test
-    public void NamedNativeRetornaNomeAluno() {
-        Query query = em.createNamedQuery("Usuario.RetornaNome");
-        String nomeAluno = (String) query.getSingleResult();
-        System.out.println(nomeAluno);
-        // assertNull(null);
-        //fazer um assert decente
-    }
-
+    // 1ª apresentação
     @Test
     public void inserirAluno_01() {
         Aluno aluno = new Aluno();

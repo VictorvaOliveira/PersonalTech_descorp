@@ -146,25 +146,4 @@ public class ExercicioTest {
         int size = al.getExercicios().size();
         assertEquals(2, size);
     }
-    
-    @Test
-    public void NamedNativeRetornaNomeAluno() {
-        Query query = em.createNamedQuery("Exercicio.RetornaTipoExercicio");
-        query.setParameter(1, 12);
-        List result = query.getResultList();
-        Object[] item = (Object[]) result.get(0);
-        assertEquals(1, result.size());
-        assertEquals("BIANCA", item[1]);
-    }
-    
-    @Test
-    public void retonarAlunosQuePraticamExercicioX() {
-        Exercicio ex = em.find(Exercicio.class, (long) 1);
-        NomeExercicio nome = NomeExercicio.BICEPS_BARRA_ROSCA_PRON_POLIA;
-        TypedQuery<Aluno> query = em.createQuery("SELECT DISTINCT a FROM Aluno a JOIN FETCH a.exercicios xs WHERE xs.exercicio = :tipo", Aluno.class);
-        query.setParameter("tipo", nome);
-        List<Aluno> alunos = query.getResultList();
-        assertEquals(alunos.size(), 4);
-        assertNotNull(alunos);
-    }
 }
