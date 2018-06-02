@@ -93,7 +93,7 @@ public class Aluno extends Usuario implements Serializable {
     public void setExercicios(List<Exercicio> exercicios) {
         // corrigido
         for (Exercicio exercicio : exercicios) {
-            exercicios.add(exercicio);
+            this.exercicios.add(exercicio);
         }
     }
 

@@ -83,7 +83,7 @@ public class SegundaApresentacaoTest {
             if (et.isActive()) {
                 et.rollback();
             }
-            fail(ex.getMessage());    
+            fail(ex.getMessage());
         }
     }
 
@@ -93,12 +93,8 @@ public class SegundaApresentacaoTest {
         TypedQuery<Aluno> query = em.createQuery("SELECT a FROM Aluno a WHERE a.nome LIKE :nome ORDER BY a.id DESC", Aluno.class);
         query.setParameter("nome", "j%");
         List<Aluno> alunos = query.getResultList();
-        for (Aluno aluno : alunos) {
-            assertEquals("J", aluno.getNome().substring(0, 1).toUpperCase());
-        }
-        if (alunos.isEmpty()) {
-            assertEquals(0, alunos.size());
-        }
+
+        assertEquals(5, alunos.size());
     }
 
     @Test
@@ -106,28 +102,24 @@ public class SegundaApresentacaoTest {
         TypedQuery<Aluno> query = em.createNamedQuery("Aluno.PorNome", Aluno.class);
         query.setParameter("nome", "j%");
         List<Aluno> alunos = query.getResultList();
-        for (Aluno aluno : alunos) {
-            assertEquals("J", aluno.getNome().substring(0, 1).toUpperCase());
-        }
-        if (alunos.isEmpty()) {
-            assertEquals(0, alunos.size());
-        }
+        assertEquals(5, alunos.size());
+
     }
 
     @Test
     public void JPQLretornaAlunosQueTemExercicios() {
         TypedQuery<Aluno> query = em.createQuery("SELECT a FROM Aluno a WHERE a.exercicios IS NOT EMPTY", Aluno.class);
         List<Aluno> alunos = query.getResultList();
-        assertNotEquals(alunos.size(), 0);
+        assertEquals(alunos.size(), 8);
     }
 
     @Test
     public void JPQLexistenciaDeEntidadeEmColecao() {
         Exercicio ex = em.find(Exercicio.class, (long) 1);
-        TypedQuery<Aluno> query = em.createQuery("SELECT a FROM Aluno a JOIN FETCH a.exercicios xs WHERE :ex MEMBER OF a.exercicios", Aluno.class);
+        TypedQuery<Aluno> query = em.createQuery("SELECT DISTINCT a FROM Aluno a JOIN FETCH a.exercicios xs WHERE :ex MEMBER OF a.exercicios", Aluno.class);
         query.setParameter("ex", ex);
-        List<Aluno> alunos = query.getResultList();
-        assertNotNull(alunos);
+        Aluno aluno = query.getSingleResult();
+        assertEquals(aluno.getNome(), "CARL");
     }
 
     @Test
@@ -135,7 +127,6 @@ public class SegundaApresentacaoTest {
         TypedQuery<Aluno> query = em.createNamedQuery("Aluno.PorTipoDeExercicio", Aluno.class);
         query.setParameter("ex", TipoExercicio.BICEPS);
         List<Aluno> alunos = query.getResultList();
-        System.out.println(alunos.size());
         assertEquals(alunos.size(), 6);
     }
 
@@ -151,8 +142,7 @@ public class SegundaApresentacaoTest {
     public void NativeRetornaNomeAluno() {
         Query query = em.createNativeQuery("SELECT TXT_NOME FROM TB_USUARIO WHERE ID = 4");
         String nomeAluno = (String) query.getSingleResult();
-        System.out.println(nomeAluno);
-        assertNull(null);
+        assertEquals(nomeAluno, "JOAO");
     }
 
     @Test
@@ -188,16 +178,11 @@ public class SegundaApresentacaoTest {
     public void NativeGroupBy() {
         Query query = em.createNativeQuery("SELECT TB_USUARIO.TXT_NOME, COUNT(TB_ALUNO.ID_USUARIO) FROM TB_ALUNO INNER JOIN TB_USUARIO ON TB_ALUNO.ID_PT = TB_USUARIO.ID GROUP BY TXT_NOME ORDER BY COUNT(TB_ALUNO.ID_USUARIO) DESC");
         List lista = query.getResultList();
-        for (int i = 0; i < lista.size(); i++) {
-            Object[] item = (Object[]) lista.get(i);
-            System.out.println(item[0] + " : " + item[1]);
-            assertEquals(2, item.length);
-        }
         Object[] item = (Object[]) lista.get(0);
         assertEquals(item[0], "VICTOR");
         assertEquals(item[1], (long) 6);
     }
-    
+
     // PERSONAL
     @Test
     public void NamedNativeRetornaNomePersonal() {
@@ -206,7 +191,7 @@ public class SegundaApresentacaoTest {
         String nomePersonal = (String) query.getSingleResult();
         assertEquals("JUCA", nomePersonal);
     }
-    
+
     // AVALIACAO
     @Test
     public void JPQLupdateAvaliacaoDate_01() {
@@ -237,21 +222,10 @@ public class SegundaApresentacaoTest {
         query.setParameter("date", date);
         query.setParameter("id", 7);
         query.executeUpdate();
-        
+
         assertNull(em.find(Avaliacao.class, (long) 7));
     }
 
-    // Métodos Auxiliares
-    private Date setDate(int ano, int mes, int dia) {
-        Calendar c = Calendar.getInstance();
-        c.set(Calendar.YEAR, ano);
-        c.set(Calendar.MONTH, mes);
-        c.set(Calendar.DAY_OF_MONTH, dia);
-        Date date = c.getTime();
-        return date;
-    }
-    
-    
     // EXERCÍCIO
     @Test
     public void NamedNativeRetornaNomeAluno() {
@@ -259,18 +233,27 @@ public class SegundaApresentacaoTest {
         query.setParameter(1, 12);
         List result = query.getResultList();
         Object[] item = (Object[]) result.get(0);
-        assertEquals(1, result.size());
-        assertEquals("BIANCA", item[1]);
+        Exercicio tipo = (Exercicio) item[0];
+        assertEquals("BICEPS", tipo.getTipo().toString());
     }
-    
+
     @Test
     public void retonarAlunosQuePraticamExercicioX() {
         Exercicio ex = em.find(Exercicio.class, (long) 1);
-        NomeExercicio nome = NomeExercicio.BICEPS_BARRA_ROSCA_PRON_POLIA;
         TypedQuery<Aluno> query = em.createQuery("SELECT DISTINCT a FROM Aluno a JOIN FETCH a.exercicios xs WHERE xs.exercicio = :tipo", Aluno.class);
+        NomeExercicio nome = NomeExercicio.BICEPS_BARRA_ROSCA_PRON_POLIA;
         query.setParameter("tipo", nome);
         List<Aluno> alunos = query.getResultList();
         assertEquals(alunos.size(), 4);
-        assertNotNull(alunos);
+    }
+    
+      // Métodos Auxiliares
+    private Date setDate(int ano, int mes, int dia) {
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.YEAR, ano);
+        c.set(Calendar.MONTH, mes);
+        c.set(Calendar.DAY_OF_MONTH, dia);
+        Date date = c.getTime();
+        return date;
     }
 }
