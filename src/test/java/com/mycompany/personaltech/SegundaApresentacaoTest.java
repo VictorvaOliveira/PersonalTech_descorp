@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mycompany.personaltech;
 
 import java.text.SimpleDateFormat;
@@ -20,8 +15,6 @@ import javax.persistence.TypedQuery;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.fail;
 import org.junit.Before;
@@ -93,7 +86,6 @@ public class SegundaApresentacaoTest {
         TypedQuery<Aluno> query = em.createQuery("SELECT a FROM Aluno a WHERE a.nome LIKE :nome ORDER BY a.id DESC", Aluno.class);
         query.setParameter("nome", "j%");
         List<Aluno> alunos = query.getResultList();
-
         assertEquals(5, alunos.size());
     }
 
@@ -103,7 +95,6 @@ public class SegundaApresentacaoTest {
         query.setParameter("nome", "j%");
         List<Aluno> alunos = query.getResultList();
         assertEquals(5, alunos.size());
-
     }
 
     @Test
@@ -168,10 +159,8 @@ public class SegundaApresentacaoTest {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         String menorData = dateFormat.format((Date) resultado[0]);
         String maiorData = dateFormat.format((Date) resultado[1]);
-
         assertEquals("12-09-1968", menorData);
         assertEquals("17-09-2000", maiorData);
-
     }
 
     @Test
@@ -215,17 +204,15 @@ public class SegundaApresentacaoTest {
     @Test
     public void JPQLdeleteAvaliacaoDate_01() {
         Query query = em.createQuery("DELETE FROM Avaliacao a WHERE a.id = :id AND a.dataAvaliacao = :date");
-
         Calendar c = Calendar.getInstance(); // CURRENT DATE
         c.setTime(new Date());
         Date date = c.getTime();
         query.setParameter("date", date);
         query.setParameter("id", 7);
         query.executeUpdate();
-
         assertNull(em.find(Avaliacao.class, (long) 7));
     }
-
+    
     // EXERCÍCIO
     @Test
     public void NamedNativeRetornaNomeAluno() {
@@ -246,8 +233,8 @@ public class SegundaApresentacaoTest {
         List<Aluno> alunos = query.getResultList();
         assertEquals(alunos.size(), 4);
     }
-    
-      // Métodos Auxiliares
+
+    // Métodos Auxiliares
     private Date setDate(int ano, int mes, int dia) {
         Calendar c = Calendar.getInstance();
         c.set(Calendar.YEAR, ano);
