@@ -209,7 +209,7 @@ public abstract class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "TOSTRING USER";
+        return this.nome;
     }
 
 }
